@@ -1,49 +1,93 @@
+/*
+Copyright 2013 ISTI-CNR
+ 
+This file is part of SmartFed.
+
+SmartFed is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+SmartFed is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
 package it.cnr.isti.smartfed.federation.application;
 
+
 import java.util.Locale;
+
+import it.cnr.isti.smartfed.networking.SecuritySupport;
 
 import org.cloudbus.cloudsim.Vm;
 import org.jgrapht.graph.DefaultEdge;
 
-import it.cnr.isti.smartfed.networking.SecuritySupport;
-
-public class ApplicationEdge extends DefaultEdge{
+public class ApplicationEdge extends DefaultEdge
+{
+	private static final long serialVersionUID = 1423234l;
+	
+	/* requirements */
 	private double bandwidth;
 	private SecuritySupport security;
 	private double latency;
 	private double messageLength;
 	private double messageRate;
 	
+	@Deprecated
+	public ApplicationEdge(double bandwidth, SecuritySupport security, double latency)
+	{
+		this.bandwidth = bandwidth;
+		this.security = security;
+		this.latency = latency;
+	}
 	
 	/**
 	 * 
-	 * @param mlength message length in KB sent in this link 
-	 * @param mrate message rate in Hz sent in this link 
+	 * @param mlenght message length in KB sent in this link 
+	 * @param mlenght message rate in Hz sent in this link 
 	 * @param security
 	 * @param latency
 	 */
-	public ApplicationEdge(double mlength, double mrate, SecuritySupport security, double latency){
+	public ApplicationEdge(double mlength, double mrate, SecuritySupport security, double latency)
+	{
 		this.messageLength = mlength;
 		this.messageRate = mrate;
-		this.bandwidth = messageLength/messageRate;
+		this.bandwidth = messageLength / messageRate;
 		this.security = security;
 		this.latency = latency;
-	} 
-	
-	public ApplicationEdge(double mlength, double mrate) {
-		this(mlength, mrate, SecuritySupport.NO, 0);
 	}
 	
-	public ApplicationEdge(double mlength, double mrate, double latency) {
-		this(mlength, mrate, SecuritySupport.NO, latency);
-	}
-	
-	/*
-	 * Estimated required bandwidth of this link in KB/s
+	/**
+	 * 
+	 * @param mlenght message length in KB sent in this link 
+	 * @param mlenght message rate in Hz sent in this link 
+	 * @param latency
 	 */
-	public double getBandwith() {
+	public ApplicationEdge(double mlength, double mrate)
+	{
+		this(mlength,mrate,SecuritySupport.NO, 0);
+	}
+	
+	public ApplicationEdge(double mlength, double mrate, double latency)
+	{
+		this(mlength,mrate,SecuritySupport.NO, latency);
+	}
+	
+	/**
+	 * Estimated required bandwidth of this link in KB/s
+	 * @return
+	 */
+	public double getBandwidth()
+	{
 		return this.bandwidth;
 	}
+
 	
 	public double getMessageLength()
 	{
@@ -54,7 +98,7 @@ public class ApplicationEdge extends DefaultEdge{
 	{
 		return this.security;
 	}
-	
+
 	public double getLatency()
 	{
 		return this.latency;
@@ -65,20 +109,22 @@ public class ApplicationEdge extends DefaultEdge{
 		return res;
 	}
 	
-	public String toString() {
+	public String toString(){
 		double message = this.messageLength;
 		String size = message > 1024 ? "MB": "KB";
 		message = message > 1024 ? message/1024: message;
 		String res = String.format(Locale.ENGLISH, "%.2f", message);
-		return res + size;	
+		return res + size;
+		// return "(" + super.getSource() + "->" + super.getTarget() + ")";
 	}
 	
-	public Vm getSourceVm() {
+	public Vm getSourceVm(){
 		Vm vm;
 		try {
-			ApplicationVertex v = (ApplicationVertex)super.getSource();
+			ApplicationVertex v = (ApplicationVertex) super.getSource();
 			vm = v.getVms().get(0);
-		}catch (Exception e) {
+		}
+		catch (Exception e){
 			vm = null;
 		}
 		return vm;

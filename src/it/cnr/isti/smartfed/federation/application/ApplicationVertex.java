@@ -1,4 +1,30 @@
+/*
+Copyright 2013 ISTI-CNR
+ 
+This file is part of SmartFed.
+
+SmartFed is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+SmartFed is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
 package it.cnr.isti.smartfed.federation.application;
+
+import it.cnr.isti.smartfed.federation.UtilityPrint;
+import it.cnr.isti.smartfed.federation.resources.Country;
+import it.cnr.isti.smartfed.federation.resources.VmFactory;
+import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
+import it.cnr.isti.smartfed.federation.resources.VmTyped;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +34,24 @@ import java.util.Map;
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 
-import it.cnr.isti.smartfed.federation.UtilityPrint;
-import it.cnr.isti.smartfed.federation.resources.Country;
-import it.cnr.isti.smartfed.federation.resources.VmFactory;
-import it.cnr.isti.smartfed.federation.resources.VmTyped;
-import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
-
-public class ApplicationVertex {
+/**
+ * This class abstracts the application vertex.
+ * An application vertex can contain one or more Cloudlet, 
+ * each representing an instance of a code that can be run
+ * on a VM (i.e. a web server).
+ * 
+ * For the sake of simplicity, we consider each cloudlet running on 
+ * a dedicated VM. All the VMs inside an application vertex are of the
+ * same type.
+ *
+ * This class also contains the method to get the associated VM from
+ * a cloudlet, and viceversa.
+ * 
+ * @author carlini, anastasi
+ *
+ */
+public class ApplicationVertex
+{
 	private List<Cloudlet> cloudlets;
 	private List<Vm> vms;
 	private Map<Cloudlet, Vm> cloudletMap;
@@ -26,17 +63,21 @@ public class ApplicationVertex {
 	private double budget = 1.0;
 	private VmType vm_type;
 	private Vm desiredVm = null;
-	private Country countryEnum;
+	private Country countryEnum;  
 	
 	public Vm getDesiredVm() {
 		return desiredVm;
 	}
-	
+
+	/**
+	 * Setting desired Vm, that may be different from that one specified by VmType as available in Amazon. 
+	 * Introduced for STRATOS comparison, assuming homogeneus Vms for all cloudlets.
+	 * @param desiredVm
+	 */
 	public void setDesiredVm(Vm desiredVm) {
 		this.desiredVm = desiredVm;
 	}
-	
-	//构造虚拟机和任务之间的关系，
+
 	private void construct (int userId, List<Cloudlet> cloudlets, VmType vmtype)
 	{
 		this.id = counter++;
@@ -73,7 +114,8 @@ public class ApplicationVertex {
 		this("", userId, cloudlets, vmtype);
 	}
 	
-	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, Vm sample) {
+	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, Vm sample)
+	{
 		this.id = counter++;
 		this.vm_type = VmType.CUSTOM;
 		this.cloudlets = cloudlets;
@@ -81,13 +123,15 @@ public class ApplicationVertex {
 		this.vmMap = new HashMap<Vm, Cloudlet>();
 		this.vms = new ArrayList<Vm>();
 		
-		for (Cloudlet c : cloudlets){
+		for (Cloudlet c : cloudlets)
+		{
 			Vm clone = VmFactory.cloneVMnewId(sample);
 			VmTyped cloned = new VmTyped(clone, vm_type);
 			this.vms.add(cloned);
 			this.cloudletMap.put(c, cloned);
-			this.vmMap.put(cloned, c);	
+			this.vmMap.put(cloned, c);
 		}
+		
 	}
 	
 	public String getCountry() {
@@ -98,7 +142,7 @@ public class ApplicationVertex {
 		this.countryEnum = place;
 		this.country = place.toString();
 	}
-	
+
 	public double getBudget() {
 		return budget;
 	}
@@ -134,7 +178,7 @@ public class ApplicationVertex {
 	public int getId() {
 		return id;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder res = new StringBuilder();
@@ -172,7 +216,7 @@ public class ApplicationVertex {
 		
 		return res.toString();
 	}
-	
+
 	public VmType getVmType() {
 		return vm_type;
 	}

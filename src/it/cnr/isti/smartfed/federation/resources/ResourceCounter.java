@@ -1,6 +1,7 @@
 package it.cnr.isti.smartfed.federation.resources;
 
-public class ResourceCounter {
+public class ResourceCounter 
+{
 	private static int HOST_ID = 0;
 	private static int VM_ID = 0;
 	private static int CLOUDLET_ID = 0;

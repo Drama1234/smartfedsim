@@ -1,6 +1,7 @@
 package it.cnr.isti.smartfed.federation.resources;
 
-public enum Country {
+public enum Country 
+{
 	Italy,
 	France,
 	UK,
