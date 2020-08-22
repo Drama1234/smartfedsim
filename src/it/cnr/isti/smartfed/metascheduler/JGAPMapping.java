@@ -63,7 +63,10 @@ public class JGAPMapping {
 			// making gene
 			int providerNumber = providerList.size();
 			List<MSApplicationNode> nodes = state.getApplication().getNodes();
+			
+			
 			Gene[] genes = new Gene[nodes.size()];
+			
 			for (int i = 0; i < nodes.size(); i++){
 				// precondition: providerList is ordered
 				int firstInteger = providerList.get(0).getID();

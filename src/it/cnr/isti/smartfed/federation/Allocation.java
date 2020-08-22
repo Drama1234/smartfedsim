@@ -24,7 +24,6 @@ import it.cnr.isti.smartfed.federation.application.Application;
 import it.cnr.isti.smartfed.federation.application.ApplicationVertex;
 import it.cnr.isti.smartfed.federation.mapping.MappingSolution;
 import it.cnr.isti.smartfed.federation.resources.FederationDatacenter;
-import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
 
 import java.util.ArrayList;
 import java.util.HashMap;

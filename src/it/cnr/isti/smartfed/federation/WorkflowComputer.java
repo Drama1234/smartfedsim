@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.workflowsim.Task;
 
-public class WorkflowComputer 
+public class WorkflowComputer
 {	
 	
 	public static double getFlowCompletionTime(WorkflowApplication workflow, List<FederationDatacenter> dcs, InternetEstimator internet)

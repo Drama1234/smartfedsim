@@ -46,7 +46,6 @@ public class Federation extends SimEntity
 {
 	private List<Integer> datacenterIds;
 	private List<FederationDatacenter> datacenters;
-
 	private Map<Integer, DatacenterCharacteristics> datacenterCharacteristicsList;
 	
 	private Map<Integer, Application> vmToApp; 
@@ -172,7 +171,6 @@ public class Federation extends SimEntity
 		FederationLog.timeLogDebug("Received monitoring response from datacenter #"+characteristics.getId());
 		if (this.emptyQueue)
 			mappingModule.getMonitoringHub().shutdownEntity();
-			
 	}
 
 	// Manage the application submit

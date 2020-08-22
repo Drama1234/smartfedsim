@@ -34,6 +34,8 @@ import java.util.Map;
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 
+import federation.resources.City;
+
 /**
  * This class abstracts the application vertex.
  * An application vertex can contain one or more Cloudlet, 
@@ -63,7 +65,7 @@ public class ApplicationVertex
 	private double budget = 1.0;
 	private VmType vm_type;
 	private Vm desiredVm = null;
-	private Country countryEnum;  
+	private Country CountryEnum;  
 	
 	public Vm getDesiredVm() {
 		return desiredVm;
@@ -138,9 +140,9 @@ public class ApplicationVertex
 		return country;
 	}
 	
-	public void setCountry(Country place) {
-		this.countryEnum = place;
-		this.country = place.toString();
+	public void setCountry(Country country) {
+		this.CountryEnum = country;
+		this.country = country.toString();
 	}
 
 	public double getBudget() {

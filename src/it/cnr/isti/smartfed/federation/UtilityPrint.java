@@ -88,6 +88,7 @@ public class UtilityPrint
 		sb.append("net:").append(host.getBw()).append(",");
 		sb.append("storage:").append(host.getStorage()).append(",");
 		sb.append("mips:").append(host.getTotalMips());
+		sb.append("cores:").append(host.getNumberOfPes());
 		
 		return sb.toString();
 	}

@@ -20,7 +20,6 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
 
 package it.cnr.isti.smartfed.metascheduler.resources;
 
-import it.cnr.isti.smartfed.federation.application.ApplicationEdge;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 
 import java.util.ArrayList;
@@ -28,13 +27,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import application.ApplicationEdge;
+import federation.resources.FederationDatacenter;
+
+
 
 
 public class MSApplication implements IMSApplication, Cloneable {
 	
 	private int ID;
-	private String place;
+	private String city;
 	private double budget;
+	private FederationDatacenter fDatacenter;
+	
+	
 
 	private List<MSApplicationNode> nodes;
 	
@@ -47,16 +53,16 @@ public class MSApplication implements IMSApplication, Cloneable {
 	private int firstVmIndex;
 
 	public MSApplication() {
-		new MSApplication(-1, null, 0, null);
+		new MSApplication(-1, null, 0, null,null);
 	}
 
-	public MSApplication(int ID, String place, double badget,
-			List<MSApplicationNode> nodes) {
+	public MSApplication(int ID, String city, double budget,
+			List<MSApplicationNode> nodes,FederationDatacenter Datacenter) {
 		this.ID = ID;
-		this.place = place;
-		this.setBudget(badget);
+		this.city = city;
+		this.setBudget(budget);
 		this.nodes = nodes;
-
+		this.fDatacenter = Datacenter;
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class MSApplication implements IMSApplication, Cloneable {
 		if (o == null)
 			return 1;
 		MSApplication app = (MSApplication) o;
-		if (ID == app.ID && place.equalsIgnoreCase(app.place))
+		if (ID == app.ID && city.equalsIgnoreCase(app.city) && fDatacenter.equals(app.fDatacenter) )
 			return 0;
 		return ID = app.ID;
 	}
@@ -85,9 +91,9 @@ public class MSApplication implements IMSApplication, Cloneable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return app;		
-				
+		return app;					
 	}
+	
 
 	@Override
 	public int getID() {

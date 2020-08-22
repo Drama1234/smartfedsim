@@ -186,7 +186,7 @@ public class CostComputer
 			amount = costs[3];
 			break;
 		case CUSTOM:
-			amount = calculateCostCustomVm(datacenter, vm);
+					
 		}
 		
 		// the provider does not have a price for this type (case of providers with mixed cost models)

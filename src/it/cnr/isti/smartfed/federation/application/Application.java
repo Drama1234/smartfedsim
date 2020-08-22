@@ -58,7 +58,7 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 	private Hashtable<Cloudlet, ApplicationVertex> cloudletToVertex;
 	private Hashtable<Vm, ApplicationVertex> vmToVertex;
 
-	public Application() 
+	public Application()
 	{
 		graph = new SimpleDirectedGraph<ApplicationVertex, ApplicationEdge>(ApplicationEdge.class);
 		cloudlets = new ArrayList<Cloudlet>();
@@ -78,6 +78,7 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 		{
 			cloudletToVertex.put(c, av);
 			idToCloudlet.put(c.getCloudletId(), c);
+			
 		}
 		
 		for (Vm vm: av.getVms())

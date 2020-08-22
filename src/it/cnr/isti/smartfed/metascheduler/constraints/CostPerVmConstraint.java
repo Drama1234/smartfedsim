@@ -40,7 +40,6 @@ public class CostPerVmConstraint extends MSPolicy {
 	}
 
 	
-	
 	private static double vmCost(MSApplicationNode node, IMSProvider prov){
 		double cost;
 		double[] costPerVm = (double[]) prov.getCharacteristic().get(Constant.COST_VM);
@@ -72,7 +71,7 @@ public class CostPerVmConstraint extends MSPolicy {
 		if (Double.isNaN(cost)){
 			cost = BudgetConstraint.calculateCost(node, prov);
 		}
-		return cost;
+		return cost;	
 	}
 	
 	@Override

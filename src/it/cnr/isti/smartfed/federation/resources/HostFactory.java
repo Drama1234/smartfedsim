@@ -31,6 +31,11 @@ import org.cloudbus.cloudsim.VmScheduler;
 import org.cloudbus.cloudsim.provisioners.BwProvisioner;
 import org.cloudbus.cloudsim.provisioners.RamProvisioner;
 
+import it.cnr.isti.smartfed.federation.resources.HostProfile;
+import it.cnr.isti.smartfed.federation.resources.ResourceCounter;
+import it.cnr.isti.smartfed.federation.resources.SimpleHost;
+
+
 public class HostFactory 
 {	
 	private static Host createHost(HostProfile profile, List<Pe> pes)
@@ -57,14 +62,13 @@ public class HostFactory
 			return null;
 		}
 
-		
 		Host host = new SimpleHost(ResourceCounter.nextHostID(), 
 				ramP, bwP, 
 				Long.parseLong(profile.get(HostParams.STORAGE_MB)),
 				pes, 
 				vmSched);
 		
-		VmAllocationPolicySimple a;
+		//VmAllocationPolicySimple a;
 		return host;
 	}
 	

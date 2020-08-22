@@ -27,13 +27,13 @@ import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.UtilizationModel;
 import org.cloudbus.cloudsim.UtilizationModelFull;
 
-public class CloudletProvider 
+public class CloudletProvider
 {	
 	private static Cloudlet createCloudlet(CloudletProfile profile)
 	{
 		// Instantiate utilization models
 		UtilizationModel uCPU = null;
-		UtilizationModel uRAM = null; 
+		UtilizationModel uRAM = null;
 		UtilizationModel uBW = null;
 		
 		try

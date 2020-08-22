@@ -32,8 +32,9 @@ import org.cloudbus.cloudsim.Vm;
  * 
  * bandwidth is quite obscure yet.
  */
-public class VmFactory 
+public class VmFactory
 {
+	
 	public enum VmType
 	{
 		SMALL,
@@ -67,6 +68,7 @@ public class VmFactory
 			{
 				return createSmall(userId);
 			}
+			
 		}
 	}
 	
@@ -130,6 +132,7 @@ public class VmFactory
 		VmTyped vmt = new VmTyped(vm, VmType.XLARGE);
 		return vm;
 	}
+	
 
 	public static Vm getCustomVm(int userId, double mips, int cores, int ramMB, long bandMB, long diskMB)
 	{		

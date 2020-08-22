@@ -124,7 +124,9 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics {
 	public void setHighestBw(long bw) {
 		this.maxBwForVm = bw;
 	}
-	
+	/*
+	 * 在主机之间获得最高分配的BW
+	 */
 	public long getHighestAllocatedBwAmongHosts() {
 		List<Host> list = super.getHostList();
 		Host max = Collections.max(list, new Comparator<Host>() {

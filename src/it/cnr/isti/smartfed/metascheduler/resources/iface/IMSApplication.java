@@ -40,8 +40,10 @@ public interface IMSApplication extends IApplicationData {
 	 */
 	
 	public void setID(int id);
+	
 	public int getID();
 	
 	public List<MSApplicationNode> getNodes();
+	
 	public void setNodes(List<MSApplicationNode> nodes);
 }

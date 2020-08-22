@@ -31,8 +31,6 @@ import org.cloudbus.cloudsim.VmAllocationPolicy;
 
 public class FederationDatacenterFactory 
 {	
-	
-	
 	private static FederationDatacenter createFederationDatacenter(FederationDatacenterProfile profile, List<Host> hosts, List<Storage> storages) {
 		return createFederationDatacenter("datacenter_"+ResourceCounter.nextDatacenterID(), profile, hosts, storages);
 	}

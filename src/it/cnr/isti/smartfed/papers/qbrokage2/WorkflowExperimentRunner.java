@@ -64,7 +64,7 @@ public class WorkflowExperimentRunner
 		double tc = TestResult.getCompletion().getMean();
 		double cost = TestResult.getCost().getMean();
 		
-		sb.append(filename).append("\t");
+		sb.append(filename).append("\t\n");
 		sb.append(f(baseline_tc)).append("\t").append(f(3600/baseline_tc)).append("\t")
 		.append(f(baseline_cost)).append("\t");
 		sb.append(f(tc)).append("\t").append(f(3600/ tc)).append("\t").append(f(cost)).append("\n");

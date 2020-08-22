@@ -38,5 +38,4 @@ public class Metascheduler {
 		MSExternalState state = new MSExternalState(application, dclist, internet); //TODO
 		return JGAPMapping.execute(state, policy, randomSeed);
 	}
-
 }

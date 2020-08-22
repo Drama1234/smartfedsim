@@ -72,7 +72,6 @@ public class NetworkConstraint extends MSPolicy {
 		String s = res + "MBps";
 		return s;
 	}
-	
 	@Override
 	public double evaluateGlobalPolicy(int gene_index, IChromosome chromos, IMSApplication app, IMSProvider prov, InternetEstimator internet){
 		long app_bw = calcBwFromEdges(gene_index, chromos, app, prov);
@@ -112,4 +111,5 @@ public class NetworkConstraint extends MSPolicy {
 			System.out.println("Output reuqired bw from Node " + gene_index + " is " + printMBperSec(byteBw) + " MBps");
 		return byteBw;
 	}
+
 }

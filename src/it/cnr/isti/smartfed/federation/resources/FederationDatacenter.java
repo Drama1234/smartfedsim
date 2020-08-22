@@ -325,7 +325,6 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler()
 					.getAllocatedMipsForVm(vm));
 		}
-
 	}
 	
 	/**

@@ -29,7 +29,7 @@ import org.workflowsim.utils.ReplicaCatalog;
 
 public class WorkflowApplication extends Application
 {
-	public static String fileName = "Epigenomics_46";
+	public static String fileName = "RemoteSense_13";
 	public String daxPath = "resources/" + fileName + ".xml";
 
 	void setWorkflowSimConfig()
@@ -83,8 +83,6 @@ public class WorkflowApplication extends Application
 		}
 		else
 			build(userId, tasks);
-		
-		
 	}
 	
 	public WorkflowApplication(List<Task> tasks, int userId, boolean clustering)
@@ -169,13 +167,18 @@ public class WorkflowApplication extends Application
 			addVertex(v);
 		}
 		
+		
 		for (T t: tasks){
+			//List<Task> childs = ((Task) t).getChildList();
+			//System.out.println("孩子数量：" +childs.size());
+			
 			ApplicationVertex base = this.getVertexForCloudlet(t);
 			double outputSize = 0;
 			double mrate = 1;
 			List<File> files = ((Task) t).getFileList();
 			for (File f: files){
 				if (f.getType() == 2)//output as constructed by parser
+					//f.getFileAttribute().getName();
 					outputSize += f.getSize(); // this size is in bytes
 			}
 	
@@ -188,6 +191,7 @@ public class WorkflowApplication extends Application
 			}
 		}
 		System.out.println(super.vertexSet().size() + "+" + super.getEdges().size());
+		
 	}
 	
 	public static void main(String[] args){
@@ -202,14 +206,13 @@ public class WorkflowApplication extends Application
 		try {
 			boolean taskClustering = false;
 			g = new WorkflowApplication(0, taskClustering);
-			String add = taskClustering == true ? "clust" : "";
-			g.export("plots/" + fileName + add + ".dot");
-			System.out.println(g);
+//			String add = taskClustering == true ? "clust" : "";
+//			g.export("plots/" + fileName + add + ".dot");
+//			System.out.println(g);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	protected List<Job> processClustering(List<Task> tasks) {

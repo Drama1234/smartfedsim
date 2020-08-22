@@ -1,0 +1,33 @@
+digraph G {
+  1 [ label="1" ];
+  2 [ label="2" ];
+  3 [ label="3" ];
+  4 [ label="4" ];
+  5 [ label="5" ];
+  6 [ label="6" ];
+  7 [ label="7" ];
+  8 [ label="8" ];
+  9 [ label="9" ];
+  10 [ label="10" ];
+  11 [ label="11" ];
+  12 [ label="12" ];
+  13 [ label="13" ];
+  1 -> 2 [ label=" Edge [ vm:(0->1) message length: 1000.00KB bandwith: 30MB/s latency: 0.12s" ];
+  1 -> 3 [ label=" Edge [ vm:(0->2) message length: 1000.00KB bandwith: 29MB/s latency: 0.12s" ];
+  1 -> 4 [ label=" Edge [ vm:(0->3) message length: 1000.00KB bandwith: 33MB/s latency: 0.13s" ];
+  1 -> 5 [ label=" Edge [ vm:(0->4) message length: 1000.00KB bandwith: 22MB/s latency: 0.11s" ];
+  1 -> 6 [ label=" Edge [ vm:(0->5) message length: 1000.00KB bandwith: 20MB/s latency: 0.11s" ];
+  2 -> 7 [ label=" Edge [ vm:(1->6) message length: 200.01KB bandwith: 28MB/s latency: 0.12s" ];
+  2 -> 8 [ label=" Edge [ vm:(1->7) message length: 200.01KB bandwith: 16MB/s latency: 0.1s" ];
+  3 -> 7 [ label=" Edge [ vm:(2->6) message length: 200.01KB bandwith: 33MB/s latency: 0.13s" ];
+  3 -> 9 [ label=" Edge [ vm:(2->8) message length: 200.01KB bandwith: 13MB/s latency: 0.09s" ];
+  4 -> 7 [ label=" Edge [ vm:(3->6) message length: 200.01KB bandwith: 28MB/s latency: 0.12s" ];
+  4 -> 10 [ label=" Edge [ vm:(3->9) message length: 200.01KB bandwith: 20MB/s latency: 0.11s" ];
+  5 -> 7 [ label=" Edge [ vm:(4->6) message length: 200.01KB bandwith: 16MB/s latency: 0.1s" ];
+  5 -> 11 [ label=" Edge [ vm:(4->10) message length: 200.01KB bandwith: 12MB/s latency: 0.09s" ];
+  6 -> 7 [ label=" Edge [ vm:(5->6) message length: 200.01KB bandwith: 15MB/s latency: 0.1s" ];
+  7 -> 8 [ label=" Edge [ vm:(6->7) message length: 333.35KB bandwith: 30MB/s latency: 0.12s" ];
+  7 -> 9 [ label=" Edge [ vm:(6->8) message length: 333.35KB bandwith: 16MB/s latency: 0.1s" ];
+  7 -> 10 [ label=" Edge [ vm:(6->9) message length: 333.35KB bandwith: 14MB/s latency: 0.1s" ];
+  7 -> 11 [ label=" Edge [ vm:(6->10) message length: 333.35KB bandwith: 13MB/s latency: 0.1s" ];
+}

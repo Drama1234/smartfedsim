@@ -19,6 +19,7 @@ public class LatencyConstraint extends MSPolicy
 
 	public LatencyConstraint(double weight, char type) {
 		super(weight, MSPolicy.DESCENDENT_TYPE);
+		
 	}
 
 	@Override

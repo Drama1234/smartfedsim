@@ -5,6 +5,7 @@ import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
 import org.cloudbus.cloudsim.CloudletScheduler;
 import org.cloudbus.cloudsim.Vm;
 
+
 /**
  * 
  * @author gae
@@ -13,6 +14,7 @@ import org.cloudbus.cloudsim.Vm;
 public class VmTyped extends Vm {
 
 	VmType type = VmType.CUSTOM;
+	
 	
 	public VmTyped(int id, int userId, double mips, int numberOfPes, int ram,
 			long bw, long size, String vmm, CloudletScheduler cloudletScheduler, VmType vm_type) {
