@@ -28,7 +28,7 @@ public class FederationDatacenterFactory {
 				Double.parseDouble(profile.get(DatacenterParams.COST_PER_STORAGE)),
 				Double.parseDouble(profile.get(DatacenterParams.COST_PER_BW))
 				);
-		//dc.setHighestBw(Long.parseLong(profile.get(DatacenterParams.MAX_BW_FOR_VM)));
+		dc.setDatacenterBw(Integer.parseInt(profile.get(DatacenterParams.BW)));
 		
 		// creating vm allocation policy class
 		VmAllocationPolicy vmAllocationPolicy = null;

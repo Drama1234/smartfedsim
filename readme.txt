@@ -1,0 +1,4 @@
+实验步骤
+
+1.生成遥感科学工作流实例
+在workflowGenerator文件夹里RemoteSense实例生成方法

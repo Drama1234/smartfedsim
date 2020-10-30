@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.jgap.Gene;
 import org.jgap.IChromosome;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import it.cnr.isti.smartfed.metascheduler.CIntegerGene;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
@@ -16,6 +17,7 @@ public class Solution {
 	private double fit;
 	IChromosome chromosome = null;
 	private double costAmount;
+	private double makespan;
 	private boolean valid;
 	
 	public IChromosome getChromosome() {
@@ -132,11 +134,20 @@ public class Solution {
 	 * @param cost
 	 */
 	public void setCostAmount(double cost){
-		costAmount = cost; 
+		this.costAmount = cost; 
 	}
 	
 	public double getCostAmount(){
 		return costAmount; 
+	}
+	
+	
+	public double getMakespan() {
+		return makespan;
+	}
+
+	public void setMakespan(double makespan) {
+		this.makespan = makespan;
 	}
 
 	public boolean getCompleteSatisfaction() {

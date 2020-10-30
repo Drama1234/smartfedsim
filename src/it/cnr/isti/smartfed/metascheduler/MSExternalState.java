@@ -83,8 +83,8 @@ public class MSExternalState
 		return _providers;
 	}
 
-	public InternetEstimator getInternet() {
-		return _internet;
-	}
+//	public InternetEstimator getInternet() {
+//		return _internet;
+//	}
 	
 }

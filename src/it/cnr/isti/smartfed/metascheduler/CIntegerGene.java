@@ -30,7 +30,7 @@ import org.jgap.impl.IntegerGene;
 public class CIntegerGene extends IntegerGene{
 	private static final long serialVersionUID = 1L;
 	
-	double localFitness = 0;
+	double Fitness = 0;
 	double allocationCost = 0;
 	
 	
@@ -40,12 +40,12 @@ public class CIntegerGene extends IntegerGene{
 	
 	public CIntegerGene(Configuration a_config, int min, int max, double fit) throws InvalidConfigurationException {
 		super(a_config, min, max);
-		localFitness = fit;
+		Fitness = fit;
 	}
 	
 	public CIntegerGene(Configuration a_config, int min, int max, double fit, double aCost) throws InvalidConfigurationException {
 		super(a_config, min, max);
-		localFitness = fit;
+		Fitness = fit;
 		allocationCost = aCost;
 	}
 	
@@ -76,11 +76,11 @@ public class CIntegerGene extends IntegerGene{
 	 * @return The fitness of each gene
 	 */
 	public double getLocalFitness() {
-		return localFitness;
+		return Fitness;
 	}
 
-	public void setLocalFitness(double localFitness) {
-		this.localFitness = localFitness;
+	public void setLocalFitness(double Fitness) {
+		this.Fitness = Fitness;
 	}
 	
 	public double getAllocationCost() {

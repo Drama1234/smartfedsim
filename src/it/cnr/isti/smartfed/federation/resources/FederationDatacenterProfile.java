@@ -75,7 +75,7 @@ public class FederationDatacenterProfile
 		FederationDatacenterProfile prof = new FederationDatacenterProfile();
 		prof.data.put(DatacenterParams.COST_PER_SEC, "0.0");
 		prof.data.put(DatacenterParams.COST_PER_MEM, "0.0");
-		prof.data.put(DatacenterParams.COST_PER_STORAGE, "0.0");
+		prof.data.put(DatacenterParams.COST_PER_STORAGE, "0.0");  
 		prof.data.put(DatacenterParams.COST_PER_BW, "0.12"); // $ per GB (amount of transmitted data must be calculated per hour)
 		prof.data.put(DatacenterParams.COST_PER_VM_SMALL, "0.085"); // $ per hour
 		prof.data.put(DatacenterParams.COST_PER_VM_MEDIUM,"0.340");

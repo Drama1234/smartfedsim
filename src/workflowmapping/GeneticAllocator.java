@@ -50,7 +50,7 @@ public class GeneticAllocator extends AbstractAllocator{
 		}
 		
 		solutions = Metascheduler.getMapping(application, constraint.getList(), dcs, this.netEstimator, randomSeed);
-		//System.out.println(chooseSolution(solutions));
+		System.out.println(chooseSolution(solutions));
 		finishSimTime = CloudSim.clock();
 		finishRealTime = System.currentTimeMillis();
 		
@@ -58,11 +58,14 @@ public class GeneticAllocator extends AbstractAllocator{
 		for (int i=0; i < sols.length; i++)
 			sols[i] = convert(solutions[i], application, dcs);
 		
-		this.setSolution(sols[0]);
+//		this.setSolution(sols[0]);
 		return sols;	
 	}
 	
-
+	private Solution chooseSolution(Solution[] sols) {
+		return sols[0];
+	}
+	
 	/**
 	 * Convert the genetic solution object "Solution" in the 
 	 * federation's MappingPlan 

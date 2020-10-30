@@ -103,7 +103,7 @@ public class BasicExperiment {
 		
 		list.add(FederationDatacenterFactory.get("EC2", amazon, hostList, storageList));
 		list.add(FederationDatacenterFactory.get("Aruba", aruba, hostList, storageList));
-		
+		list.add(FederationDatacenterFactory.get("Rackspace", rackspace, hostList, storageList));
 		return list;
 	}
 	

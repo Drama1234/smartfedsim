@@ -19,6 +19,8 @@ import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEvent;
 
+import it.cnr.isti.smartfed.federation.resources.VmTyped;
+import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
 import workflowfederation.CostComputer;
 import workflowfederation.FederationLog;
 import workflowfederation.UtilityPrint;
@@ -80,11 +82,13 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		return ((DatacenterCharacteristicsMS) super.getCharacteristics()).toString();
 	}
 	
+	
 	public String toStringDetail() {
 		StringBuilder sb = new StringBuilder();
 		DatacenterCharacteristicsMS chars = this.getMSCharacteristics();
 		sb.append("name:").append(chars.getResourceName()).append(",");
 		sb.append("city:").append(chars.getCity()).append(",");
+		sb.append("bw:").append(chars.getDatacenterBw()).append(",");
 		sb.append("host_num:").append(this.getHostList().size()).append(",");
 		Host host = this.getHostList().get(0);
 		if (host != null)
@@ -106,6 +110,10 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 	
 	public DatacenterCharacteristicsMS getMSCharacteristics(){
 		return (DatacenterCharacteristicsMS) super.getCharacteristics();
+	}
+	
+	public int getDatacenterBw() {
+		return ((DatacenterCharacteristicsMS)super.getCharacteristics()).getDatacenterBw();
 	}
 	
 	@Override
@@ -253,7 +261,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 	protected void processVmCreate(SimEvent ev, boolean ack) {
 		
 			Vm generic_vm = (Vm) ev.getData();
-			Vm vm = new FederationVm(generic_vm);
+			Vm vm = new VmTyped(generic_vm, VmType.CUSTOM);
 		
 
 		boolean result = getVmAllocationPolicy().allocateHostForVm(vm);

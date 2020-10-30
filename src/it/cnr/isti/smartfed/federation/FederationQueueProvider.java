@@ -28,7 +28,6 @@ import java.util.List;
 
 public class FederationQueueProvider {
 
-	
 	public static FederationQueue createFederationQueue(FederationQueueProfile profile, Federation federation, 
 			List<Application> applications){
 		
@@ -51,7 +50,6 @@ public class FederationQueueProvider {
 		}
 		
 		return fq;
-		
 	}
 	
 	public static FederationQueue getFederationQueue(FederationQueueProfile profile, Federation federation, List<Application> applications){

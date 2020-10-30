@@ -93,14 +93,14 @@ public class PolicyContainer {
 		return new BudgetConstraint(normWeight,c);
 	}
 	
-	public MSPolicy networkConstraint(double weightP,double weightN,ConstraintScope c){
+	public MSPolicy networkConstraint(double weightP,double weightN, ConstraintScope c){
 		double normWeightP = calculateNormWeight(weightP);
-		double normWeightN = calculateNormWeight(weightN);
+		double normWeightN = calculateNormWeight(weightP);
 		
 		log.info("Norm weight into ProviderBwConstraint " + normWeightP);
-		log.info("Norm weight into NetworkBwConstraint " + normWeightN);
+		log.info("Norm weight into ProviderBwConstraint " + normWeightN);
 		
-		return new NetworkBWConstraint(normWeightP, normWeightP,highProviderBwValue,highNetworkBwValue,c);
+		return new NetworkBWConstraint(normWeightP, normWeightN,highProviderBwValue,highNetworkBwValue,c);
 	}
 	
 	public MSPolicy LatencyConstraint(double weight,ConstraintScope c) {

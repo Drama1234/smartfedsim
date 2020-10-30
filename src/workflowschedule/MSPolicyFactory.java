@@ -21,10 +21,10 @@ public class MSPolicyFactory {
 		constraint.add(constraint.ramConstraint(weights[0]));
 		constraint.add(constraint.storageConstraint(weights[1]));
 		constraint.add(constraint.cpuNumberConstraint(weights[2]));
-		constraint.add(constraint.locationConstraint(weights[3]));
-		constraint.add(constraint.costPerResourceConstraint(weights[4],ConstraintScope.Global));
-		constraint.add(constraint.networkConstraint(weights[5],weights[6],ConstraintScope.Global));
-		constraint.add(constraint.LatencyConstraint(weights[7], ConstraintScope.Global));
+//		constraint.add(constraint.locationConstraint(weights[3]));
+		constraint.add(constraint.costPerResourceConstraint(weights[3],ConstraintScope.Global));
+		constraint.add(constraint.networkConstraint(weights[4],weights[5],ConstraintScope.Global));
+		constraint.add(constraint.LatencyConstraint(weights[6], ConstraintScope.Global));
 		
 		System.out.println(constraint);
 		return constraint;

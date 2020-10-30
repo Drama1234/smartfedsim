@@ -22,32 +22,21 @@ package application;
 
 
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Iterator;
-
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
-import org.jgrapht.ext.DOTExporter;
-import org.jgrapht.ext.EdgeNameProvider;
-import org.jgrapht.ext.IntegerNameProvider;
-import org.jgrapht.ext.StringEdgeNameProvider;
-import org.jgrapht.ext.VertexNameProvider;
+import org.jgrapht.ext.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
-import sun.print.resources.serviceui;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+
 
 
 /**
  * 
- * @author carlini
+ * @author drama
  *
  */
 
@@ -125,6 +114,30 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 		}
 
 		return set;
+	}
+	
+	public List<Cloudlet> getRequirementTask(Cloudlet cloudlet){
+		List<Cloudlet> list = new ArrayList<Cloudlet>();
+		ApplicationVertex av = this.getVertexForCloudlet(cloudlet);
+		
+		for(ApplicationEdge ae: graph.edgesOf(av)) {
+			ApplicationVertex source = graph.getEdgeSource(ae);
+			if (source.equals(av) == false)
+				list.addAll(source.getCloudlets());
+		}
+		return list;
+	}
+	
+	public List<Cloudlet> getTargetTask(Cloudlet cloudlet){
+		List<Cloudlet> list = new ArrayList<Cloudlet>();
+		ApplicationVertex av = this.getVertexForCloudlet(cloudlet);
+		
+		for(ApplicationEdge ae: graph.edgesOf(av)) {
+			ApplicationVertex source = graph.getEdgeTarget(ae);
+			if (source.equals(av) == false)
+				list.addAll(source.getCloudlets());
+		}
+		return list;
 	}
 
 	/**
@@ -236,6 +249,14 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 	public ApplicationVertex getVertexForVm(Vm vm)
 	{
 		return vmToVertex.get(vm);
+	}
+	
+	public Vm getVmForVertex(ApplicationVertex av) {
+		for(Vm vm: vmToVertex.keySet()) {
+			if(vmToVertex.get(vm).equals(av))
+				return vm;
+		}
+		return null;
 	}
 
 	/**

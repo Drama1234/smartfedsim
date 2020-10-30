@@ -9,8 +9,9 @@ import org.jgap.impl.IntegerGene;
 public class CIntegerGene extends IntegerGene{
 	private static final long serialVersionUID = 1L;
 	
-	double localFitness = 0;
+	double Fitness = 0;
 	double allocationCost = 0;
+	double allocationTime = 0;
 	
 	public CIntegerGene(Configuration a_config, int min, int max) throws InvalidConfigurationException {
 		super(a_config, min, max);
@@ -18,7 +19,7 @@ public class CIntegerGene extends IntegerGene{
 	
 	public CIntegerGene(Configuration a_config, int min, int max, double fit, double aCost) throws InvalidConfigurationException {
 		super(a_config, min, max);
-		localFitness = fit;
+		Fitness = fit;
 		allocationCost = aCost;
 	}
 	
@@ -42,11 +43,11 @@ public class CIntegerGene extends IntegerGene{
 	 * @return The fitness of each gene
 	 */
 	public double getLocalFitness() {
-		return localFitness;
+		return Fitness;
 	}
 
 	public void setLocalFitness(double localFitness) {
-		this.localFitness = localFitness;
+		this.Fitness = localFitness;
 	}
 	
 	public double getAllocationCost() {
@@ -56,7 +57,14 @@ public class CIntegerGene extends IntegerGene{
 	public void setAllocationCost(double allocationCost) {
 		this.allocationCost = allocationCost;
 	}
+	
+	public double getAllocationTime() {
+		return allocationTime;
+	}
 
+	public void setAllocationTime(double allocationTime) {
+		this.allocationTime = allocationTime;
+	}
 
 	public String toString(){
 		return super.toString() + " - " + this.getLocalFitness();

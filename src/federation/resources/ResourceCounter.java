@@ -1,6 +1,5 @@
 package federation.resources;
 
-import federation.resources.FederationDatacenterProfile.DatacenterParams;
 
 public class ResourceCounter {
 	private static int HOST_ID = 0;

@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 public class MSApplicationNode implements Cloneable{	
 	private int ID;
+	private int ProviderId;
 	private MSApplicationComputing appComp;
 	private MSApplicationNetwork appNet;
 	private MSApplicationStorage appSto;
@@ -67,6 +68,15 @@ public class MSApplicationNode implements Cloneable{
 		return node;
 	}
 	
+	
+	public int getProviderId() {
+		return ProviderId;
+	}
+
+	public void setProviderId(int providerId) {
+		ProviderId = providerId;
+	}
+
 	public void setID(int id){
 		ID = id;
 	}

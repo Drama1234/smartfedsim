@@ -21,6 +21,7 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
 package it.cnr.isti.smartfed.metascheduler;
 
 import it.cnr.isti.smartfed.federation.FederationLog;
+import it.cnr.isti.smartfed.metascheduler.constraints.CostPerVmConstraint;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 
@@ -74,7 +75,8 @@ public class JGAPMapping {
 				// genes[i] = new CIntegerGene(conf, 0, providerNumber-1);
 				genes[i] = new CIntegerGene(conf, firstInteger, lastInteger);
 			}
-
+			
+			
 			IChromosome sampleCh = new Chromosome(conf, genes);
 			conf.setSampleChromosome(sampleCh);
 			conf.setPopulationSize(JGAPMapping.POP_SIZE);
@@ -107,7 +109,7 @@ public class JGAPMapping {
 			
 			k = 0;
 			
-			/*
+			
 			boolean[] acceptable = selectingSatisfactorySolutions(array);
 			for (int i=0; i<acceptable.length && k < JGAPMapping.SOLUTION_NUMBER; i++){
 				if (acceptable[i]){
@@ -121,7 +123,7 @@ public class JGAPMapping {
 			
 			if (k != JGAPMapping.SOLUTION_NUMBER)
 				System.out.println("\n\nAlert!!!! Not all solution were satisfactory\n");
-			*/	
+				
 			
 			if (k == 0){
 				for (int i=0; i<JGAPMapping.SOLUTION_NUMBER && i<array.length; i++){
@@ -168,7 +170,7 @@ public class JGAPMapping {
 		for (int j=0; j<genes.length; j++){
 			// IMSProvider provider = MSProviderAdapter.findProviderById(providerList, (int) genes[j].getAllele());
 			tmp += ((CIntegerGene) genes[j]).getAllocationCost();
-			// tmp += CostPerVmConstraint.vmCost(nodes.get(j), provider, c);
+			tmp += CostPerVmConstraint.vmCost(nodes.get(j), provider, c);
 		}
 		return tmp;
 	}

@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.cloudbus.cloudsim.Vm;
 
+import com.sun.net.ssl.internal.ssl.Provider;
+
 import application.Application;
 import application.ApplicationEdge;
 import application.ApplicationVertex;
@@ -54,7 +56,7 @@ public class MSApplicationUtility {
 		return ret;
 	}
 	
-	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, String city, double budget,FederationDatacenter datecenter) {
+	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, double budget,FederationDatacenter datacenter) {
 		MSApplicationNode appNode = new MSApplicationNode();
 		
 		HashMap<String, Object> compParam =  new HashMap<String, Object>();
@@ -76,6 +78,7 @@ public class MSApplicationUtility {
 		storage.setCharacteristic(storeParam);
 		
 		netParam.put(Constant.INTER_BW, aggregateOutBwFromVm(edges, vm));
+		netParam.put(Constant.BW, vm.getBw());
 		network.setCharacteristic(netParam);
 		
 		appNode.setComputing(computing);
@@ -84,11 +87,13 @@ public class MSApplicationUtility {
 		
 		HashMap<String, Object> nodeCharacteristic = new HashMap<String, Object>();
 		nodeCharacteristic.put(Constant.BUDGET, budget);
-		nodeCharacteristic.put(Constant.CITY,city);
+//		nodeCharacteristic.put(Constant.CITY,city);
+		appNode.setProviderId(datacenter.getId());
 		appNode.setCharacteristic(nodeCharacteristic);
 		appNode.setID(vm.getId());
 		return appNode;
 	}
+	
 	private static long aggregateOutBwFromVm(Set<ApplicationEdge> edges, Vm vm){
 		long bw = 0;
 		for (ApplicationEdge e: edges){
@@ -97,7 +102,7 @@ public class MSApplicationUtility {
 			}
 		}
 		return bw;  
-	}
+	}	
 	
 	public static IMSApplication getMSApplication(Application app){
 		MSApplication newApp = new MSApplication();
@@ -108,7 +113,7 @@ public class MSApplicationUtility {
 		for(int i=0; i<vmList.size(); i++){
 			newApp.setFirstVmIndex(vmList.get(i).getId());
 			vertex = app.getVertexForVm(vmList.get(i));
-			MSApplicationNode node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getCity(), vertex.getBudget(),vertex.getFederationDatacenter());
+			MSApplicationNode node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getFederationDatacenter());
 			
 			if (vertex.getDesiredVm() != null){
 				Vm desVm = vertex.getDesiredVm();

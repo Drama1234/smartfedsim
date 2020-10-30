@@ -26,13 +26,13 @@ import application.ApplicationEdge;
 import application.ApplicationVertex;
 import federation.resources.City;
 import federation.resources.FederationDatacenter;
-import federation.resources.FederationVm;
+import federation.resources.VmFactory;
 import workflowtest.Range;
 import workflowtest.WorkflowDataset;
 
 public class WorkflowGenerator extends Application{
 	
-	protected AbstractRealDistribution distribution;
+//	protected AbstractRealDistribution distribution;
 	
 	public String daxPath;
 	public static String filename = "resources/RemoteSense_13.xml";
@@ -61,7 +61,7 @@ public class WorkflowGenerator extends Application{
          */
         Map<Integer, DistributionGenerator> clusteringDelay = new HashMap<Integer, DistributionGenerator>();
         
-        int maxLevel = 4; // Montage has at most 11 horizontal levels 
+        int maxLevel = 5; // RemoteSense has at most 11 horizontal levels 
         for (int level = 0; level < maxLevel; level++ ){
             DistributionGenerator cluster_delay = new DistributionGenerator(DistributionGenerator.DistributionFamily.WEIBULL, 10.0, 1.0);
             clusteringDelay.put(level, cluster_delay);//the clustering delay specified to each level is 1.0 seconds
@@ -98,24 +98,69 @@ public class WorkflowGenerator extends Application{
 		build(userId, tasks, datacenterlist);
 	}
 	
-	private Vm createVm(int userId,double value) {
-		Range mipsValue = new Range(6502.18, 6502.18*30);
-		Range coresValue = new Range(1, 32);
-		Range ramValue = new Range(2*1024, 64*1024);//2GB-32GB
-		Range bwValue = new Range(100 * 1024 * 1024, 600 * 1024 * 1024);//100MB/s-600MB/s
-		Range storageValue = new Range(250 * 1024, 20 * 1024 * 1024);//250GB-20TB
-//		distribution = new UniformRealDistribution();
-//		double value = distribution.sample();
-		double mips;
-		int cores,ram;
-		long bw,storage;
-		mips = mipsValue.denormalize(value);
-		cores = (int)coresValue.denormalize(value);
-		ram = (int)ramValue.denormalize(value);
-		bw = (long)bwValue.denormalize(value);
-		storage = (long)storageValue.denormalize(value);
-		Vm vm = FederationVm.getCustomVm(userId, mips, cores, ram, bw, storage);
-		return vm;
+	public List<Task> getTasksWithDepth(int depth){
+		List<Task> tasks = new ArrayList<Task>();
+		if (depth < 0)
+			return tasks;
+		
+		for (Cloudlet c: getAllCloudlets()) {
+			Task t = (Task) c;
+			if (t.getDepth() == depth)
+				tasks.add(t);
+		}
+		return tasks;
+	}
+	
+//	private Vm createVm(int userId,double value) {
+//		Range mipsValue = new Range(0, 6502.18*30);
+//		Range coresValue = new Range(0, 32);
+//		Range ramValue = new Range(0, 64*1024);//2GB-64GB
+//		Range bwValue = new Range(0, 500 * 1024 * 1024);//100MB/s-500MB/s
+//		Range storageValue = new Range(0, 10 * 1024 * 1024);//250GB-10TB
+////		distribution = new UniformRealDistribution();
+////		double value = distribution.sample();
+//		double mips;
+//		int cores,ram;
+//		long bw,storage;
+//		mips = mipsValue.denormalize(value);
+//		cores = (int)coresValue.denormalize(value);
+//		ram = (int)ramValue.denormalize(value);
+//		bw = (long)bwValue.denormalize(value);
+//		storage = (long)storageValue.denormalize(value);
+//		Vm vm = VmFactory.getCustomVm(userId, mips, cores, ram, bw, storage);
+//		return vm;
+//	}
+	
+	private Vm createSmallVm(int userId) {
+		return VmFactory.getDesiredVm(
+				userId, 
+				6502.18*4, 
+				4, 
+				new Double(6*1024).intValue(),//ram
+				new Long(100 * 1024 * 1024),//100MB/s
+				new Long(200 * 1024)//200GB
+				);
+	}
+	
+	private Vm createMediumVm(int userId) {
+		return VmFactory.getDesiredVm(
+				userId, 
+				6502.18*10, 
+				10, 
+				new Double(10*1024).intValue(),//ram
+				new Long(100 * 1024 * 1024),//100MB/s
+				new Long(500 * 1024)//500GB
+				);
+	}
+	private Vm createlLargeVm(int userId) {
+		return VmFactory.getDesiredVm(
+				userId, 
+				6502.18*16, 
+				116, 
+				new Double(20*1024).intValue(),//ram
+				new Long(100 * 1024 * 1024),//100MB/s
+				new Long(1024 * 1024)//1TB
+				);
 	}
 	
 	private List<FederationDatacenter> getDatacenter(List<FederationDatacenter> datacenterlist, City city ) {
@@ -129,8 +174,8 @@ public class WorkflowGenerator extends Application{
 	}
 
 	private <T extends Cloudlet> void build(int userId, List<T> tasks,List<FederationDatacenter> datacenterlist) {
-		distribution = new UniformRealDistribution();
-		distribution.reseedRandomGenerator(77);
+//		distribution = new UniformRealDistribution();
+//		distribution.reseedRandomGenerator(77);
 		
 		//System.out.println("任务数量 "+tasks.size()+"数据中心数量：" +datacenterlist.size());
 		
@@ -140,14 +185,15 @@ public class WorkflowGenerator extends Application{
 			cloudlets.add(task);
 			Vm vm = null;
 			if(task.getCloudletLength() < 900) {
-				vm = createVm(userId, 0.2);
+				vm = createSmallVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				v.setBudget(10);
-				v.setCity(City.Beijing);
-				v.setFederationDatacenter(getDatacenter(datacenterlist, v.getEnumCity()).get(1));
+//				v.setCity(City.Beijing);
+				v.setFederationDatacenter(datacenterlist.get(0));
+				//v.setFederationDatacenter(getDatacenter(datacenterlist, v.getEnumCity()).get(1));
 				addVertex(v);
 			}else if(task.getCloudletLength() < 2000) {
-				vm = createVm(userId, 0.4);
+				vm = createMediumVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				//v.setCity(City.Beijing);
 				//先随机定义一个，后续调度时再修改
@@ -155,7 +201,7 @@ public class WorkflowGenerator extends Application{
 				v.setBudget(20);
 				addVertex(v);
 			}else {
-				vm = createVm(userId, 0.6);
+				vm = createlLargeVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				//v.setCity(City.Beijing);
 				//先随机定义一个，后续调度时再修改
@@ -214,8 +260,8 @@ public class WorkflowGenerator extends Application{
 //			}			
 //		}
 //		System.out.println("任务数量 "+tasks.size()+"数据中心数量：" +datacenterlist.size());
-		Range interbwValue = new Range(10*1024*1024,35*1024*1024);//10MB/s-35MB/s
-		Range latencyValue = new Range(0.09, 0.13);
+//		Range interbwValue = new Range(10*1024*1024,35*1024*1024);//10MB/s-35MB/s
+//		Range latencyValue = new Range(0.09, 0.13);
 		
 		
 		for(T t : tasks) {
@@ -283,7 +329,7 @@ public class WorkflowGenerator extends Application{
 //				BigDecimal b1 = new BigDecimal(latencyValue.denormalize(value)); 
 //				latency = b1.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue(); 
 				
-				bandwidth = 20*1024*1024;
+				bandwidth = 20*1024; //20*1024 KB/s
 				latency = 0.12;
 				
 				addEdge(new ApplicationEdge(size, bandwidth, latency), base, child);
@@ -312,9 +358,6 @@ public class WorkflowGenerator extends Application{
 //				addEdge(new ApplicationEdge(inputSize, bandwidth,latency), base, child);
 //			}
 //		}
-
-		
-
 		
 		
 	
@@ -339,6 +382,4 @@ public class WorkflowGenerator extends Application{
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

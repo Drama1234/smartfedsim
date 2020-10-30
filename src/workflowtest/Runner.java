@@ -1,9 +1,10 @@
-package workflowtest;
+	package workflowtest;
 
 import java.util.Locale;
 
 import it.cnr.isti.smartfed.test.TestResult;
 import workflowmapping.GeneticAllocator;
+import workflowmapping.GeneticWork;
 
 public class Runner {
 	private static StringBuilder sb = new StringBuilder();
@@ -24,6 +25,9 @@ public class Runner {
 		
 		GeneticAllocator allocator = new GeneticAllocator();
 		allocator.setPolicyType();//全局网络
+		
+		GeneticWork allocator1 = new GeneticWork();
+		allocator1.setPolicyType();
 		
 		//for (int i=0; i<10; i++)
 		//{ 

@@ -108,10 +108,10 @@ public class ApplicationEdge extends DefaultEdge
 		return this.latency;
 	}
 	
-	public double getMBperHour(){
-		double res = this.bandwidth / 1024 * 3600;
-		return res;
-	}
+//	public double getMBperHour(){
+//		double res = this.bandwidth / 1024 * 3600;
+//		return res;
+//	}
 	
 	public String toString(){
 		StringBuilder res = new StringBuilder();

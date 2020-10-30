@@ -55,7 +55,6 @@ public class FederationQueue extends SimEntity
 	
 	private void scheduleEvents()
 	{
-		
 		long[] longs = (long[]) applicationsAndTimestamps[1];
 		Application[] applications = (Application[]) applicationsAndTimestamps[0];
 		
@@ -83,7 +82,6 @@ public class FederationQueue extends SimEntity
 		}
 	}
 
-
 	@Override
 	public void shutdownEntity() {
 		Log.printLine("FederationQueue is shutting down...");		
@@ -95,7 +93,5 @@ public class FederationQueue extends SimEntity
 	{
 		FederationLog.debugLog("FederationQueue is starting...");
 	}
-	
-	
 	
 }

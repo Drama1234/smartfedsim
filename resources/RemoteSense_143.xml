@@ -1,0 +1,1564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adag xmlns="http://pegasus.isi.edu/schema/DAX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pegasus.isi.edu/schema/DAX http://pegasus.isi.edu/schema/dax-2.1.xsd" version="2.1" count="1" index="0" name="test" jobCount="143" fileCount="0" childCount="142">
+<!-- part 1: list of all referenced files (may be empty) -->
+<!-- part 2: definition of all jobs (at least one) -->
+	<job id="ID00000" namespace="RemoteSense" name="SpiltData" version="1.0" runtime="2.3" >
+		<uses file="regionyear.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="14336000"/><!-- 14000KB -->
+   		<uses file="regionyear_RID000_YID000_DID001_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID002_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID003_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID004_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID005_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID006_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID007_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID008_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID009_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID010_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID011_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID012_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID013_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID014_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID015_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID016_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID017_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID018_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID019_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID020_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID021_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID022_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID023_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID024_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID025_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID026_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID027_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID028_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID029_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID030_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID031_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID032_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID033_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID034_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID035_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID036_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID037_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID038_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID039_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID040_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID041_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID042_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID043_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID044_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID045_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID046_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID047_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID048_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID049_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID050_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID051_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID052_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID053_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID054_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID055_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID056_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID057_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID058_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID059_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID060_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID061_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID062_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID063_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID064_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID065_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID066_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
+   		<uses file="regionyear_RID000_YID000_DID067_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID068_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID069_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID070_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
+   		<uses file="regionyear_RID000_YID000_DID001_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID002_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID003_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID004_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID005_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID006_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID007_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID008_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID009_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID010_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID011_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID012_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID013_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID014_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID015_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID016_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID017_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID018_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID019_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID020_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID021_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID022_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID023_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID024_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID025_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID026_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID027_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID028_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID029_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID030_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID031_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID032_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID033_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID034_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID035_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID036_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID037_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID038_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID039_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID040_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID041_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID042_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID043_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID044_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID045_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID046_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID047_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID048_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID049_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID050_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID051_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID052_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID053_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID054_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID055_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID056_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID057_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID058_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID059_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID060_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID061_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID062_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID063_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID064_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID065_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID066_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/><!-- 66.67kB -->
+   		<uses file="regionyear_RID000_YID000_DID067_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID068_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID069_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+   		<uses file="regionyear_RID000_YID000_DID070_500.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00001" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID001_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID001_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00002" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID002_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID002_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00003" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID003_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID003_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00004" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID004_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID004_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00005" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID005_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID005_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+		<job id="ID00006" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID006_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID006_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00007" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID007_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID007_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00008" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID008_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID008_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00009" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID009_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID009_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00010" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID010_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID010_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+		<job id="ID00011" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID011_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID011_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00012" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID012_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID012_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00013" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID013_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID013_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00014" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID014_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID014_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00015" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID015_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID015_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+		<job id="ID00016" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID016_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID016_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00017" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID017_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID017_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00018" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID018_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID018_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00019" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID019_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID019_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00020" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID020_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID020_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00021" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID021_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID021_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00022" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID022_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID022_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00023" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID023_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID023_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00024" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID024_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID024_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00025" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID025_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID025_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00026" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID026_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID026_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00027" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID027_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID027_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00028" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID028_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID028_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00029" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID029_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID029_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00030" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID030_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID030_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00031" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID031_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID031_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00032" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID032_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID032_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00033" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID033_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID033_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00034" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID034_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID034_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00035" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID035_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID035_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00036" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID036_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID036_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00037" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID037_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID037_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00038" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID038_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID038_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00039" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID039_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID039_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00040" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID040_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID040_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00041" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID041_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID041_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00042" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID042_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID042_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00043" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID043_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID043_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00044" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID044_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID044_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00045" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID045_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID045_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00046" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID046_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID046_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00047" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID047_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID047_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00048" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID048_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID048_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00049" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID049_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID049_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00050" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID050_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID050_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00051" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID051_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID051_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00052" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID052_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID052_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00053" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID053_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID053_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00054" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID054_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID054_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00055" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID055_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID055_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00056" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID056_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID056_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00057" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID057_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID057_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00058" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID058_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID058_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00059" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID059_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID059_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00060" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID060_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID060_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00061" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID061_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID061_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00062" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID062_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID062_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00063" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID063_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID063_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00064" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID064_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID064_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00065" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID065_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID065_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00066" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID066_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID066_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00067" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID067_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID067_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00068" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID068_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID068_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+    <job id="ID00069" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID069_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID069_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job> 
+	<job id="ID00070" namespace="RemoteSense" name="NDWI" version="1.0" runtime="3" >
+		<uses file="regionyear_RID000_YID000_DID070_p2p5.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="136540"/>
+		<uses file="regionyear_RID000_YID000_DID070_NDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00071" namespace="RemoteSense" name="avgNDWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_DID001_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID002_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID003_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID004_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID005_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID006_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID007_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID008_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID009_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID010_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID011_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID012_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID013_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID014_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID015_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID016_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID017_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID018_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID019_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID020_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID021_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID022_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID023_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID024_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID025_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID026_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID027_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID028_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID029_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID030_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID031_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID032_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID033_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID034_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID035_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID036_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID037_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID038_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID039_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID040_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID041_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID042_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID043_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID044_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID045_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID046_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID047_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID048_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID049_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID050_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID051_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID052_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID053_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID054_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID055_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID056_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID057_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID058_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID059_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID060_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID061_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID062_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID063_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID064_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID065_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID066_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID067_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID068_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID069_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID070_NDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="68270"/>
+	</job>
+	<job id="ID00072" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID001_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID001_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00073" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID002_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID002_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00074" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID003_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID003_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00075" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID004_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID004_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00076" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID005_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID005_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00077" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID006_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID006_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00078" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID007_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID007_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00079" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID008_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID008_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00080" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID009_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID009_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00081" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID010_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID010_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00082" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID011_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID011_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00083" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID012_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID012_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00084" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID013_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID013_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00085" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID014_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID014_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00086" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID015_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID015_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00087" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID016_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID016_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00088" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID017_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID017_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00089" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID018_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID018_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00090" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID019_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID019_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00091" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID020_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID020_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00092" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID021_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID021_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00093" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID022_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID022_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00094" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID023_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID023_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00095" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID024_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID024_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00096" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID025_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID025_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00097" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID026_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID026_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00098" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID027_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID027_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00099" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID028_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID028_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00100" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID029_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID029_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00101" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID030_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID030_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00102" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID031_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID031_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00103" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID032_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID032_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00104" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID033_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID033_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00105" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID034_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID034_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00106" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID035_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID035_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00107" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID036_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID036_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00108" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID037_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID037_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00109" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID038_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID038_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00110" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID039_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID039_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00111" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID040_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID040_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00112" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID041_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID041_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00113" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID042_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID042_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00114" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID043_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID043_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00115" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID044_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID044_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00116" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID045_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID045_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00117" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID046_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID046_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00118" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID047_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID047_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00119" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID048_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID048_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00120" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID049_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID049_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00121" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID050_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID050_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00122" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID051_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID051_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00123" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID052_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID052_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00124" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID053_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID053_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00125" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID054_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID054_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00126" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID055_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID055_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00127" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID056_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID056_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00128" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID057_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID057_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00129" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID058_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID058_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00130" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID059_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID059_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00131" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID060_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID060_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00132" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID061_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID061_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00133" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID062_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID062_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00134" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID063_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID063_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00135" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID064_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID064_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00136" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID065_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID065_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job> 
+	<job id="ID00137" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID066_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID066_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00138" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID067_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID067_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>		
+	<job id="ID00139" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID068_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID068_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00140" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID069_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID069_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>
+	<job id="ID00141" namespace="RemoteSense" name="AWI" version="1.0" runtime="2" >
+		<uses file="regionyear_RID000_YID000_avgNDWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID070_500.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="68270"/>
+		<uses file="regionyear_RID000_YID000_DID070_AWI.txt" link="output" register="true" transfer="true" optional="false" type="data" size="34135"/>
+	</job>  
+	<job id="ID00142" namespace="RemoteSense" name="MergeData" version="1.0" runtime="1.5" >
+		<uses file="regionyear_RID000_YID000_DID001_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID002_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID003_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID004_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID005_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID006_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID007_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID008_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID009_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID010_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID011_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID012_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID013_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID014_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID015_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID016_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID017_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID018_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID019_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID020_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID021_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID022_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID023_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID024_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID025_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID026_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID027_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID028_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID029_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID030_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID031_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID032_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID033_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID034_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID035_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID036_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID037_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID038_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID039_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID040_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID041_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID042_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID043_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID044_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID045_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID046_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID047_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID048_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID049_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID050_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID051_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID052_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID053_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID054_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID055_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID056_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID057_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID058_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID059_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID060_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID061_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID062_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID063_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID064_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID065_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID066_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID067_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/><!-- 33.34KB -->
+		<uses file="regionyear_RID000_YID000_DID068_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID069_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_DID070_AWI.txt" link="input" register="true" transfer="true" optional="false" type="data" size="34135"/>
+		<uses file="regionyear_RID000_YID000_Result.txt" link="output" register="true" transfer="true" optional="false" type="data" size="170675"/>
+	</job>
+
+<!-- part 3: list of control-flow dependencies (may be empty) -->
+  <child ref="ID00001">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00002">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00003">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00004">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00005">
+    <parent ref="ID00000"/>
+  </child>
+    <child ref="ID00006">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00007">
+    <parent ref="ID00000"/>
+  </child>
+    <child ref="ID00008">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00009">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00010">
+    <parent ref="ID00000"/>
+  </child>
+    <child ref="ID00011">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00012">
+    <parent ref="ID00000"/>
+  </child>
+    <child ref="ID00013">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00014">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00015">
+    <parent ref="ID00000"/>
+  </child>
+    <child ref="ID00016">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00017">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00018">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00019">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00020">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00021">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00022">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00023">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00024">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00025">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00026">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00027">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00028">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00029">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00030">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00031">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00032">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00033">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00034">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00035">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00036">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00037">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00038">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00039">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00040">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00041">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00042">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00043">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00044">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00045">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00046">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00047">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00048">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00049">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00050">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00051">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00052">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00053">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00054">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00055">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00056">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00057">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00058">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00059">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00060">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00061">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00062">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00063">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00064">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00065">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00066">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00067">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00068">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00069">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00070">
+    <parent ref="ID00000"/>
+  </child>
+  <child ref="ID00071">
+    <parent ref="ID00001"/>
+    <parent ref="ID00002"/>
+    <parent ref="ID00003"/>
+    <parent ref="ID00004"/>
+    <parent ref="ID00005"/>
+    <parent ref="ID00006"/>
+    <parent ref="ID00007"/>
+    <parent ref="ID00008"/>
+    <parent ref="ID00009"/>
+    <parent ref="ID00010"/>
+    <parent ref="ID00011"/>
+    <parent ref="ID00012"/>
+    <parent ref="ID00013"/>
+    <parent ref="ID00014"/>
+    <parent ref="ID00015"/>
+    <parent ref="ID00016"/>
+    <parent ref="ID00017"/>
+    <parent ref="ID00018"/>
+    <parent ref="ID00019"/>
+    <parent ref="ID00020"/>
+    <parent ref="ID00021"/>
+    <parent ref="ID00022"/>
+    <parent ref="ID00023"/>
+    <parent ref="ID00024"/>
+    <parent ref="ID00025"/>
+    <parent ref="ID00026"/>
+    <parent ref="ID00027"/>
+    <parent ref="ID00028"/>
+    <parent ref="ID00029"/>
+    <parent ref="ID00030"/>
+    <parent ref="ID00031"/>
+    <parent ref="ID00032"/>
+    <parent ref="ID00033"/>
+    <parent ref="ID00034"/>
+    <parent ref="ID00035"/>
+    <parent ref="ID00036"/>
+    <parent ref="ID00037"/>
+    <parent ref="ID00038"/>
+    <parent ref="ID00039"/>
+    <parent ref="ID00040"/>
+    <parent ref="ID00041"/>
+    <parent ref="ID00042"/>
+    <parent ref="ID00043"/>
+    <parent ref="ID00044"/>
+    <parent ref="ID00045"/>
+    <parent ref="ID00046"/>
+    <parent ref="ID00047"/>
+    <parent ref="ID00048"/>
+    <parent ref="ID00049"/>
+    <parent ref="ID00050"/>
+    <parent ref="ID00051"/>
+    <parent ref="ID00052"/>
+    <parent ref="ID00053"/>
+    <parent ref="ID00054"/>
+    <parent ref="ID00055"/>
+    <parent ref="ID00056"/>
+    <parent ref="ID00057"/>
+    <parent ref="ID00058"/>
+    <parent ref="ID00059"/>
+    <parent ref="ID00060"/>
+    <parent ref="ID00061"/>
+    <parent ref="ID00062"/>
+    <parent ref="ID00063"/>
+    <parent ref="ID00064"/>
+    <parent ref="ID00065"/>
+    <parent ref="ID00066"/>
+    <parent ref="ID00067"/>
+    <parent ref="ID00068"/>
+    <parent ref="ID00069"/>
+    <parent ref="ID00070"/>
+  </child>
+  <child ref="ID00072">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00073">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00074">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00075">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00076">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00077">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00078">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00079">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00080">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00081">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00082">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00083">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00084">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00085">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00086">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00087">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00088">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00089">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00090">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00091">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00092">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00093">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00094">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00095">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00096">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00097">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00098">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00099">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00100">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00101">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00102">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00103">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00104">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00105">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00106">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00107">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00108">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00109">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00110">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00111">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00112">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00113">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00114">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00115">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00116">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00117">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00118">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00119">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00120">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00121">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00122">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00122">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00123">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00124">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00125">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00126">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00127">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00128">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00129">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00130">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00131">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00132">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00133">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00134">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00135">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00136">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00137">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00138">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00139">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00140">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>
+  <child ref="ID00141">
+  	<parent ref="ID00000"/>
+    <parent ref="ID00071"/>
+  </child>  
+  <child ref="ID00142">
+    <parent ref="ID00072"/>
+    <parent ref="ID00073"/>
+    <parent ref="ID00074"/>
+    <parent ref="ID00075"/>
+    <parent ref="ID00076"/>
+    <parent ref="ID00077"/>
+    <parent ref="ID00078"/>
+    <parent ref="ID00079"/>
+    <parent ref="ID00080"/>
+    <parent ref="ID00081"/>
+    <parent ref="ID00082"/>
+    <parent ref="ID00083"/>
+    <parent ref="ID00084"/>
+    <parent ref="ID00085"/>
+    <parent ref="ID00086"/>
+    <parent ref="ID00087"/>
+    <parent ref="ID00088"/>
+    <parent ref="ID00089"/>
+    <parent ref="ID00090"/>
+    <parent ref="ID00091"/>
+    <parent ref="ID00092"/>
+    <parent ref="ID00093"/>
+    <parent ref="ID00094"/>
+    <parent ref="ID00095"/>
+    <parent ref="ID00096"/>
+    <parent ref="ID00097"/>
+    <parent ref="ID00098"/>
+    <parent ref="ID00099"/>
+    <parent ref="ID00100"/>
+    <parent ref="ID00101"/>
+    <parent ref="ID00102"/>
+    <parent ref="ID00103"/>
+    <parent ref="ID00104"/>
+    <parent ref="ID00105"/>
+    <parent ref="ID00106"/>
+    <parent ref="ID00107"/>
+    <parent ref="ID00108"/>
+    <parent ref="ID00109"/>
+    <parent ref="ID00110"/>
+    <parent ref="ID00111"/>
+    <parent ref="ID00112"/>
+    <parent ref="ID00113"/>
+    <parent ref="ID00114"/>
+    <parent ref="ID00115"/>
+    <parent ref="ID00116"/>
+    <parent ref="ID00117"/>
+    <parent ref="ID00118"/>
+    <parent ref="ID00119"/>
+    <parent ref="ID00120"/>
+    <parent ref="ID00121"/>
+    <parent ref="ID00122"/>
+    <parent ref="ID00123"/>
+    <parent ref="ID00124"/>
+    <parent ref="ID00125"/>
+    <parent ref="ID00126"/>
+    <parent ref="ID00127"/>
+    <parent ref="ID00128"/>
+    <parent ref="ID00129"/>
+    <parent ref="ID00130"/>
+    <parent ref="ID00131"/>
+    <parent ref="ID00132"/>
+    <parent ref="ID00133"/>
+    <parent ref="ID00134"/>
+    <parent ref="ID00135"/>
+    <parent ref="ID00136"/>
+    <parent ref="ID00137"/>
+    <parent ref="ID00138"/>
+    <parent ref="ID00139"/>
+    <parent ref="ID00140"/>
+    <parent ref="ID00141"/>
+  </child> 
+</adag>

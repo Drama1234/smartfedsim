@@ -42,6 +42,7 @@ public class WorkflowComputer {
 		}
 		depth ++;
 		tasks = workflow.getTasksWithDepth(depth);
+		
 		while(tasks.size() != 0) {
 			for (Task t: tasks) {
 				ApplicationVertex av = workflow.getVertexForCloudlet(t);
@@ -82,7 +83,7 @@ public class WorkflowComputer {
 		return totaltime;
 	}
 	
-	private static double taskTime(Task t, WorkflowApplication workflow)
+	public static double taskTime(Task t, WorkflowApplication workflow)
 	{
 		long filesize = t.getCloudletLength();	
 		double expected_service_time = filesize / workflow.getVertexForCloudlet(t).getAssociatedVm(t).getMips();
@@ -92,11 +93,12 @@ public class WorkflowComputer {
 	}
 	
 	private static double inputTime(double inputSize,Task t,WorkflowApplication workflow) {
-		double input_time = inputSize / workflow.getVertexForCloudlet(t).getAssociatedVm(t).getBw();
+		double input_time = inputSize / workflow.getVertexForCloudlet(t).getFederationDatacenter().getDatacenterBw();
+		
 		return input_time;
 	}
 	
-	private static double edgeTime(ApplicationEdge edge, WorkflowApplication workflow, Task t, List<FederationDatacenter> dcs, InternetEstimator internet)
+	public static double edgeTime(ApplicationEdge edge, WorkflowApplication workflow, Task t, List<FederationDatacenter> dcs, InternetEstimator internet)
 	{
 		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
 		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
@@ -115,33 +117,37 @@ public class WorkflowComputer {
 			
 			transfer_time = (edge.getMessageLength() * 1024)/link.getBandwidth();
 		}
+		else {
+			transfer_time = (edge.getMessageLength() * 1024)/dc_source.getMSCharacteristics().getDatacenterBw();
+		}
 		
 		//qdouble transfer_time = (edge.getMessageLength() * 1024) / dc_source.getMSCharacteristics().getHighestBw();
 		
 		System.out.println("--- Length: "+ edge.getMessageLength());
-		System.out.println("--- Bw:   "+transfer_time);
+		System.out.println("--- Transfer_time: "+ transfer_time);
 		System.out.println("--- Latency: " + latency);
 		
 		return latency + transfer_time;
 	}
 	
-	public static double getFlowCostPerHour(Allocation allocation, double completionTime, InternetEstimator internet)
+	public static double getFlowCost(WorkflowApplication workflow,List<FederationDatacenter> dcs,Allocation allocation, double completionTime, InternetEstimator internet)
 	{
-		double total = CostComputer.actualCost(allocation,internet);
-		double net = CostComputer.actualNetCost(allocation,internet);
-		
-		// cost of only resources per hour
-		double resourcesPerHour = total - net;
-		
-		// times we execute a workflow per hour
-		double workflowPerHour = 3600d / completionTime;
-		
-		// cost of network for one run of the workflow
-		double netOneRun = net;
-		
-		// cost of only network per hour
-		double netPerHour = netOneRun * workflowPerHour;
-		
-		return resourcesPerHour + netPerHour;
+		double total = CostComputer.actualCost(allocation,dcs,internet);
+//		double net = CostComputer.actualNetCost(allocation,internet);
+		return total;
+//		
+//		// cost of only resources per hour
+//		double resourcesPerHour = total - net;
+//		
+//		// times we execute a workflow per hour
+//		double workflowPerHour = 3600d / completionTime;
+//		
+//		// cost of network for one run of the workflow
+//		double netOneRun = net;
+//		
+//		// cost of only network per hour
+//		double netPerHour = netOneRun * workflowPerHour;
+//		
+//		return resourcesPerHour + netPerHour;
 	}
 }

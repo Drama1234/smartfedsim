@@ -12,10 +12,9 @@ import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	private City city;
-//	private long maxBwForVm = 0;
+	private int DatacenterBw = 0;
+	
 //	private double costVmCustom = 0;
-//	private double[] costPerIntraRegion = null;
-//	private double costPerInterRegion = 0;
 	
 	
 	public City getCity() {
@@ -26,8 +25,6 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 //		return costVmTypes;
 //	}
 	
-	
-
 	public DatacenterCharacteristicsMS(City city,String architecture, String os, 
 			String vmm, List<? extends Host> hostList,double timeZone, 
 			double costPerCpu, double costPerMem, double costPerStorage, double costPerBw) {
@@ -48,6 +45,7 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	public String toString() {
 		String str = new String();
 		str += " City: " + city;
+		str += " BW: " + getDatacenterBw();
 		str	+= " Cost " + "(mem: " + super.getCostPerMem();
 		str += " and cpu "+ getCostPerCpu();
 		str += " and sto " + super.getCostPerStorage();
@@ -114,15 +112,15 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 		return max.getStorage();
 	}
 	
+//	
+	public int getDatacenterBw() {
+		return this.DatacenterBw;
+	}
 	
-//	public long getHighestBw() {
-//		return this.maxBwForVm;
-//	}
-//	
-//	public void setHighestBw(long bw) {
-//		this.maxBwForVm = bw;
-//	}
-//	
+	public void setDatacenterBw(int bw) {
+		this.DatacenterBw = bw;
+	}
+	
 	public long getHighestAllocatedBwAmongHosts() {
 		List<Host> list = super.getHostList();
 		Host max = Collections.max(list,new Comparator<Host>() {

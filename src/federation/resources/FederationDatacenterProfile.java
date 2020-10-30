@@ -16,11 +16,8 @@ public class FederationDatacenterProfile {
 		COST_PER_STORAGE("0.001"),
 		COST_PER_BW("0.0"),
 		VM_ALLOCATION_POLICY("org.cloudbus.cloudsim.VmAllocationPolicySimple"),
-		//MAX_BW_FOR_VM("0"),
-		SCHEDULING_INTERNAL("0"),
-		LATENCT("0");
-		
-		
+		MAX_BW_FOR_VM("0"),//云服务供应商云内带宽
+		SCHEDULING_INTERNAL("0");
 		
 		private String def;
 		
@@ -46,6 +43,7 @@ public class FederationDatacenterProfile {
 	{
 		return new FederationDatacenterProfile();
 	}
+	
 	/*
 	//USA 爱荷华
 	public static FederationDatacenterProfile getGoogleCloudC2() {

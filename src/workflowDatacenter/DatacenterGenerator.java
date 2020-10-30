@@ -29,6 +29,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 	protected Range costPerSto;
 	protected Range costPerCpu;
 	protected Range costPerBw;
+	protected Range Bw;
 	
 	// host variables
 	protected Range ramAmount;
@@ -52,10 +53,11 @@ public class DatacenterGenerator extends AbstractGenerator{
 		costPerSto = new Range(0.01, 0.05);
 		costPerCpu = new Range(0.01, 0.05); 
 		//costPerBw = new Range(0.05, 0.15); //former (0.001, 0.05)
+		//Bw = new Range(100*1024*1024, 500*1024*1024);
 		//host
 		ramAmount = new Range(1024*1, 1024*64);//1GB-64GB
-		bwAmount = new Range(100*1024*1024, 800*1024*1024);//100Mb-800Mb/s
-		stoAmount = new Range(250*1024, 10*1024*1024); // 250GB - 10TB max
+		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
+		stoAmount = new Range(250*1024, 1*1024*1024); // 250GB - 1TB max
 		coreAmount = new Range(1, 32);
 		mipsAmount = new Range(1000, 50000);
 		
@@ -102,25 +104,27 @@ public class DatacenterGenerator extends AbstractGenerator{
 		for (int i=0; i<approxNumberDatacenters; i++) {
 			if (assign[i] <= 0)
 				continue;
-			//一个数据中心中分配不同个数的主机，每个主机类型不同
+			//一个数据中心中分配不同个数的主机，每个主机类型相同
 			int numCore, mips, ram, bw, sto;
 			double costCpu, costSto, costMem;
 			
-			double value = distribution.sample();
+			numCore = (int) coreAmount.denormalize(distribution.sample());
+			mips = (int) mipsAmount.denormalize(distribution.sample());
+			ram = (int) ramAmount.denormalize(distribution.sample());
+			bw = (int) bwAmount.denormalize(distribution.sample());
+			sto = (int) stoAmount.denormalize(distribution.sample());
 			
-			costCpu = costPerCpu.denormalize(value);
-			costSto = costPerSto.denormalize(value);
-			costMem = costPerMem.denormalize(value);
-			
+			costCpu = costPerCpu.denormalize(distribution.sample());
+			costSto = costPerSto.denormalize(distribution.sample());
+			costMem = costPerMem.denormalize(distribution.sample());
 			
 			// create the datacenters
 			FederationDatacenterProfile profile = FederationDatacenterProfile.getDefault();
 			profile.set(DatacenterParams.COST_PER_BW, "0");
-			profile.set(DatacenterParams.LATENCT, "0");
 			profile.set(DatacenterParams.COST_PER_STORAGE, costSto+"");
 			profile.set(DatacenterParams.COST_PER_CPU, costCpu+"");
 			profile.set(DatacenterParams.COST_PER_MEM, costMem+"");
-			//profile.set(DatacenterParams.MAX_BW_FOR_VM, bw+"");
+			profile.set(DatacenterParams.MAX_BW_FOR_VM, bw+"");
 			
 			// choose a random city
 			Range rangecity = new Range(0, cities.length);
@@ -132,29 +136,22 @@ public class DatacenterGenerator extends AbstractGenerator{
 			List<Host> hostList = new ArrayList<Host>();
 			List<Pe> peList = new ArrayList<Pe>();// create the virtual processor (PE)
 			
+			for (int j=0; j<numCore; j++)
+			{
+				peList.add(new Pe(j, new PeProvisionerSimple(mips)));
+			}
+			
+			// create the hosts
+			HostProfile prof = HostProfile.getDefault();
+			
+			prof.set(HostParams.RAM_AMOUNT_MB, ram+"");
+			prof.set(HostParams.BW_AMOUNT, bw+"");
+			prof.set(HostParams.STORAGE_MB, sto+"");
+			
 			for (int k=0; k<assign[i]; k++)
 			{
-				double values = distribution.sample();
-				numCore = (int) coreAmount.denormalize(values);
-				mips = (int) mipsAmount.denormalize(values);
-				ram = (int) ramAmount.denormalize(values);
-				bw = (int) bwAmount.denormalize(values);
-				sto = (int) stoAmount.denormalize(values);
-				
-				for (int j=0; j<numCore; j++)
-				{
-					peList.add(new Pe(j, new PeProvisionerSimple(mips)));
-				}
-				
-				// create the hosts
-				HostProfile prof = HostProfile.getDefault();
-				
-				prof.set(HostParams.RAM_AMOUNT_MB, ram+"");
-				prof.set(HostParams.BW_AMOUNT, bw+"");
-				prof.set(HostParams.STORAGE_MB, sto+"");
 				hostList.add(HostFactory.get(prof, peList));
 			}
-
 			// populate the list
 			list.add(FederationDatacenterFactory.get(profile, hostList, storageList));
 		}

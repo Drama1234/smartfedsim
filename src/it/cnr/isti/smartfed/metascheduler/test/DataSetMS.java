@@ -78,7 +78,7 @@ public class DataSetMS implements InterfaceDataSet
 		Properties tmp = new Properties();
 		tmp.setProperty("datacenter_number", "3");
 		tmp.setProperty("datacenter_size", "5");
-		tmp.setProperty("datacenter_places", "Italy, Italy, Italy");
+		tmp.setProperty("datacenter_places", "Italy,Italy,Italy");
 		tmp.setProperty("higher_ram_amount_mb", "8192");
 		tmp.setProperty("higher_cost_per_mem", "0.01"); //prices per hour per GB
 		tmp.setProperty("cost_per_storage", "0.05");

@@ -32,7 +32,6 @@ public class MSExternalState {
 			this._providers.add(newp);
 		}
 		
-			
 		// ascending sort by datacenter id
 		Collections.sort(this._providers, new Comparator<IMSProvider>() {
 			@Override

@@ -92,31 +92,36 @@ public class MSProviderAdapter {
 		//computing
 		computingCharacteristic.put(Constant.RAM, aggregateHost.get(Constant.RAM));
 		computingCharacteristic.put(Constant.MIPS, aggregateHost.get(Constant.MIPS));
+		computingCharacteristic.put(Constant.STORE, aggregateHost.get(Constant.STORE));
+		computingCharacteristic.put(Constant.CPU_NUMBER, aggregateHost.get(Constant.CPU_NUMBER));
+		
 		computingCharacteristic.put(Constant.COST_MEM, dcCharacter.getCostPerMem());
 		computingCharacteristic.put(Constant.COST_CPU, dcCharacter.getCostPerCpu());
-		computingCharacteristic.put(Constant.COST_BW, dcCharacter.getCostPerBw());
+	//	computingCharacteristic.put(Constant.COST_BW, dcCharacter.getCostPerBw());
 		computingCharacteristic.put(Constant.COST_STORAGE, dcCharacter.getCostPerStorage());
 		
 
 		//network
-		networkCharacteristic.put(Constant.BW, dcCharacter.getHighestAllocatedBwAmongHosts());
-		networkCharacteristic.put(Constant.COST_BW,dcCharacter.getCostPerBw());
+		networkCharacteristic.put(Constant.BW, dcCharacter.getDatacenterBw());
+		networkCharacteristic.put(Constant.COST_BW, dcCharacter.getCostPerBw());
+//		networkCharacteristic.put(Constant.INTER_BW, dcCharacter.getHighestAllocatedBwAmongHosts());
+//		networkCharacteristic.put(Constant.BW, dcCharacter.getHighestAllocatedBwAmongHosts());
+//		networkCharacteristic.put(Constant.COST_BW,dcCharacter.getCostPerBw());
 		
 		
-		// networkCharacteristic.put(Constant.COST_BW, dcCharacterisitc.getCostPerBw());
+		//networkCharacteristic.put(Constant.COST_BW, dcCharacterisitc.getCostPerBw());
 		//networkCharacteristic.put(Constant.COST_BW, CostComputer.getCostPerBw(datacenter));
 
 		//storage
 		storageCharacteristic.put(Constant.STORE, aggregateHost.get(Constant.STORE));
-		storageCharacteristic.put(Constant.COST_STORAGE,dcCharacter.getCostPerStorage());
-		//storageCharacteristic.put(Constant.COST_STORAGE, CostComputer.getCostPerStorage(datacenter));
+		storageCharacteristic.put(Constant.COST_STORAGE, CostComputer.getCostPerStorage(datacenter));
 
 		//provider
 		providerCharacteristic.put(Constant.ID, dcCharacter.getId());
-//		providerCharacteristic.put(Constant.COST_CPU, dcCharacter.getCostPerCpu());
-//		providerCharacteristic.put(Constant.COST_MEM, dcCharacter.getCostPerMem());
+		providerCharacteristic.put(Constant.COST_CPU, dcCharacter.getCostPerCpu());
+		providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
 		//providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
-		providerCharacteristic.put(Constant.CITY, dcCharacter.getCity());
+//		providerCharacteristic.put(Constant.CITY, dcCharacter.getCity());
 		providerCharacteristic.put(Constant.VM_INSTANCES, hostList.size());
 //		providerCharacteristic.put(Constant.COST_VM, dcCharacter.getCostVmTypes());
 
@@ -130,5 +135,17 @@ public class MSProviderAdapter {
 		provider.getNetwork().setCharacteristic(networkCharacteristic);
 
 		return provider;
+	}
+	
+	public static IMSProvider findProviderById(List<IMSProvider> providerList, Integer providerID) {
+		IMSProvider p = null;
+		boolean found = false;
+		for (int i =0; i<providerList.size() && !found; i++){
+			if (providerList.get(i).getID() == providerID){
+				found = true;
+				p = providerList.get(i);
+			}
+		}
+		return p;
 	}
 }

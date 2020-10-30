@@ -14,6 +14,7 @@ public class CloudletProfile {
 		OUTPUT_SIZE("100"),
 		CPU_MODEL("org.cloudbus.cloudsim.UtilizationModelFull"),
 		RAM_MODEL("org.cloudbus.cloudsim.UtilizationModelFull"),
+		STORAGE_MODEL("org.cloudbus.cloudsim.UtilizationModelFull"),
 		BW_MODEL("org.cloudbus.cloudsim.UtilizationModelFull");
 		
 		private String def;

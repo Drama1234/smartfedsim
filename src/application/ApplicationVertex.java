@@ -21,20 +21,20 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
 package application;
 
 
+import federation.resources.City;
+import federation.resources.FederationDatacenter;
+import federation.resources.VmFactory;
+import federation.resources.VmFactory.vmType;
+import federation.resources.VmTyped;
+
+import org.cloudbus.cloudsim.Cloudlet;
+import org.cloudbus.cloudsim.Vm;
+import workflowfederation.UtilityPrint;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.cloudbus.cloudsim.Cloudlet;
-import org.cloudbus.cloudsim.Vm;
-
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
-
-import federation.resources.City;
-import federation.resources.FederationDatacenter;
-import federation.resources.FederationVm;
-import workflowfederation.UtilityPrint;
 
 /**
  * This class abstracts the application vertex.
@@ -59,11 +59,11 @@ public class ApplicationVertex
 	private Map<Cloudlet, Vm> cloudletMap;
 	private Map<Vm, Cloudlet> vmMap;
 	private String name;
-	private String city = "";
+//	private String city = "";
 	private int id;
 	private static int counter = 0;
 	private double budget = 1.0;
-//	private vmType vm_type;
+	private vmType vm_type;
 	private Vm desiredVm = null;
 	private City cityenum;
 	private FederationDatacenter federationDatacenter;
@@ -80,31 +80,41 @@ public class ApplicationVertex
 	public void setDesiredVm(Vm desiredVm) {
 		this.desiredVm = desiredVm;
 	}
-//
-//	private void construct(int userId, List<Cloudlet> cloudlets)
-//	{
-//		this.id = counter++;
-//		this.cloudlets = cloudlets;
-//		this.cloudletMap = new HashMap<Cloudlet, Vm>();
-//		this.vmMap = new HashMap<Vm, Cloudlet>();
-//		this.vms = new ArrayList<Vm>();
-//		
-//		for (Cloudlet c : cloudlets)
-//		{
-//			Vm clone = VmFactory.getVm(vmtype, userId);
-//			VmTyped cloned = new VmTyped(clone, vmtype);
-//			this.vms.add(cloned);
-//			this.cloudletMap.put(c, cloned);
-//			this.vmMap.put(cloned, c);
-//		}
-//	}
-//	
-//	public ApplicationVertex(String name, int userId, List<Cloudlet> cloudlets, vmType vmtype)
-//	{
-//		this.name = name;
-//		construct(userId, cloudlets, vmtype);
-//	}
-//	
+
+	private void construct(int userId, List<Cloudlet> cloudlets,vmType vmtype)
+	{
+		this.id = counter++;
+		this.cloudlets = cloudlets;
+		this.cloudletMap = new HashMap<Cloudlet, Vm>();
+		this.vmMap = new HashMap<Vm, Cloudlet>();
+		this.vms = new ArrayList<Vm>();
+		
+		for (Cloudlet c : cloudlets)
+		{
+			Vm clone = VmFactory.getVm(vmtype, userId);
+			VmTyped cloned = new VmTyped(clone, vmtype);
+			this.vms.add(cloned);
+			this.cloudletMap.put(c, cloned);
+			this.vmMap.put(cloned, c);
+		}
+	}
+	
+	public ApplicationVertex(String name, int userId, List<Cloudlet> cloudlets, vmType vmtype)
+	{
+		this.name = name;
+		construct(userId, cloudlets, vmtype);
+	}
+	
+	/**
+	 * Constructor for ApplicationVertex
+	 * @param userId
+	 * @param cloudlets
+	 * @param vmtype
+	 */
+	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, vmType vmtype)
+	{
+		this("", userId, cloudlets, vmtype);
+	}
 	/**
 	 * Constructor for ApplicationVertex
 	 * @param userId
@@ -120,7 +130,7 @@ public class ApplicationVertex
 	{
 		this.name = name;
 		this.id = counter++;
-		//this.vm_type = vmType.CUSTOM;
+		this.vm_type = vmType.CUSTOM;
 		this.cloudlets = cloudlets;
 		this.cloudletMap = new HashMap<Cloudlet, Vm>();
 		this.vmMap = new HashMap<Vm, Cloudlet>();
@@ -128,7 +138,7 @@ public class ApplicationVertex
 		
 		for (Cloudlet c : cloudlets)
 		{
-			Vm clone = FederationVm.cloneVMnewId(sample);
+			Vm clone = VmFactory.cloneVMnewId(sample);
 			//VmTyped cloned = new VmTyped(clone, vm_type);
 			this.vms.add(clone);
 			this.cloudletMap.put(c, clone);
@@ -222,7 +232,7 @@ public class ApplicationVertex
 		res.append("id: ").append(this.getId());
 		res.append(" size: ").append(this.getCloudlets().size());
 		res.append(" budget: ").append(this.getBudget());
-		res.append(" city: ").append(this.getCity());
+//		res.append(" city: ").append(this.getCity());
 //		if(this.getCity().contains(city.toString())) {
 //			res.append(" city: ").append(this.getCity());
 //		}
@@ -275,7 +285,7 @@ public class ApplicationVertex
 
 	public void cloningFeatures(ApplicationVertex vertexForVm) {
 		budget = vertexForVm.getBudget();
-		city = vertexForVm.getCity();
+//		city = vertexForVm.getCity();
 		federationDatacenter = vertexForVm.getFederationDatacenter();
 	}
 }

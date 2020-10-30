@@ -36,7 +36,7 @@ public class VmFactory {
 				6502.18 * 2, //mips
 				2, 
 				new Double(4 * 1024 ).intValue(),//4GB ram
-				new Long(100 * 1024 * 1024), //100MB/s内部带宽
+				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long(250 * 1024), //250GB硬盘
 				"xen", new CloudletSchedulerTimeShared());
 		VmTyped vmt = new VmTyped(vm, vmType.SMALL);
@@ -49,7 +49,7 @@ public class VmFactory {
 				6502.18 * 4, //mips
 				4, 
 				new Double(8 * 1024 ).intValue(),//8GB ram
-				new Long(150 * 1024 * 1024), //150MB/s内部带宽
+				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long(500 * 1024), //500GB硬盘
 				"xen", new CloudletSchedulerTimeShared());
 		VmTyped vmt = new VmTyped(vm, vmType.MEDIUM);
@@ -62,7 +62,7 @@ public class VmFactory {
 				6502.18 * 8, //mips
 				8, 
 				new Double(16 * 1024 ).intValue(),//16GB ram
-				new Long(250 * 1024 * 1024), //250MB/s内部带宽
+				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long(1024 * 1024), //1TB硬盘
 				"xen", new CloudletSchedulerTimeShared());
 		VmTyped vmt = new VmTyped(vm, vmType.LARGE);
@@ -75,7 +75,7 @@ public class VmFactory {
 				6502.18 * 16, //mips
 				16, 
 				new Double(32 * 1024 ).intValue(),//32GB ram
-				new Long(300 * 1024 * 1024), //300MB/s内部带宽
+				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long( 5 * 1024 * 1024), //5TB硬盘
 				"xen", new CloudletSchedulerTimeShared());
 		VmTyped vmt = new VmTyped(vm, vmType.XLARGE);
@@ -87,203 +87,13 @@ public class VmFactory {
 				userId, 
 				6502.18 * 32, //mips
 				32, 
-				new Double(64 * 1024 ).intValue(),//32GB ram
-				new Long(500 * 1024 * 1024), //450MB/s内部带宽
+				new Double(64 * 1024 ).intValue(),//64GB ram
+				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long( 10 * 1024 * 1024), //10TB硬盘
 				"xen", new CloudletSchedulerTimeShared());
 		VmTyped vmt = new VmTyped(vm, vmType.X2LARGE);
 		return vm;
 	}
-	
-//	// google c2 适合HPC
-//	private static Vm createGoogleMedium(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 4, //mips
-//				4, 
-//				new Double(16 * 1024 ).intValue(),//16GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(257 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.MEDIUM,DataCenter.GoogleCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createGoogleLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 8, //mips
-//				8, 
-//				new Double(32 * 1024 ).intValue(),//16GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(257 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.LARGE,DataCenter.GoogleCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createGoogleXLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 16, //mips
-//				16, 
-//				new Double(64 * 1024 ).intValue(),//64GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(257 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.XLARGE,DataCenter.GoogleCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createGoogle2XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 30, //mips
-//				30, 
-//				new Double(120 * 1024 ).intValue(),//120GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(257 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X2LARGE,DataCenter.GoogleCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createGoogle4XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 60, //mips
-//				60, 
-//				new Double(240 * 1024 ).intValue(),//120GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(257 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X4LARGE,DataCenter.GoogleCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createAlibabaMedium(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 2, //mips
-//				2, 
-//				new Double(4 * 1024 ).intValue(),//4GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.MEDIUM,DataCenter.AlibabaCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createAlibabaLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 4, //mips
-//				4, 
-//				new Double(8 * 1024 ).intValue(),//8GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.LARGE,DataCenter.AlibabaCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createAlibabaXLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 8, //mips
-//				8, 
-//				new Double(16 * 1024 ).intValue(),//16GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //257TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.XLARGE,DataCenter.AlibabaCloud);
-//		return vm;
-//	}
-//	private static Vm createAlibaba2XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 12, //mips
-//				12, 
-//				new Double(24 * 1024 ).intValue(),//24GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X2LARGE,DataCenter.AlibabaCloud);
-//		return vm;
-//	}
-//	
-//	private static Vm createAlibaba4XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 16, //mips
-//				16, 
-//				new Double(32 * 1024 ).intValue(),//32GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X4LARGE,DataCenter.AlibabaCloud);
-//		return vm;
-//	}
-//	private static Vm createAmazonMedium(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 1, //mips
-//				1, 
-//				new Double(2 * 1024 ).intValue(),//4GB ram
-//				new Long(1024 * 1024 * 1024), //1GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.MEDIUM,DataCenter.AmazonCloud);
-//		return vm;
-//	}
-//	private static Vm createAmazonLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 2, //mips
-//				2, 
-//				new Double(4 * 1024 ).intValue(),//4GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.LARGE,DataCenter.AmazonCloud);
-//		return vm;
-//	}
-//	private static Vm createAmazonXLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 4, //mips
-//				4, 
-//				new Double(8 * 1024 ).intValue(),//4GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.XLARGE,DataCenter.AmazonCloud);
-//		return vm;
-//	}
-//	private static Vm createAmazon2XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 8, //mips
-//				8, 
-//				new Double(16 * 1024 ).intValue(),//4GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X2LARGE,DataCenter.AmazonCloud);
-//		return vm;
-//	}
-//	private static Vm createAmazon4XLarge(int userId) {
-//		Vm vm = new Vm(ResourceCounter.nextVmID(), 
-//				userId, 
-//				6502.18 * 16, //mips
-//				16, 
-//				new Double(32 * 1024 ).intValue(),//4GB ram
-//				new Long(10 * 1024 * 1024 * 1024), //10GB/s内部带宽
-//				new Long(250 * 1024 * 1024), //250TB硬盘
-//				"xen", new CloudletSchedulerTimeShared());
-//		VmTyped vmt = new VmTyped(vm, vmType.X4LARGE,DataCenter.AmazonCloud);
-//		return vm;
-//	}
 	
 	
 	public static Vm getCustomVm(int userId, double mips, int cores, int ramMB, long bwMB, long diskMB)

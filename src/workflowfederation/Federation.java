@@ -149,7 +149,7 @@ public class Federation extends SimEntity{
 		if (allocation == null)
 		{
 			// compute the mapping solution
-			 long before = System.currentTimeMillis();
+			//long before = System.currentTimeMillis();
 			MappingSolution[] sols = mappingModule.findAllocation(ag);//在具体的分配算法内部进行整理
 			
 			// commented because it is better to retrieve time from the mappingSolution object 
@@ -158,18 +158,18 @@ public class Federation extends SimEntity{
 			// long after = System.currentTimeMillis();
 			// TestResult.getMappingTime().addValue(after - before);
 			
-			if (sols[0].isValid() == false)
-			{
-				FederationLog.timeLog("Invalid mapping solution for application: \n" + ag);
-				// mappingModule.getMonitoringHub().shutdownEntity();
-				TestResult.getFailures().addValue(1);
-				return;
-			}
+//			if (sols[0].isValid() == false)
+//			{
+//				FederationLog.timeLog("Invalid mapping solution for application: \n" + ag);
+//				// mappingModule.getMonitoringHub().shutdownEntity();
+//				TestResult.getFailures().addValue(1);
+//				return;
+//			}
 			
 			
-			FederationLog.timeLog("############# MAPPING SOLUTION ###################");
-			FederationLog.timeLog("(Federation)" + sols[0].toString());
-			FederationLog.timeLog("##################################################");
+//			FederationLog.timeLog("############# MAPPING SOLUTION ###################");
+//			FederationLog.timeLog("(Federation)" + sols[0].toString());
+//			FederationLog.timeLog("##################################################");
 			
 			allocation = new Allocation(ag, sols, seed);
 			appToAllocation.put(ag, allocation);

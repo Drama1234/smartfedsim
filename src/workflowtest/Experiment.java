@@ -14,6 +14,9 @@ import application.ApplicationVertex;
 import application.WorkflowApplication;
 import federation.resources.FederationDatacenter;
 import federation.resources.ResourceCounter;
+import it.cnr.isti.smartfed.federation.FederationQueue;
+import it.cnr.isti.smartfed.federation.FederationQueueProfile;
+import it.cnr.isti.smartfed.federation.FederationQueueProvider;
 import it.cnr.isti.smartfed.test.PreciseDataset;
 import it.cnr.isti.smartfed.test.TestResult;
 import workflowfederation.Allocation;
@@ -53,10 +56,10 @@ public class Experiment {
 		CloudSim.init(num_user, calendar, trace_flag);
 		
 		//创建Federation
-		Federation federation = new Federation(allocator, randomSeed);
+		Federation federation = new Federation(allocator,randomSeed);
 		CloudSim.addEntity(federation);
 		
-		//初始化数据集
+		//初始化联盟云
 		if (dataset instanceof PreciseDataset)
 			((PreciseDataset)dataset).init(federation.getId());
 		
@@ -82,6 +85,11 @@ public class Experiment {
 		allocator.setMonitoring(monitor);
 		allocator.setNetEstimator(internetEstimator);
 		allocator.setRandomSeed(randomSeed);
+		
+//		// create the queue (is that still needed)?
+//		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();
+//		FederationQueue queue = FederationQueueProvider.getFederationQueue(queueProfile, federation, applications);
+//		CloudSim.addEntity(queue);
 		
 		// manually setup the end of the simulation
 		CloudSim.terminateSimulation(1000000); // in milliseconds

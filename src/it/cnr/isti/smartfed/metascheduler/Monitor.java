@@ -94,7 +94,7 @@ public class Monitor implements IEvolutionMonitor{
 		
 		double maxFitPopul = arg0.determineFittestChromosome().getFitnessValue();
 		double numGenes = arg0.getChromosome(0).getGenes().length;
-		double acceptableFitness = (numGenes * MSFitnessFunction.AWARD) ;
+		double acceptableFitness = (numGenes * MSFitnessFunction.AWARD);
 		
 		if (iterationCount >= maxIteration){
 			arg1.add("\n[MONITOR] \nIterations: " + iterationCount + "/" + maxIteration);

@@ -12,8 +12,10 @@ import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 import workflowfederation.CostComputer;
+import workflowfederation.WorkflowComputer;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
+import workflowschedule.CIntegerGene;
 import workflowschedule.Constant;
 import workflowschedule.MSPolicy;
 
@@ -71,6 +73,8 @@ public class BudgetConstraint extends MSPolicy{
 		Double budget = (Double) node.getCharacteristic().get(Constant.BUDGET);
 		Double cost = calculateCost_Network(gene_index, chromos, app, prov,internet);
 		Double maxCost = budget;
+		
+		((CIntegerGene) chromos.getGene(gene_index)).setAllocationCost(cost);
 		//定义总体成本约束即可，没有必要单独计算每一项
 //		Double c_maxCost = highCpuCost*CpuNumberConstraint.getHighCpuValue();
 //		Double s_maxCost = highRamCost*RamConstraint.getHighRamValue();
@@ -81,7 +85,7 @@ public class BudgetConstraint extends MSPolicy{
 		return distance * getWeight();
 	}
 	
-	private static Double calculateCost_Network(int i, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
+	public static Double calculateCost_Network(int i, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
 		MSApplicationNode node = app.getNodes().get(i);
 		Double cpu_cost = cpuCost(node, prov);
 		Double r_cost = ramCost(node, prov);
