@@ -119,7 +119,7 @@ public class NetworkBWConstraint extends MSPolicy{
 		if(appBw > 0 && numofdifference != 0) {
 			distanceprovider = calculateDistance_ErrHandling(provBw, appBw, maxProviderBw);
 			distancenetwork = sumofdifference / numofdifference;
-			distance = distancenetwork * getWeight() + distanceprovider * getWeigthNetworkBw();
+			distance = distancenetwork * getWeigthNetworkBw()  + distanceprovider * getWeight();
 		}else {
 			distance = MAXSATISFACTION_DISTANCE;
 		}

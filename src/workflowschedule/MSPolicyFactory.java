@@ -9,13 +9,15 @@ import federation.resources.FederationDatacenter;
 import workflowconstraints.PolicyContainer;
 import workflownetworking.InternetEstimator;
 import workflowschedule.MSPolicy.ConstraintScope;
+import workflowtest.WorkflowDataset;
 
 public class MSPolicyFactory {
 	private final static Logger log = Logger.getLogger(PolicyContainer.class.getSimpleName());
 	
-	public static PolicyContainer createPoliciesDefaultNetBw(List<FederationDatacenter> dcList, double[] weights){
+	public static PolicyContainer createPoliciesDefaultNetBw(List<FederationDatacenter> dcList, double[] weights,InternetEstimator internet){
 		System.out.println("*** Creating global policy with net and bw ***");
 		findCommonMaxValues(dcList);
+		findCommonMaxNetworkValues(internet);
 
 		PolicyContainer constraint = new PolicyContainer(weights);
 		constraint.add(constraint.ramConstraint(weights[0]));
@@ -25,7 +27,7 @@ public class MSPolicyFactory {
 		constraint.add(constraint.costPerResourceConstraint(weights[3],ConstraintScope.Global));
 		constraint.add(constraint.networkConstraint(weights[4],weights[5],ConstraintScope.Global));
 		constraint.add(constraint.LatencyConstraint(weights[6], ConstraintScope.Global));
-		
+		constraint.add(constraint.providerId(weights[7]));
 		System.out.println(constraint);
 		return constraint;
 	}
@@ -60,19 +62,19 @@ public class MSPolicyFactory {
 	}
 	
 	// finding the datacenter with the highest storage quantity 
-	public static FederationDatacenter findDatacenterMaxCore(List<FederationDatacenter> dcList) {
-		FederationDatacenter max = Collections.max(dcList, new Comparator<FederationDatacenter>() {
-			@Override
-			public int compare(FederationDatacenter first, FederationDatacenter second) {
-				if (first.getMSCharacteristics().getHighestCore() > second.getMSCharacteristics().getHighestStorage())
-					return 1;
-				else if (first.getMSCharacteristics().getHighestStorage() < second.getMSCharacteristics().getHighestStorage())
-					return -1;
-				return 0;
-			}
-		});
-		return max;
-	}
+//	public static FederationDatacenter findDatacenterMaxCore(List<FederationDatacenter> dcList) {
+//		FederationDatacenter max = Collections.max(dcList, new Comparator<FederationDatacenter>() {
+//			@Override
+//			public int compare(FederationDatacenter first, FederationDatacenter second) {
+//				if (first.getMSCharacteristics().getHighestCore() > second.getMSCharacteristics().getHighestStorage())
+//					return 1;
+//				else if (first.getMSCharacteristics().getHighestStorage() < second.getMSCharacteristics().getHighestStorage())
+//					return -1;
+//				return 0;
+//			}
+//		});
+//		return max;
+//	}
 	 
 	
 	public static int findMaxCoreAllDatacenters(List<FederationDatacenter> dcList) {
@@ -141,4 +143,16 @@ public class MSPolicyFactory {
 		});
 		return max;
 	}
+	
+//	public static void main(String[] args) {
+//		final String filename = "resources/RemoteSense_23.xml";
+//		WorkflowDataset dataset = new WorkflowDataset(20, filename);
+//    	List<FederationDatacenter> datacenters = dataset.createDatacenters();
+//    	MSPolicyFactory msPolicyFactory = new MSPolicyFactory();
+//    	InternetEstimator internet = new InternetEstimator(datacenters, 77);
+//    	double[] weights = {1,1,1,1,1,1,1,1};
+//    	PolicyContainer policyContainer = msPolicyFactory.createPoliciesDefaultNetBw(datacenters, weights, internet);
+//    	System.out.println(policyContainer.toString());
+//    	
+//	}
 }

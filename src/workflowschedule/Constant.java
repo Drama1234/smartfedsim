@@ -26,6 +26,8 @@ public class Constant {
 
 //	public static final String CITY = "city";
 	public static final String ID = "ID";
+	public static final String providerID = "providerID";
+	public static final String vertextLength = "vertext_Length";
 	
 	
 	//public static final String[] aggregationParam = {"ram_amount_mb", "bw_amount", "storage_mb"};

@@ -34,15 +34,14 @@ public class ApplicationEdge extends DefaultEdge
 	
 	/* requirements */
 	private double bandwidth;
-	private SecuritySupport security;
+//	private SecuritySupport security;
 	private double latency;
 	private double messageLength;
 	
-	public ApplicationEdge(double mlength, double bandwidth, SecuritySupport security, double latency)
+	public ApplicationEdge(double mlength, double bandwidth, double latency)
 	{
 		this.messageLength = mlength;
 		this.bandwidth = bandwidth;
-		this.security = security;
 		this.latency = latency;
 	}
 	
@@ -63,9 +62,6 @@ public class ApplicationEdge extends DefaultEdge
 //		this.latency = latency;
 //	}
 	
-	public ApplicationEdge(double mlength,double bandwidth,double latency) {
-		this(mlength,bandwidth, SecuritySupport.NO, latency);
-	}
 	
 //	/**
 //	 * 
@@ -98,10 +94,10 @@ public class ApplicationEdge extends DefaultEdge
 		return this.messageLength;
 	}
 
-	public SecuritySupport getSecurity()
-	{
-		return this.security;
-	}
+//	public SecuritySupport getSecurity()
+//	{
+//		return this.security;
+//	}
 
 	public double getLatency()
 	{
@@ -120,7 +116,7 @@ public class ApplicationEdge extends DefaultEdge
 		String size = message > 1024 ? "MB": "KB";
 		message = message > 1024 ? message/1024: message;
 		String messages = String.format(Locale.ENGLISH, "%.2f", message);
-		double bandwidth = this.bandwidth/(1024*1024);
+		double bandwidth = this.bandwidth/(1024);
 		String bw = String.format(Locale.ENGLISH, "%.0f",bandwidth);
 		
 		
@@ -129,6 +125,7 @@ public class ApplicationEdge extends DefaultEdge
 		res.append(" message length: ").append(messages).append(size);
 		res.append(" bandwith: ").append(bw).append("MB/s");
 		res.append(" latency: ").append(this.latency).append("s");
+		res.append(" ]");
 		
 		
 		return res.toString();
@@ -151,7 +148,7 @@ public class ApplicationEdge extends DefaultEdge
 		Vm vm;
 		try {
 			ApplicationVertex v = (ApplicationVertex) super.getTarget();
-			vm =  v.getVms().get(0);
+			vm = v.getVms().get(0);
 		}
 		catch (Exception e){
 			vm = null;

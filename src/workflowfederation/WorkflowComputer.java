@@ -25,6 +25,8 @@ public class WorkflowComputer {
 		double process_time = 0;
 		double input_time = 0;
 		double output_time = 0;
+		double total_time = 0;
+		
 		if (tasks.size() != 0)
 		{
 			for (Task t: tasks)
@@ -93,7 +95,7 @@ public class WorkflowComputer {
 	}
 	
 	private static double inputTime(double inputSize,Task t,WorkflowApplication workflow) {
-		double input_time = inputSize / workflow.getVertexForCloudlet(t).getFederationDatacenter().getDatacenterBw();
+		double input_time = inputSize / workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw();
 		
 		return input_time;
 	}

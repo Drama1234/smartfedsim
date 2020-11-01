@@ -85,12 +85,12 @@ public class BudgetConstraint extends MSPolicy{
 		return distance * getWeight();
 	}
 	
-	public static Double calculateCost_Network(int i, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
-		MSApplicationNode node = app.getNodes().get(i);
+	public static Double calculateCost_Network(int index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
+		MSApplicationNode node = app.getNodes().get(index);
 		Double cpu_cost = cpuCost(node, prov);
 		Double r_cost = ramCost(node, prov);
 		Double s_cost = storageCost(node, prov);
-		Double net_cost = netCost(i, chromos, app, prov,internet);
+		Double net_cost = netCost(index, chromos, app, prov,internet);
 		// System.out.println(r_cost + " + " + s_cost);
 		return r_cost + s_cost + cpu_cost + net_cost;
 	}

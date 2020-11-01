@@ -133,7 +133,6 @@ public class ApplicationVertex
 			this.cloudletMap.put(c, cloned);
 			this.vmMap.put(cloned, c);
 		}
-		
 	}
 	
 	public String getCountry() {

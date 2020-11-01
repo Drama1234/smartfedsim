@@ -19,19 +19,16 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package application;
-
-
-
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 import org.jgrapht.ext.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import federation.resources.FederationDatacenter;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-
-
 
 
 /**
@@ -277,6 +274,14 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 		return list;
 	}
 	
+	public List<FederationDatacenter> getFederationDatacenters(){
+		List<FederationDatacenter> list = new ArrayList<FederationDatacenter>();
+		for (ApplicationVertex av : vertexSet()) {
+			list.addAll(av.getfeFederationDatacenters());
+		}
+		return list;
+	}
+	
 //	public List<VmTyped> getAllVmsTyped()
 //	{
 //		List<VmTyped> list = new ArrayList<VmTyped>();
@@ -295,11 +300,12 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 			String str = "Application \n";
 			List<Vm> vmList = this.getAllVms();
 			for (Vm a : vmList){
-				str += "vmID:"+ a.getId() + "\t" + this.getVertexForVm(a).getCity()+"\n";
+				str += "vmID:"+ a.getId() + "\t" + "vertexID:" + this.getVertexForVm(a).getId() + "\n";
 				str += "    Size (MB): " + a.getSize() +"\n";
 				str += "    Ram (MB): "+ a.getRam() + "\n";
 				str += "    Mips: " + a.getMips()+"\n";
 				str += "    Net: " + a.getBw()+"\n";
+				str += "    NumOfPers: " + a.getNumberOfPes() + "\n";
 				str += "    Budget: " + this.getVertexForVm(a).getBudget() + "\n";
 			}
 			str += this.edgesRepresentation();
@@ -358,7 +364,6 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 		DOTExporter t = new DOTExporter(vertID,vertName,edgeName);
 		try {
 			t.export(new FileWriter(filename), this.graph);
-
 		} catch (IOException e) {
 			System.out.println("Eccezione");
 			e.printStackTrace();

@@ -18,8 +18,8 @@ public class MSExternalState {
 	private List<IMSProvider> _providers;
 	private InternetEstimator _internet;
 	
-	public MSExternalState(Application application, List<FederationDatacenter> providers, InternetEstimator estimator) {
-		this._internet = estimator;
+	public MSExternalState(Application application, List<FederationDatacenter> providers, InternetEstimator internet) {
+		this._internet = internet;
 		this._application = MSApplicationUtility.getMSApplication(application);
 		
 		/*
@@ -56,5 +56,4 @@ public class MSExternalState {
 	public InternetEstimator getInternet() {
 		return _internet;
 	}
-	
 }

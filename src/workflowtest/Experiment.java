@@ -1,6 +1,7 @@
 package workflowtest;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,6 @@ import workflowfederation.MonitoringHub;
 import workflowfederation.UtilityPrint;
 import workflowfederation.WorkflowComputer;
 import workflowmapping.AbstractAllocator;
-import workflowmapping.MappingSolution;
 import workflownetworking.InternetEstimator;
 
 public class Experiment {
@@ -72,7 +72,7 @@ public class Experiment {
 		
 		// 创建网络
 		InternetEstimator internetEstimator = dataset.createInternetEstimator(datacenters);
-		
+//		System.out.println(internetEstimator.toString());
 		//创建监控
 		int schedulingInterval = 1; // probably simulation time
 		MonitoringHub monitor = new MonitoringHub(datacenters, schedulingInterval);
@@ -85,6 +85,8 @@ public class Experiment {
 		allocator.setMonitoring(monitor);
 		allocator.setNetEstimator(internetEstimator);
 		allocator.setRandomSeed(randomSeed);
+		
+		
 		
 //		// create the queue (is that still needed)?
 //		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();
@@ -113,10 +115,14 @@ public class Experiment {
 //		TestResult.getLockDegree().addValue(usedDc);
 		
 		// add the values to the TestResult class
-		for (Allocation a: federation.getAllocations())
-		{
+		//for (int i = 0; i < federation.getAllocations().size(); i++) {
+
+			for (Allocation a: federation.getAllocations()) {
+				//Collection<Allocation> a = federation.getAllocations();
+		
 			if (a.isCompleted())
 			{
+				System.out.println("分配方案：");
 				double budget = 0;
 				for (ApplicationVertex av : a.getApplication().vertexSet())
 					budget += av.getBudget();
@@ -125,21 +131,23 @@ public class Experiment {
 				if (applications.get(0) instanceof WorkflowApplication)
 				{			
 					double completion = WorkflowComputer.getFlowCompletionTime((WorkflowApplication) applications.get(0), datacenters, internetEstimator);
-					double cost = WorkflowComputer.getFlowCostPerHour(a, completion,internetEstimator);
-					TestResult.getCompletion().addValue(completion);
-					TestResult.getCost().addValue(cost);
-					System.out.println("COMPLETION -----------> " + completion);
+					double cost = WorkflowComputer.getFlowCost((WorkflowApplication) applications.get(0), datacenters, a, completion, internetEstimator);
+//					TestResult.getCompletion().addValue(completion);
+//					TestResult.getCost().addValue(cost);
+					System.out.println("BUDGET：------------------->" + budget);
+					System.out.println("COST：-------------------> " + cost);
+					System.out.println("COMPLETION：----------------> " + completion);
 				}
-				else
-				{
-					double total = CostComputer.actualCost(a,internetEstimator);
-					double netcost = CostComputer.actualNetCost(a,internetEstimator);
-					System.out.println("TOTAL --------> "+total);
-					
-					TestResult.getCost().addValue(total);
-					TestResult.getNetCost().addValue(netcost);
-					TestResult.getBerger().addValue(Math.log(total / budget));
-				}	
+//				else
+//				{
+//					double total = CostComputer.actualCost(a,internetEstimator);
+//					double netcost = CostComputer.actualNetCost(a,internetEstimator);
+//					System.out.println("TOTAL --------> "+total);
+//					
+//					TestResult.getCost().addValue(total);
+//					TestResult.getNetCost().addValue(netcost);
+//					TestResult.getBerger().addValue(Math.log(total / budget));
+//				}	
 			}
 			else
 				System.out.println("Not completed");

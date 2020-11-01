@@ -11,25 +11,25 @@ import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 
 public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
-	private City city;
+//	private City city;
 	private int DatacenterBw = 0;
 	
 //	private double costVmCustom = 0;
 	
 	
-	public City getCity() {
-		return city;
-	}
+//	public City getCity() {
+//		return city;
+//	}
 
 //	public double[] getCostVmTypes() {
 //		return costVmTypes;
 //	}
 	
-	public DatacenterCharacteristicsMS(City city,String architecture, String os, 
+	public DatacenterCharacteristicsMS(String architecture, String os, 
 			String vmm, List<? extends Host> hostList,double timeZone, 
 			double costPerCpu, double costPerMem, double costPerStorage, double costPerBw) {
 		super(architecture, os, vmm, hostList, timeZone, costPerCpu, costPerMem, costPerStorage, costPerBw);
-			this.city = city;
+//			this.city = city;
 //			this.costVmCustom = costVmCustom;
 //			this.costVmTypes = costPerVm;
 	}
@@ -44,7 +44,7 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	
 	public String toString() {
 		String str = new String();
-		str += " City: " + city;
+//		str += " City: " + city;
 		str += " BW: " + getDatacenterBw();
 		str	+= " Cost " + "(mem: " + super.getCostPerMem();
 		str += " and cpu "+ getCostPerCpu();

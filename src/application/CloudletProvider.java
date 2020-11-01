@@ -38,7 +38,6 @@ public class CloudletProvider {
 	public static UtilizationModel getDefaultUtilModel(){
 		CloudletProfile profile = CloudletProfile.getDefault();
 		UtilizationModel uCPU = null;
-
 		
 		try {
 			uCPU = (UtilizationModel)Class.forName(profile.get(CloudletParams.CPU_MODEL)).newInstance();
@@ -58,7 +57,4 @@ public class CloudletProvider {
 	{
 		return createCloudlet(profile);
 	}
-	
-	
-
 }

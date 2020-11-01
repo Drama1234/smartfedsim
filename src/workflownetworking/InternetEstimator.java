@@ -151,4 +151,15 @@ public class InternetEstimator {
 		}
 		return max;
 	}
+
+	@Override
+	public String toString() {
+		return "HighestLatency:"+getHighestLatency()+"HighestBw:"+getHighestBw()+"HighestCostBw"+getHighestCostBw();
+	}
+	
+	
+
+	
+	
+	
 }

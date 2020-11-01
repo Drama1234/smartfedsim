@@ -62,7 +62,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			}
 		}
 		result += "@@@@@@@@@@@@@@ Datacenter " + this.getName() + " @@@@@@@@@@@ " + hostlist.size() + " host\n";
-		result += "City: " + ((DatacenterCharacteristicsMS) super.getCharacteristics()).getCity() + "\n";
+//		result += "City: " + ((DatacenterCharacteristicsMS) super.getCharacteristics()).getCity() + "\n";
 		result += "VMs: ";
 		if (l != null)
 			for (Vm vm : l)
@@ -87,7 +87,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		StringBuilder sb = new StringBuilder();
 		DatacenterCharacteristicsMS chars = this.getMSCharacteristics();
 		sb.append("name:").append(chars.getResourceName()).append(",");
-		sb.append("city:").append(chars.getCity()).append(",");
+//		sb.append("city:").append(chars.getCity()).append(",");
 		sb.append("bw:").append(chars.getDatacenterBw()).append(",");
 		sb.append("host_num:").append(this.getHostList().size()).append(",");
 		Host host = this.getHostList().get(0);

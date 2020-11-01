@@ -2,6 +2,8 @@ package workflowDatacenter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ import application.ApplicationVertex;
 import federation.resources.City;
 import federation.resources.FederationDatacenter;
 import federation.resources.VmFactory;
+import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 import workflowtest.Range;
 import workflowtest.WorkflowDataset;
 
@@ -35,7 +38,7 @@ public class WorkflowGenerator extends Application{
 //	protected AbstractRealDistribution distribution;
 	
 	public String daxPath;
-	public static String filename = "resources/RemoteSense_13.xml";
+	public static String filename = "resources/RemoteSense_23.xml";
 	
 	protected Range coreAmount;
 	protected Range mipsAmount;
@@ -43,11 +46,6 @@ public class WorkflowGenerator extends Application{
 	protected Range bwAmount;
 	protected Range diskAmount;
 	
-	protected City[] cities;
-	
-	public void setCities(City[] c){
-		this.cities = c;
-	}
 	
 	void setWorkflowSimConfig() {
 		int vmNum = 13;//number of vms;
@@ -163,17 +161,19 @@ public class WorkflowGenerator extends Application{
 				);
 	}
 	
-	private List<FederationDatacenter> getDatacenter(List<FederationDatacenter> datacenterlist, City city ) {
-		List<FederationDatacenter> bfd = new ArrayList<>();
-		for (FederationDatacenter fd : datacenterlist) {
-			if(fd.getMSCharacteristics().getCity() == city) {
-				bfd.add(fd);
-			}
-		}
-		return bfd;
-	}
+//	private List<FederationDatacenter> getDatacenter(List<FederationDatacenter> datacenterlist, City city ) {
+//		List<FederationDatacenter> bfd = new ArrayList<>();
+//		for (FederationDatacenter fd : datacenterlist) {
+//			if(fd.getMSCharacteristics().getCity() == city) {
+//				bfd.add(fd);
+//			}
+//		}
+//		return bfd;
+//	}
 
-	private <T extends Cloudlet> void build(int userId, List<T> tasks,List<FederationDatacenter> datacenterlist) {
+	private <T extends Cloudlet> void build(int userId, List<T> tasks,List<FederationDatacenter> datacenterlist) 
+	{
+		
 //		distribution = new UniformRealDistribution();
 //		distribution.reseedRandomGenerator(77);
 		
@@ -186,10 +186,11 @@ public class WorkflowGenerator extends Application{
 			Vm vm = null;
 			if(task.getCloudletLength() < 900) {
 				vm = createSmallVm(userId);
-				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
+				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm, datacenterlist.get(0));
 				v.setBudget(10);
-//				v.setCity(City.Beijing);
-				v.setFederationDatacenter(datacenterlist.get(0));
+				//v.setCity(City.Beijing);
+				
+				//v.setFederationDatacenter(datacenterlist.get(0));
 				//v.setFederationDatacenter(getDatacenter(datacenterlist, v.getEnumCity()).get(1));
 				addVertex(v);
 			}else if(task.getCloudletLength() < 2000) {
@@ -197,6 +198,7 @@ public class WorkflowGenerator extends Application{
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				//v.setCity(City.Beijing);
 				//先随机定义一个，后续调度时再修改
+				//v.setFederationDatacenter(datacenterlist.get(0));
 				//v.setFederationDatacenter(getDatacenter(datacenterlist, City.Beijing).get(0));
 				v.setBudget(20);
 				addVertex(v);
@@ -205,6 +207,7 @@ public class WorkflowGenerator extends Application{
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				//v.setCity(City.Beijing);
 				//先随机定义一个，后续调度时再修改
+				//v.setFederationDatacenter(datacenterlist.get(0));
 				//v.setFederationDatacenter(getDatacenter(datacenterlist, City.Beijing).get(0));
 				v.setBudget(30);
 				addVertex(v);
@@ -335,7 +338,7 @@ public class WorkflowGenerator extends Application{
 				addEdge(new ApplicationEdge(size, bandwidth, latency), base, child);
 			}
 		}
-		System.out.println(super.toString());
+//		System.out.println(super.toString());
 //		System.out.println(super.vertexSet().size() + "+" + super.getEdges().size());
 	}
 		//System.out.println(super.toString());
@@ -360,8 +363,6 @@ public class WorkflowGenerator extends Application{
 //		}
 		
 		
-	
-	
 	public static void main(String[] args){
 		int num_user = 1;   // number of grid users
         Calendar calendar = Calendar.getInstance();
@@ -374,7 +375,7 @@ public class WorkflowGenerator extends Application{
         	
         	WorkflowDataset dataset = new WorkflowDataset(20, filename);
         	List<FederationDatacenter> datacenters = dataset.createDatacenters();
-        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_13", 0, taskClustering, datacenters);
+        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_23", 0, taskClustering, datacenters);
         	
 			//app.export("plots/" + "RemoteSense_1" + ".dot");
 		} catch (Exception e) {

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 
 import com.sun.net.ssl.internal.ssl.Provider;
@@ -56,8 +57,10 @@ public class MSApplicationUtility {
 		return ret;
 	}
 	
-	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, double budget,FederationDatacenter datacenter) {
+	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, double budget,FederationDatacenter datacenter, long cloudletLength) {
+		
 		MSApplicationNode appNode = new MSApplicationNode();
+		int providerID = datacenter.getId();
 		
 		HashMap<String, Object> compParam =  new HashMap<String, Object>();
 		HashMap<String, Object> netParam = new HashMap<String, Object>();
@@ -87,8 +90,11 @@ public class MSApplicationUtility {
 		
 		HashMap<String, Object> nodeCharacteristic = new HashMap<String, Object>();
 		nodeCharacteristic.put(Constant.BUDGET, budget);
+		nodeCharacteristic.put(Constant.providerID, providerID);
+		nodeCharacteristic.put(Constant.vertextLength, cloudletLength);
+		
 //		nodeCharacteristic.put(Constant.CITY,city);
-		appNode.setProviderId(datacenter.getId());
+//		appNode.setProviderId(datacenter.getId());
 		appNode.setCharacteristic(nodeCharacteristic);
 		appNode.setID(vm.getId());
 		return appNode;
@@ -108,22 +114,25 @@ public class MSApplicationUtility {
 		MSApplication newApp = new MSApplication();
 		ApplicationVertex vertex ;
 		List<Vm> vmList = app.getAllVms();
+		List<FederationDatacenter> datacenterList = app.getFederationDatacenters();
 		
 		List<MSApplicationNode> nodeList = new ArrayList<MSApplicationNode>();
 		for(int i=0; i<vmList.size(); i++){
 			newApp.setFirstVmIndex(vmList.get(i).getId());
 			vertex = app.getVertexForVm(vmList.get(i));
-			MSApplicationNode node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getFederationDatacenter());
+			Cloudlet cloudlet = vertex.getCloudlets().get(0);
+			long cloudletLength = vertex.getCloudlets().get(0).getCloudletLength();
+			MSApplicationNode node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getfeFederationDatacenters().get(0),cloudletLength);
 			
-			if (vertex.getDesiredVm() != null){
-				Vm desVm = vertex.getDesiredVm();
-				HashMap<String, Object> desiredCharacteristic = new HashMap<String, Object>();
-				desiredCharacteristic.put(Constant.STORE, desVm.getSize());
-				desiredCharacteristic.put(Constant.RAM, desVm.getRam());
-				desiredCharacteristic.put(Constant.CPU_NUMBER, desVm.getNumberOfPes());
-				desiredCharacteristic.put(Constant.BW, desVm.getBw());
-				node.setDesiredCharacteristics(desiredCharacteristic);
-			}
+//			if (vertex.getDesiredVm() != null){
+//				Vm desVm = vertex.getDesiredVm();
+//				HashMap<String, Object> desiredCharacteristic = new HashMap<String, Object>();
+//				desiredCharacteristic.put(Constant.STORE, desVm.getSize());
+//				desiredCharacteristic.put(Constant.RAM, desVm.getRam());
+//				desiredCharacteristic.put(Constant.CPU_NUMBER, desVm.getNumberOfPes());
+//				desiredCharacteristic.put(Constant.BW, desVm.getBw());
+//				node.setDesiredCharacteristics(desiredCharacteristic);
+//			}
 			nodeList.add(node);	
 		}
 

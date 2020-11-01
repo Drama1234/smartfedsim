@@ -21,7 +21,6 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
 package application;
 
 
-import federation.resources.City;
 import federation.resources.FederationDatacenter;
 import federation.resources.VmFactory;
 import federation.resources.VmFactory.vmType;
@@ -56,6 +55,8 @@ public class ApplicationVertex
 {
 	private List<Cloudlet> cloudlets;
 	private List<Vm> vms;
+	private List<FederationDatacenter> federationDatacenters;
+//	private Map<Cloudlet, FederationDatacenter> federationMap;
 	private Map<Cloudlet, Vm> cloudletMap;
 	private Map<Vm, Cloudlet> vmMap;
 	private String name;
@@ -63,11 +64,12 @@ public class ApplicationVertex
 	private int id;
 	private static int counter = 0;
 	private double budget = 1.0;
+//	private String datacenterId = "";
 	private vmType vm_type;
 	private Vm desiredVm = null;
-	private City cityenum;
-	private FederationDatacenter federationDatacenter;
-	
+//	private City cityenum;
+//	private FederationDatacenter federationDatacenter = null;
+	//得到用户期望的虚拟机
 	public Vm getDesiredVm() {
 		return desiredVm;
 	}
@@ -80,7 +82,7 @@ public class ApplicationVertex
 	public void setDesiredVm(Vm desiredVm) {
 		this.desiredVm = desiredVm;
 	}
-
+	
 	private void construct(int userId, List<Cloudlet> cloudlets,vmType vmtype)
 	{
 		this.id = counter++;
@@ -139,10 +141,30 @@ public class ApplicationVertex
 		for (Cloudlet c : cloudlets)
 		{
 			Vm clone = VmFactory.cloneVMnewId(sample);
-			//VmTyped cloned = new VmTyped(clone, vm_type);
-			this.vms.add(clone);
-			this.cloudletMap.put(c, clone);
-			this.vmMap.put(clone, c);
+			VmTyped cloned = new VmTyped(clone, vm_type);
+			this.vms.add(cloned);
+			this.cloudletMap.put(c, cloned);
+			this.vmMap.put(cloned, c);
+		}
+	}
+	
+	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, Vm sample, FederationDatacenter federationDatacenter) {
+		this.id = counter++;
+		this.vm_type = vmType.CUSTOM;
+		this.cloudlets = cloudlets;
+		this.cloudletMap = new HashMap<Cloudlet, Vm>();
+		this.vmMap = new HashMap<Vm, Cloudlet>();
+		this.vms = new ArrayList<Vm>();
+		this.federationDatacenters = new ArrayList<FederationDatacenter>();
+		
+		for(Cloudlet c : cloudlets) {
+			Vm clone = VmFactory.cloneVMnewId(sample);
+			VmTyped cloned = new VmTyped(clone, vm_type);
+			this.vms.add(cloned);
+			this.cloudletMap.put(c, cloned);
+			this.vmMap.put(cloned, c);
+			this.federationDatacenters.add(federationDatacenter);
+//			this.federationMap.put(c,federationDatacenter);
 		}
 	}
 	
@@ -151,25 +173,25 @@ public class ApplicationVertex
 //		return federationDatacenter.getMSCharacteristics().getResourceName();
 //	}
 	
-	public FederationDatacenter getFederationDatacenter() {
-		return federationDatacenter;
-	}
+//	public FederationDatacenter getFederationDatacenter() {
+//		return federationDatacenter;
+//	}
+//
+//	public void setFederationDatacenter(FederationDatacenter federationDatacenter) {
+//		this.federationDatacenter = federationDatacenter;
+//	}
 
-	public void setFederationDatacenter(FederationDatacenter federationDatacenter) {
-		this.federationDatacenter = federationDatacenter;
-	}
-
-	public String getCity() {
-		return city;
-	}
-	
-	public City getEnumCity() {
-		return cityenum;
-	}
-	public void setCity(City city) {
-		this.cityenum = city;
-		this.city = city.toString();
-	}
+//	public String getCity() {
+//		return city;
+//	}
+//	
+//	public City getEnumCity() {
+//		return cityenum;
+//	}
+//	public void setCity(City city) {
+//		this.cityenum = city;
+//		this.city = city.toString();
+//	}
 
 	public double getBudget() {
 		return budget;
@@ -195,6 +217,10 @@ public class ApplicationVertex
 		return this.vms;
 	}
 	
+	public List<FederationDatacenter> getfeFederationDatacenters(){
+		return this.federationDatacenters;
+	}
+	
 	public Vm getAssociatedVm(Cloudlet cloudlet) {
 		return cloudletMap.get(cloudlet);
 	}
@@ -202,6 +228,7 @@ public class ApplicationVertex
 	public Cloudlet getAssociatedCloudlet(Vm vm) {
 		return vmMap.get(vm);
 	}
+	
 	
 	public int getId() {
 		return id;
@@ -229,14 +256,18 @@ public class ApplicationVertex
 		StringBuilder res = new StringBuilder();
 		
 		res.append("Vertex [");
-		res.append("id: ").append(this.getId());
+		res.append(" id: ").append(this.getId());
 		res.append(" size: ").append(this.getCloudlets().size());
 		res.append(" budget: ").append(this.getBudget());
 //		res.append(" city: ").append(this.getCity());
 //		if(this.getCity().contains(city.toString())) {
 //			res.append(" city: ").append(this.getCity());
 //		}
-		res.append(" datacenter: ").append(this.getFederationDatacenter().toString());
+		
+		if(this.getfeFederationDatacenters() != null) {
+			res.append(" datacenter: ").append(this.getfeFederationDatacenters().get(0).toString());
+		} 
+		
 //		if(this.getFederationDatacenterName().contains(cityenum.toString())) {
 //			res.append(" datacenter: ").append(this.getFederationDatacenterName());}
 		res.append(" VMs: {");
@@ -253,10 +284,10 @@ public class ApplicationVertex
 		return res.toString();
 	}
 
-//	public vmType getVmType() {
-//		return vm_type;
-//	}
-//	
+	public vmType getVmType() {
+		return vm_type;
+	}
+	
 //	public char getVmTypeChar() {
 //		char c;
 //		switch (vm_type){
@@ -286,6 +317,6 @@ public class ApplicationVertex
 	public void cloningFeatures(ApplicationVertex vertexForVm) {
 		budget = vertexForVm.getBudget();
 //		city = vertexForVm.getCity();
-		federationDatacenter = vertexForVm.getFederationDatacenter();
+//		federationDatacenter = vertexForVm.;
 	}
 }

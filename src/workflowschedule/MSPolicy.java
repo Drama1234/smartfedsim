@@ -25,7 +25,7 @@ public abstract class MSPolicy {
 	
 	protected final static int RUNTIME_ERROR = 1000;
 	protected final int MAXSATISFACTION_DISTANCE = -1;
-	protected static final boolean DEBUG = false;
+	protected static final boolean DEBUG = true;
 	
 	private double weight;
 	private char type;
@@ -147,7 +147,7 @@ public abstract class MSPolicy {
 		return distance;
 	}
 	
-	protected static int getGeneIndexFromNodeId(int vmId, Gene[] genes, IMSApplication app){
+	public static int getGeneIndexFromNodeId(int vmId, Gene[] genes, IMSApplication app){
 		int target_index = 0;
 		boolean trovato = false;
 		for (int i=0; i<genes.length && !trovato; i++){

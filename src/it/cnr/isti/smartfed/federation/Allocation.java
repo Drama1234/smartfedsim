@@ -90,7 +90,7 @@ public class Allocation
 		mapping = new HashMap<Vm, FederationDatacenter>();
 		blacklistMap = new HashMap<Vm, List<Integer>>();
 		avToDcid = new HashMap<ApplicationVertex, Integer>();
-
+		//记录分配被拒绝的数据中心ID
 		for (Vm vm: application.getAllVms())
 		{
 			blacklistMap.put(vm, new ArrayList<Integer>());

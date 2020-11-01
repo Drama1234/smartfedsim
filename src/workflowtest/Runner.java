@@ -1,33 +1,27 @@
-	package workflowtest;
+package workflowtest;
 
-import java.util.Locale;
 
 import it.cnr.isti.smartfed.test.TestResult;
 import workflowmapping.GeneticAllocator;
-import workflowmapping.GeneticWork;
 
 public class Runner {
 	private static StringBuilder sb = new StringBuilder();
 	
 	public static void main(String[] args) {
-		sb.append("makespan\t").append("cost\t");
+//		sb.append("makespan\t").append("cost\t");
 		String[] files = new String[]{"RemoteSense_13"};
 		for (String file : files) {
 			runworkflow(file);
 			
-			System.out.println(sb);
+//			System.out.println(sb);
 		}
 	}
 	
 	private static void runworkflow(String filename) {
 		WorkflowDataset dataset = new WorkflowDataset(20, filename);
 		TestResult.reset();
-		
 		GeneticAllocator allocator = new GeneticAllocator();
-		allocator.setPolicyType();//全局网络
-		
-		GeneticWork allocator1 = new GeneticWork();
-		allocator1.setPolicyType();
+		allocator.setPolicyType();//全局网络		
 		
 		//for (int i=0; i<10; i++)
 		//{ 
@@ -37,15 +31,15 @@ public class Runner {
 			experiment.run();
 		//}
 		
-		double makespan = TestResult.getCompletion().getMean();
-		double cost = TestResult.getCost().getMean();
-		
-		sb.append(filename).append("\t");
-		sb.append(f(makespan)).append("\t").append(f(cost)).append("\t");
+//		double makespan = TestResult.getCompletion().getMean();
+//		double cost = TestResult.getCost().getMean();
+//		
+//		sb.append(filename).append("\t");
+//		sb.append(f(makespan)).append("\t").append(f(cost)).append("\t");
 	}
 	
-	private static String f(double value)
-	{
-		return String.format(Locale.ENGLISH, "%.2f", value);
-	}
+//	private static String f(double value)
+//	{
+//		return String.format(Locale.ENGLISH, "%.2f", value);
+//	}
 }

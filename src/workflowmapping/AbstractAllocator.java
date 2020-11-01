@@ -49,12 +49,12 @@ public abstract class AbstractAllocator {
 		this.solution = solution;
 	}
 	
-	/* EMA: I'm not sure if or why this is needed.
+	//EMA: I'm not sure if or why this is needed.
 	public HashMap<String, String> getStorage()
 	{
 		return persistentStorage;
 	}
-	*/
+	
 	
 	public void setRandomSeed(long randomSeed) {
 		this.randomSeed = randomSeed;

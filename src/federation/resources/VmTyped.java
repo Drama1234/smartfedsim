@@ -39,8 +39,8 @@ public class VmTyped extends Vm{
 	
 	public String toString(){
 		String s = "";
-		s+= "RAM:" + this.getRam() + " PES:" + this.getNumberOfPes() + "STORAGE:" + this.getSize();
-		s+= " type:" + this.getType();
+		s+= "RAM:" + this.getRam() + "MIPS:" + this.getMips() + "PES:" + this.getNumberOfPes() + "STORAGE:" + this.getSize();
+		s+= "type:" + this.getType();
 		return s;
 	}
 }

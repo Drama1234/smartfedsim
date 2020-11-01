@@ -11,13 +11,14 @@ import federation.resources.FederationDatacenterProfile.DatacenterParams;
 
 public class FederationDatacenterFactory {
 	private static FederationDatacenter createFederationDatacenter(FederationDatacenterProfile profile, List<Host> hosts, List<Storage> storages) {
-		return createFederationDatacenter("datacenter_"+profile.get(DatacenterParams.CITY)+"_Id"+ResourceCounter.nextDatacenterID(City.valueOf(profile.get(DatacenterParams.CITY))), profile, hosts, storages);
+//		return createFederationDatacenter("datacenter"+"_Id"+ResourceCounter.nextDatacenterID(City.valueOf(profile.get(DatacenterParams.CITY))), profile, hosts, storages);
+		return createFederationDatacenter("datacenter_Id"+ ResourceCounter.nextDatacenterID(), profile, hosts, storages);
 	}
 	
 	private static FederationDatacenter createFederationDatacenter(String dcName, FederationDatacenterProfile profile, List<Host> hosts, List<Storage> storages) {
 		// create the datacenter characteristics
 		DatacenterCharacteristicsMS dc = new DatacenterCharacteristicsMS(
-				City.valueOf(profile.get(DatacenterParams.CITY)),
+//				City.valueOf(profile.get(DatacenterParams.CITY)),
 				profile.get(DatacenterParams.ARCHITECTURE),
 				profile.get(DatacenterParams.OS),
 				profile.get(DatacenterParams.VMM),
@@ -28,7 +29,7 @@ public class FederationDatacenterFactory {
 				Double.parseDouble(profile.get(DatacenterParams.COST_PER_STORAGE)),
 				Double.parseDouble(profile.get(DatacenterParams.COST_PER_BW))
 				);
-		dc.setDatacenterBw(Integer.parseInt(profile.get(DatacenterParams.BW)));
+		dc.setDatacenterBw(Integer.parseInt(profile.get(DatacenterParams.MAX_BW_FOR_VM)));
 		
 		// creating vm allocation policy class
 		VmAllocationPolicy vmAllocationPolicy = null;

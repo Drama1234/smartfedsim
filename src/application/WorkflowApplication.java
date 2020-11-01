@@ -49,7 +49,7 @@ public class WorkflowApplication extends Application{
         
         /**
          * You can only specify clusters.num or clusters.size
-         * clusters.num is the number of clustered jobs per horizontal level
+         * clusters.num is the number of clustered jobs per horizontal levelh
          * clusters.size is the number of tasks per clustered job
          * clusters.num * clusters.size = the number of tasks per horizontal level
          * Specifying the clusters.size = 2 means each job has two tasks
@@ -103,7 +103,6 @@ public class WorkflowApplication extends Application{
 			if (t.getDepth() == depth)
 				tasks.add(t);
 		}
-		
 		return tasks;
 	}
 	
@@ -141,7 +140,7 @@ public class WorkflowApplication extends Application{
 				vm = createSmallVm_NoID(userId);
 			
 			ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
-			v.setCity(City.Beijing);
+//			v.setCity(City.Beijing);
 			v.setBudget(50);
 			addVertex(v);
 		}

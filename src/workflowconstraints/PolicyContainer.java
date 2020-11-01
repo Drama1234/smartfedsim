@@ -80,10 +80,16 @@ public class PolicyContainer {
 		return new StorageConstraint(normWeight, highStorageValue);
 	}
 	
-	public MSPolicy locationConstraint(double weight){
+//	public MSPolicy locationConstraint(double weight){
+//		double normWeight = calculateNormWeight(weight);
+//		log.info("Norm weight into locationConstraint " + normWeight);
+//		return new CityConstraint(normWeight);
+//	}
+	
+	public MSPolicy providerId(double weight) {
 		double normWeight = calculateNormWeight(weight);
-		log.info("Norm weight into locationConstraint " + normWeight);
-		return new CityConstraint(normWeight);
+		log.info("Norm weight into providerConstraint " + normWeight);
+		return new ProviderIdConstraints(weight);
 	}
 	
 	public MSPolicy costPerResourceConstraint(double weight,ConstraintScope c){
@@ -100,7 +106,7 @@ public class PolicyContainer {
 		log.info("Norm weight into ProviderBwConstraint " + normWeightP);
 		log.info("Norm weight into ProviderBwConstraint " + normWeightN);
 		
-		return new NetworkBWConstraint(normWeightP, normWeightN,highProviderBwValue,highNetworkBwValue,c);
+		return new NetworkBWConstraint(normWeightP, normWeightN, highProviderBwValue, highNetworkBwValue, c);
 	}
 	
 	public MSPolicy LatencyConstraint(double weight,ConstraintScope c) {
@@ -109,10 +115,4 @@ public class PolicyContainer {
 		return new LatencyConstraint(normWeight, highNetworkLatencyValue, c);
 	}
 	
-	public String toString(){
-		String s = "[MakePolicy] Hinumcpu HiStorage HiRam HiProvBw HiNetworkBw HiLatency" + "\n";
-		s += "[MakePolicy] " +  + highCpuNumberValue+" "+ highStorageValue + " " + highRamValue + " " +  
-				 highProviderBwValue + " " + highNetworkBwValue + " " + highNetworkLatencyValue ;
-		return s;
-	}
 }

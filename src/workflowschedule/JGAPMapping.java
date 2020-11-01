@@ -1,6 +1,5 @@
-package workflowschedule;
+ package workflowschedule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jgap.Chromosome;
@@ -14,26 +13,23 @@ import org.jgap.event.EventManager;
 import org.jgap.impl.BestChromosomesSelector;
 import org.jgap.impl.ChromosomePool;
 import org.jgap.impl.CrossoverOperator;
-import org.jgap.impl.IntegerGene;
 import org.jgap.impl.MutationOperator;
 import org.jgap.util.ICloneable;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
-import application.WorkflowApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 import workflowconstraints.BudgetConstraint;
+import workflowconstraints.Makespan;
 import workflowfederation.FederationLog;
-import workflowfederation.WorkflowComputer;
 import workflownetworking.InternetEstimator;
 import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
 	public static int POP_SIZE = 100;
-	public static int EVOLUTION_STEP = 200;
+	public static int EVOLUTION_STEP = 150;
 	
 	public static final int INTERNAL_SOLUTION_NUMBER = 10;
 	public static final int SOLUTION_NUMBER = 5;
@@ -52,16 +48,18 @@ public class JGAPMapping {
 			// making gene
 			int providerNumber = providerList.size();
 			List<MSApplicationNode> nodes = state.getApplication().getNodes();
+			
 			Gene[] genes = new Gene[nodes.size()];
-			genes[0] = new CIntegerGene(conf,0,0);
-			genes[nodes.size() - 1] = new CIntegerGene(conf,0,0);
-			for (int i = 1; i < nodes.size()-1; i++) {
-				// precondition: providerList is ordered
-				int firstInteger = providerList.get(0).getID();
-				int lastInteger =  providerList.get(providerList.size()-1).getID();
-				// genes[i] = new CIntegerGene(conf, 0, providerNumber-1);
-				genes[i] = new CIntegerGene(conf, firstInteger, lastInteger);
+//			genes[0] = new CIntegerGene(conf,0,0);
+//			genes[nodes.size() - 1] = new CIntegerGene(conf,0,0);
+			for (int i = 1; i < nodes.size(); i++) {
+				//precondition: providerList is ordered
+				//int firstInteger = providerList.get(0).getID();
+				//int lastInteger =  providerList.get(providerList.size()-1).getID();
+				genes[i] = new CIntegerGene(conf, 0, providerNumber-1);
+				//genes[i] = new CIntegerGene(conf, firstInteger, lastInteger);
 			}
+			
 			
 			IChromosome sampleCh = new Chromosome(conf, genes);
 			conf.setSampleChromosome(sampleCh);
@@ -100,7 +98,7 @@ public class JGAPMapping {
 					sol[k] = new Solution(array[i], nodes);
 					sol[k].chromosome.setGenes(mygenes);
 					sol[k].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
-					sol[k].setMakespan(calculateMakespanSolution(application,providerList,internet));
+					sol[k].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
 					k++;
 				}
 			}
@@ -123,15 +121,14 @@ public class JGAPMapping {
 		return sol;
 	}
 	private static double calculateMakespanSolution(IMSApplication application, List<IMSProvider> providerList,IChromosome c,InternetEstimator internet) {
-		Gene [] genes = c.getGenes();
+		Gene[] genes = c.getGenes();
 		double tmp = 0;
-		tmp = WorkflowComputer.getFlowCompletionTime(application, providerList, internet);
+		//tmp = WorkflowComputer.getFlowCompletionTime(application, providerList, internet);
 		for(int j=0; j < genes.length; j++) {
 			IMSProvider provider = MSProviderAdapter.findProviderById(providerList, (int) genes[j].getAllele());
-			tmp += WorkflowComputer.getFlowCompletionTime(workflow, dcs, internet);
+			tmp += Makespan.calculateMakespan_Network(j, c, application, provider, internet);
 		}
 		return tmp;
-		
 	}
 	
 	private static double calculateCostSolution(IMSApplication application, List<IMSProvider> providerList, IChromosome c,InternetEstimator internet){
@@ -155,7 +152,7 @@ public class JGAPMapping {
 			Gene[] mygenes = solarray[i].getGenes();
 			boolean scarta = false;
 			for (int j=0; j<mygenes.length && !scarta; j++){
-				if (((CIntegerGene) mygenes[j]).getLocalFitness() == 0.0){
+				if (((CIntegerGene) mygenes[j]).getFitness() == 0.0){
 					scarta = true;
 				}
 			}

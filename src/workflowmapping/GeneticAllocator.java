@@ -21,9 +21,11 @@ import workflowschedule.iface.Metascheduler;
 
 
 public class GeneticAllocator extends AbstractAllocator{
+	
 	PolicyContainer constraint = null;
 	List<FederationDatacenter> dcs = null;
 	Solution[] solutions = null;
+	
 	
 	public Solution[] getSolutions() {
 		return solutions;
@@ -34,11 +36,11 @@ public class GeneticAllocator extends AbstractAllocator{
 		super();
 	}
 	
-	public GeneticAllocator(MonitoringHub monitoring, InternetEstimator netEstimator) {
-		super();
-		this.setMonitoring(monitoring);
-		this.setNetEstimator(netEstimator);
-	}
+//	public GeneticAllocator(MonitoringHub monitoring, InternetEstimator netEstimator) {
+//		super();
+//		this.setMonitoring(monitoring);
+//		this.setNetEstimator(netEstimator);
+//	}
 
 	@Override
 	public MappingSolution[] findAllocation(Application application) {
@@ -133,7 +135,7 @@ public class GeneticAllocator extends AbstractAllocator{
 	 */
 	public void setPolicyType() {
 		if (this.getDcs() != null){
-			this.setConstraint(MSPolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1,1,1,1}));
+			this.setConstraint(MSPolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1, 1, 1, 1,1},this.netEstimator));
 		}
 	}
 	
@@ -143,7 +145,7 @@ public class GeneticAllocator extends AbstractAllocator{
 		this.monitoring = monitoring;
 		this.setDcs(monitoring.getView());
 		if (constraint == null){
-			this.setConstraint(MSPolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1,1,1,1}));
+			this.setConstraint(MSPolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1, 1, 1, 1,1}, this.netEstimator));
 		}
 	}
 }

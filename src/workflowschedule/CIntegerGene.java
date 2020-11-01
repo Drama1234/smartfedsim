@@ -11,27 +11,28 @@ public class CIntegerGene extends IntegerGene{
 	
 	double Fitness = 0;
 	double allocationCost = 0;
-	double allocationTime = 0;
+//	double allocationTime = 0;
 	
 	public CIntegerGene(Configuration a_config, int min, int max) throws InvalidConfigurationException {
 		super(a_config, min, max);
 	}
 	
-	public CIntegerGene(Configuration a_config, int min, int max, double fit, double aCost) throws InvalidConfigurationException {
-		super(a_config, min, max);
-		Fitness = fit;
-		allocationCost = aCost;
-	}
-	
-	public Gene newGene() {
-		try{
-			Gene ret = new CIntegerGene(getConfiguration(), this.getLowerBounds(), this.getUpperBounds(), 
-					this.getLocalFitness(), this.getAllocationCost());
-			return ret;
-		}catch (InvalidConfigurationException ex) {
-	        throw new IllegalStateException(ex.getMessage());
-		}
-	}
+//	public CIntegerGene(Configuration a_config, int min, int max, double fit, double aCost, double makespan) throws InvalidConfigurationException {
+//		super(a_config, min, max);
+//		Fitness = fit;
+//		allocationCost = aCost;
+//		allocationTime = makespan;
+//	}
+//	
+//	public Gene newGene() {
+//		try{
+//			Gene ret = new CIntegerGene(getConfiguration(), this.getLowerBounds(), this.getUpperBounds(), 
+//					this.getFitness(), this.getAllocationCost(),this.getAllocationTime());
+//			return ret;
+//		}catch (InvalidConfigurationException ex) {
+//	        throw new IllegalStateException(ex.getMessage());
+//		}
+//	}
 	
 	public void applyMutation(final int a_index, final double a_percentage) {
 		// System.out.println("old value is " + this.getAllele());
@@ -42,12 +43,12 @@ public class CIntegerGene extends IntegerGene{
 	/**
 	 * @return The fitness of each gene
 	 */
-	public double getLocalFitness() {
+	public double getFitness() {
 		return Fitness;
 	}
 
-	public void setLocalFitness(double localFitness) {
-		this.Fitness = localFitness;
+	public void setFitness(double Fitness) {
+		this.Fitness = Fitness;
 	}
 	
 	public double getAllocationCost() {
@@ -58,15 +59,15 @@ public class CIntegerGene extends IntegerGene{
 		this.allocationCost = allocationCost;
 	}
 	
-	public double getAllocationTime() {
-		return allocationTime;
-	}
-
-	public void setAllocationTime(double allocationTime) {
-		this.allocationTime = allocationTime;
-	}
+//	public double getAllocationTime() {
+//		return allocationTime;
+//	}
+//
+//	public void setAllocationTime(double allocationTime) {
+//		this.allocationTime = allocationTime;
+//	}
 
 	public String toString(){
-		return super.toString() + " - " + this.getLocalFitness();
+		return super.toString() + " - " + this.getFitness();
 	}
 }

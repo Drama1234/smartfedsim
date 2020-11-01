@@ -9,9 +9,8 @@ import org.jgap.FitnessFunction;
 import org.jgap.Gene;
 import org.jgap.IChromosome;
 
-import it.cnr.isti.smartfed.metascheduler.Monitor;
-import it.cnr.isti.smartfed.metascheduler.iface.MSProviderAdapter;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
+import workflowschedule.iface.MSProviderAdapter;
 
 
 public class MSFitnessFunction extends FitnessFunction{
@@ -73,7 +72,7 @@ public class MSFitnessFunction extends FitnessFunction{
 		
 		for (int i = 0; i < genes.length; i++) {
 			g_fit = evaluateGene(i, chromos) * AWARD;
-			((CIntegerGene) genes[i]).setLocalFitness(g_fit);
+			((CIntegerGene) genes[i]).setFitness(g_fit);
 			fitness += g_fit;
 		}
 		
@@ -87,11 +86,10 @@ public class MSFitnessFunction extends FitnessFunction{
 		Gene[] genes = chromos.getGenes();
 		System.out.print("基因的适应度值: ");
 		for (int i = 0; i < genes.length; i++) {
-			System.out.print(((CIntegerGene) genes[i]).getLocalFitness() + " | ");
+			System.out.print(((CIntegerGene) genes[i]).getFitness() + " | ");
 		}
 		System.out.println();
 		System.out.println("\t染色体 " + Monitor.chromosomeToString(chromos) + " 的适应度值: " + fitness);
 		System.out.println();
 	}
-
 }

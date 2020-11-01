@@ -127,10 +127,10 @@ public class DatacenterGenerator extends AbstractGenerator{
 			profile.set(DatacenterParams.MAX_BW_FOR_VM, bw+"");
 			
 			// choose a random city
-			Range rangecity = new Range(0, cities.length);
-			int index = (int) Math.floor(rangecity.denormalize(distribution.sample()));
-			City place = cities[index];
-			profile.set(DatacenterParams.CITY, place.toString());
+//			Range rangecity = new Range(0, cities.length);
+//			int index = (int) Math.floor(rangecity.denormalize(distribution.sample()));
+//			City place = cities[index];
+//			profile.set(DatacenterParams.CITY, place.toString());
 						
 			List<Storage> storageList = new ArrayList<Storage>(); // if empty, no SAN attached
 			List<Host> hostList = new ArrayList<Host>();
