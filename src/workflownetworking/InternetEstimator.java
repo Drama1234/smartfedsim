@@ -6,6 +6,7 @@ import org.apache.commons.math3.distribution.AbstractRealDistribution;
 import org.apache.commons.math3.distribution.UniformRealDistribution;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.jgrapht.graph.Multigraph;
+import org.junit.Test.None;
 
 import federation.resources.FederationDatacenter;
 import it.cnr.isti.smartfed.federation.generation.Range;
@@ -31,6 +32,14 @@ public class InternetEstimator {
 	protected Range interBwAmount;
 	protected Range interLatencyAmount;
 	protected Range costInterBw;
+	public InternetEstimator(InternetEstimator internet) {
+		internet.toString();
+		this.costInterBw = internet.costInterBw;
+		this.interBwAmount = internet.interBwAmount;
+		this.interLatencyAmount = internet.interLatencyAmount;
+		this.graph = null;
+	}
+	
 	
 	public InternetEstimator(List<FederationDatacenter> list,long seed) {
 		distribution = new UniformRealDistribution();

@@ -29,7 +29,7 @@ import org.cloudbus.cloudsim.core.CloudSim;
 public class FederationLog extends Log 
 {		
 	
-	private static boolean debug = false;
+	private static boolean debug = true;
 	
 	public static void disable()
 	{

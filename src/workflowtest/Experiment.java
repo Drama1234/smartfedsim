@@ -70,23 +70,21 @@ public class Experiment {
 		List<FederationDatacenter> datacenters = dataset.createDatacenters();
 		federation.setDatacenters(datacenters);
 		
+		allocator.setRandomSeed(randomSeed);
+		
 		// 创建网络
+//		allocator.setNetEstimator(dataset.createInternetEstimator(datacenters));
 		InternetEstimator internetEstimator = dataset.createInternetEstimator(datacenters);
+		allocator.setNetEstimator(internetEstimator);
 //		System.out.println(internetEstimator.toString());
 		//创建监控
 		int schedulingInterval = 1; // probably simulation time
 		MonitoringHub monitor = new MonitoringHub(datacenters, schedulingInterval);
 		CloudSim.addEntity(monitor);
+		allocator.setMonitoring(monitor);
 		
 		//创建应用程序
 		List<Application> applications = dataset.createApplications(federation.getId(),datacenters);
-		
-		//设置分配
-		allocator.setMonitoring(monitor);
-		allocator.setNetEstimator(internetEstimator);
-		allocator.setRandomSeed(randomSeed);
-		
-		
 		
 //		// create the queue (is that still needed)?
 //		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();

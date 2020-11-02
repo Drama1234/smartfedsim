@@ -9,8 +9,6 @@ import org.cloudbus.cloudsim.core.SimEvent;
 import com.rits.cloning.Cloner;
 
 import federation.resources.FederationDatacenter;
-import it.cnr.isti.smartfed.federation.FederationLog;
-import it.cnr.isti.smartfed.federation.FederationTags;
 
 public class MonitoringHub extends SimEntity{
 	private List<FederationDatacenter> public_view;

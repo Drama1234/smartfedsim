@@ -27,7 +27,7 @@ public class Runner {
 		//{ 
 			allocator.setRandomSeed(77);
 			dataset.setSeed(77);
-			Experiment experiment = new Experiment(allocator, dataset);		
+			Experiment experiment = new Experiment(allocator, dataset,77);		
 			experiment.run();
 		//}
 		

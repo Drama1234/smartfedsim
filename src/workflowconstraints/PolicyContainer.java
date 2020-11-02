@@ -114,5 +114,12 @@ public class PolicyContainer {
 		log.info("Norm weight into networkLatencyConstraint" + normWeight);
 		return new LatencyConstraint(normWeight, highNetworkLatencyValue, c);
 	}
+
+	@Override
+	public String toString() {
+		return 
+	}
+	
+	
 	
 }
