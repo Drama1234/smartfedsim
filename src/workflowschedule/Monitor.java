@@ -9,9 +9,11 @@ import org.jgap.Population;
 import org.jgap.audit.IEvolutionMonitor;
 import org.jgap.eval.PopulationHistoryIndexed;
 
-
-
 public class Monitor implements IEvolutionMonitor{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int maxIteration = 0;
 	private int iterationCount = 0;
 	
@@ -46,8 +48,8 @@ public class Monitor implements IEvolutionMonitor{
 			s+=genes[i].getAllele();
 			s+="|";
 		}
-		s+= "    age: ";
-		s+=ch.getAge();
+		s+= "  age:";
+		s+= ch.getAge();
 		return s;
 	}
 	

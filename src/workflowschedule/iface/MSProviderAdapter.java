@@ -117,7 +117,7 @@ public class MSProviderAdapter {
 		storageCharacteristic.put(Constant.COST_STORAGE, CostComputer.getCostPerStorage(datacenter));
 
 		//provider
-		providerCharacteristic.put(Constant.ID, dcCharacter.getId());
+		providerCharacteristic.put(Constant.providerID, dcCharacter.getId());
 		providerCharacteristic.put(Constant.COST_CPU, dcCharacter.getCostPerCpu());
 		providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
 		//providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
@@ -130,6 +130,7 @@ public class MSProviderAdapter {
 		provider.setComputing(new MSProviderComputing());
 		provider.setNetwork(new MSProviderNetwork());
 		provider.setStorage(new MSProviderStorage());
+		
 		provider.getComputing().setCharacteristic(computingCharacteristic);
 		provider.getStorage().setCharacteristic(storageCharacteristic);
 		provider.getNetwork().setCharacteristic(networkCharacteristic);

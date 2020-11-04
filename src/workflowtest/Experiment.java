@@ -15,14 +15,14 @@ import application.ApplicationVertex;
 import application.WorkflowApplication;
 import federation.resources.FederationDatacenter;
 import federation.resources.ResourceCounter;
-import it.cnr.isti.smartfed.federation.FederationQueue;
-import it.cnr.isti.smartfed.federation.FederationQueueProfile;
-import it.cnr.isti.smartfed.federation.FederationQueueProvider;
 import it.cnr.isti.smartfed.test.PreciseDataset;
 import it.cnr.isti.smartfed.test.TestResult;
 import workflowfederation.Allocation;
 import workflowfederation.CostComputer;
 import workflowfederation.Federation;
+import workflowfederation.FederationQueue;
+import workflowfederation.FederationQueueProfile;
+import workflowfederation.FederationQueueProvider;
 import workflowfederation.MonitoringHub;
 import workflowfederation.UtilityPrint;
 import workflowfederation.WorkflowComputer;
@@ -86,10 +86,11 @@ public class Experiment {
 		//创建应用程序
 		List<Application> applications = dataset.createApplications(federation.getId(),datacenters);
 		
-//		// create the queue (is that still needed)?
-//		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();
-//		FederationQueue queue = FederationQueueProvider.getFederationQueue(queueProfile, federation, applications);
-//		CloudSim.addEntity(queue);
+	
+		// create the queue (is that still needed)?
+		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();
+		FederationQueue queue = FederationQueueProvider.getFederationQueue(queueProfile, federation, applications);
+		CloudSim.addEntity(queue);
 		
 		// manually setup the end of the simulation
 		CloudSim.terminateSimulation(1000000); // in milliseconds

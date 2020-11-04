@@ -28,16 +28,19 @@ public class StorageConstraint extends MSPolicy{
 	public double evaluateLocalPolicy(Gene g, MSApplicationNode node, IMSProvider prov, InternetEstimator internet) {
 		long nodeStore =  (Long) node.getStorage().getCharacteristic().get(Constant.STORE); // what I want
 		long provStore =  (Long) prov.getStorage().getCharacteristic().get(Constant.STORE); // what I have
-		double distance;
-		try {
-			distance = evaluateDistance(provStore, nodeStore, highStorageValue);
-		} catch (Exception e) {
-			distance = RUNTIME_ERROR; // a positive value in order to not consider this constraint
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-		if (DEBUG)
-			System.out.println("\tEval on storage " + nodeStore + "-" + provStore + "/" + highStorageValue + "=" + distance);
+		
+		double distance = super.calculateDistance_ErrHandling(provStore, nodeStore, highStorageValue);
 		return distance * getWeight();
+		
+//		try {
+//			distance = evaluateDistance(provStore, nodeStore, highStorageValue);
+//		} catch (Exception e) {
+//			distance = RUNTIME_ERROR; // a positive value in order to not consider this constraint
+//			System.out.println(e.getMessage());
+//			e.printStackTrace();
+//		}
+//		if (DEBUG)
+//			System.out.println("\t  Eval on storage " + nodeStore + "-" + provStore + "/" + highStorageValue + "=" + distance);
+//		return distance * getWeight();
 	}
 }

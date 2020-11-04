@@ -28,8 +28,8 @@ import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
-	public static int POP_SIZE = 100;
-	public static int EVOLUTION_STEP = 150;
+	public static int POP_SIZE = 1;
+	public static int EVOLUTION_STEP = 1;
 	
 	public static final int INTERNAL_SOLUTION_NUMBER = 10;
 	public static final int SOLUTION_NUMBER = 5;
@@ -50,16 +50,17 @@ public class JGAPMapping {
 			List<MSApplicationNode> nodes = state.getApplication().getNodes();
 			
 			Gene[] genes = new Gene[nodes.size()];
+//			System.out.println("基因的长度"+nodes.size());
 //			genes[0] = new CIntegerGene(conf,0,0);
 //			genes[nodes.size() - 1] = new CIntegerGene(conf,0,0);
-			for (int i = 1; i < nodes.size(); i++) {
+			for (int i = 0; i < nodes.size(); i++) {
 				//precondition: providerList is ordered
 				//int firstInteger = providerList.get(0).getID();
 				//int lastInteger =  providerList.get(providerList.size()-1).getID();
-				genes[i] = new CIntegerGene(conf, 0, providerNumber-1);
+				genes[i] = new CIntegerGene(conf, 3, providerNumber+2);
 				//genes[i] = new CIntegerGene(conf, firstInteger, lastInteger);
+				//genes[i] = new CIntegerGene(conf, i, i);
 			}
-			
 			
 			IChromosome sampleCh = new Chromosome(conf, genes);
 			conf.setSampleChromosome(sampleCh);
@@ -73,9 +74,9 @@ public class JGAPMapping {
 			Genotype.setStaticConfiguration(conf);
 			
 			population = Genotype.randomInitialGenotype(conf);
-			System.out.println("*** 开始调度迭代优化...");
+			System.out.println("*** 开始调度迭代优化 ***");
 			List<String> message = population.evolve(new Monitor(JGAPMapping.EVOLUTION_STEP));
-			System.out.println("*** 结束调度迭代优化...");
+			System.out.println("*** 结束调度迭代优化 ***");
 			
 			for(String s : message){
 				FederationLog.print(s);
@@ -92,6 +93,7 @@ public class JGAPMapping {
 			k = 0;
 			
 			boolean[] acceptable = selectingSatisfactorySolutions(array);
+			
 			for (int i=0; i<acceptable.length && k < JGAPMapping.SOLUTION_NUMBER; i++) {
 				if (acceptable[i]){
 					Gene[] mygenes = array[i].getGenes();
@@ -105,15 +107,17 @@ public class JGAPMapping {
 			if (k != JGAPMapping.SOLUTION_NUMBER)
 				System.out.println("\n\nAlert!!!! Not all solution were satisfactory\n");
 			
-//			if (k == 0){
-//				for (int i=0; i<JGAPMapping.SOLUTION_NUMBER && i<array.length; i++){
-//					Gene[] mygenes = array[i].getGenes();
-//					sol[i] = new Solution(array[i], nodes);
-//					sol[i].chromosome.setGenes(mygenes);
-//					//sol[i].setCostAmount(calculateCostSolution(nodes, providerList, array[i]));
-//					sol[i].setCostAmount(calculateCostSolution(array[i]));
-//				}
-//			}
+			if (k == 0){
+				for (int i=0; i<JGAPMapping.SOLUTION_NUMBER && i<array.length; i++){
+					Gene[] mygenes = array[i].getGenes();
+					sol[i] = new Solution(array[i], nodes);
+					sol[i].chromosome.setGenes(mygenes);
+					sol[i].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
+					sol[i].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
+					//sol[i].setCostAmount(calculateCostSolution(nodes, providerList, array[i]));
+					//sol[i].setCostAmount(calculateCostSolution(array[i]));
+				}
+			}
 			Configuration.reset();
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
@@ -145,14 +149,13 @@ public class JGAPMapping {
 	}
 	
 	
-	
 	private static boolean[] selectingSatisfactorySolutions(IChromosome[] solarray) {
 		boolean[] accept = new boolean[solarray.length];
 		for (int i=0; i<accept.length; i++){
 			Gene[] mygenes = solarray[i].getGenes();
 			boolean scarta = false;
 			for (int j=0; j<mygenes.length && !scarta; j++){
-				if (((CIntegerGene) mygenes[j]).getFitness() == 0.0){
+				if (((CIntegerGene) mygenes[j]).getFitness() < 0.0){
 					scarta = true;
 				}
 			}

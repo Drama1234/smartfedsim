@@ -8,7 +8,6 @@ import org.jgap.IChromosome;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
-import workflowconstraints.NetworkBWConstraint;
 import workflownetworking.InternetEstimator;
 
 public abstract class MSPolicy {
@@ -97,15 +96,15 @@ public abstract class MSPolicy {
 	public double evaluateDistance(String value, String u_constraint) throws Exception{
 		value.trim();
 		u_constraint.trim();
-		final double epsilon = 0.00000000001;
+		//final double epsilon = 0.99;
 		switch (type){
 		case ASCENDENT_TYPE:
 			throw new Exception("Wrong method for this type of constraint");
 		case DESCENDENT_TYPE:
 			throw new Exception("Wrong method for this type of constraint");
 		case EQUAL_TYPE:
-			double ret = (value.compareTo(u_constraint) == 0 ) ? 0 : 1; // 1 if different one each other
-			return ret - epsilon;
+			double ret = (value.compareTo(u_constraint) == 0 ) ? -1 : 0; // 0 if different one each other
+			return ret;
 		default:
 			return 0;
 		}
@@ -122,12 +121,12 @@ public abstract class MSPolicy {
 			e.printStackTrace();
 		}
 		if (DEBUG){
-			if (this instanceof NetworkBWConstraint){
-				System.out.println("\tEval on " + name + " " + NetworkBWConstraint.printMBperSec(cost) + "-" + NetworkBWConstraint.printMBperSec(budget)
-						+ "/" + NetworkBWConstraint.printMBperSec(max) + "=" + distance);
-			}
-			else 
-				System.out.println("\tEval on " + name + " " + cost + "-" + budget + "/" + max + "=" + distance);
+//			if (this instanceof NetworkBWConstraint){
+//				System.out.println("\t Eval on " + name + " " + "每秒成本：" + NetworkBWConstraint.printMBperSec(cost) + "-" + "每秒预算" + NetworkBWConstraint.printMBperSec(budget)
+//						+ "/" + "最大值：" + NetworkBWConstraint.printMBperSec(max) + "=" + distance);
+//			}
+//			else 
+				System.out.println("\t Eval on " + name + " " + cost + "-" + budget + "/" + max + "=" + distance);
 		}
 		return distance;
 	}
@@ -143,7 +142,7 @@ public abstract class MSPolicy {
 			e.printStackTrace();
 		}
 		if (DEBUG)
-			System.out.println("\tEval on " + name + " " + cost + "-" + budget + "/" + maxCost + "=" + distance);
+			System.out.println("\t Eval on " + name + " " + cost + "-" + budget + "/" + maxCost + "=" + distance);
 		return distance;
 	}
 	

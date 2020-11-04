@@ -58,16 +58,23 @@ public class LatencyConstraint extends MSPolicy{
 				// check this edge's latency requirement against internet estimator
 				
 				InternetLink link = null;
-				try {link = internet.getInternetLink(prov.getID(), targetProvider);} 
-				catch (Exception e1) {e1.printStackTrace();}
 				
-				double internet_latency = link.getLatency();
-				double application_latency = e.getLatency();
+				try {
+					link = internet.getInternetLink(prov.getID(), targetProvider);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				// evaluate the distance
-				double res = calculateDistance_ErrHandling(internet_latency, application_latency, highNetworkLatencyValue);
-				sumofdifference += res;
-				numofdifference ++;
+				if(link!=null) {
+					double internet_latency = link.getLatency();
+					double application_latency = e.getLatency();
+					
+					// evaluate the distance
+					double res = calculateDistance_ErrHandling(internet_latency, application_latency, highNetworkLatencyValue);
+					sumofdifference += res;
+					numofdifference ++;
+				}
 			}
 		}
 		if (numofdifference == 0)

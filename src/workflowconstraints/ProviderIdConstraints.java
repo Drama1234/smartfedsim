@@ -18,12 +18,15 @@ public class ProviderIdConstraints extends MSPolicy{
 	protected double evaluateLocalPolicy(Gene g, MSApplicationNode node, IMSProvider prov, InternetEstimator internet) {
 		String nodeProviderId = node.getCharacteristic().get(Constant.providerID).toString(); //what I want
 		String provProviderId = prov.getCharacteristic().get(Constant.providerID).toString();
-		
 		double distance = 0;
-		distance = calculateDistance(nodeProviderId, provProviderId);
+		if(nodeProviderId!="-1") {
+			distance = calculateDistance(nodeProviderId, provProviderId);
+		}else {
+			distance = 0;
+		}
 		if (DEBUG)
 			System.out.println("\tEvaluation on providerId: " + nodeProviderId + " vs " + provProviderId + "=" + distance);
-		return distance * getWeight();
+		return distance * getWeight();	
 	}
 	
 	private double calculateDistance(String nodeProviderId,String provProviderId) {
@@ -37,5 +40,4 @@ public class ProviderIdConstraints extends MSPolicy{
 		}
 		return distance;
 	}
-	
 }

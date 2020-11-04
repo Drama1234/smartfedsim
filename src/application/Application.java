@@ -277,7 +277,8 @@ public class Application // extends Multigraph<ApplicationVertex, ApplicationEdg
 	public List<FederationDatacenter> getFederationDatacenters(){
 		List<FederationDatacenter> list = new ArrayList<FederationDatacenter>();
 		for (ApplicationVertex av : vertexSet()) {
-			list.addAll(av.getfeFederationDatacenters());
+			if(av.getfeFederationDatacenters()!=null)
+				list.addAll(av.getfeFederationDatacenters());
 		}
 		return list;
 	}

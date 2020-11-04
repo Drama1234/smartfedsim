@@ -30,6 +30,8 @@ import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 import workflowfederation.UtilityPrint;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,6 +139,7 @@ public class ApplicationVertex
 		this.cloudletMap = new HashMap<Cloudlet, Vm>();
 		this.vmMap = new HashMap<Vm, Cloudlet>();
 		this.vms = new ArrayList<Vm>();
+		this.federationDatacenters = new ArrayList<FederationDatacenter>();
 		
 		for (Cloudlet c : cloudlets)
 		{
@@ -145,6 +148,7 @@ public class ApplicationVertex
 			this.vms.add(cloned);
 			this.cloudletMap.put(c, cloned);
 			this.vmMap.put(cloned, c);
+			this.federationDatacenters = null;
 		}
 	}
 	
@@ -218,7 +222,14 @@ public class ApplicationVertex
 	}
 	
 	public List<FederationDatacenter> getfeFederationDatacenters(){
-		return this.federationDatacenters;
+		if (this.federationDatacenters!=null) {
+			//System.out.println("指定了云服务供应商");
+			return this.federationDatacenters;
+		}
+		else {
+//			System.out.println("没有指定云服务供应商");
+			return null;
+		}
 	}
 	
 	public Vm getAssociatedVm(Cloudlet cloudlet) {

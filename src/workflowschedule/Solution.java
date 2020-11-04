@@ -6,9 +6,7 @@ import java.util.Set;
 
 import org.jgap.Gene;
 import org.jgap.IChromosome;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
-import it.cnr.isti.smartfed.metascheduler.CIntegerGene;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 
 public class Solution {
@@ -57,7 +55,7 @@ public class Solution {
 		int i = 0;
 		while (i < genes.length){
 			CIntegerGene g = (CIntegerGene) genes[i];
-			if (g.getLocalFitness() == 0){
+			if (g.getFitness() == 0){
 				res = false;
 				break;
 			}
@@ -96,7 +94,7 @@ public class Solution {
 		String s = "Total Fitness ";
 		s += fit + " ( |";
 		for (int i = 0; i < genes.length; i++) {
-			s += ((CIntegerGene) genes[i]).getLocalFitness() + "|";
+			s += ((CIntegerGene) genes[i]).getFitness() + "|";
 		}
 		s+=" )";
 		return s;
@@ -105,7 +103,7 @@ public class Solution {
 	public String toString(){
 		String s = "[MS SOLUTION] cloudlet ";
 		Set<Integer> keys = associationMap.keySet();
-		s += " <";
+		s += "<";
 		for (Integer key : keys) {
 			s += key + ",";
 		}
@@ -113,8 +111,9 @@ public class Solution {
 		for (Integer key : keys) {
 			s += associationMap.get(key) + "|";
 		}
-		s+= " " + fitnessToString() + "\n";
+		s+= " \n" + fitnessToString() + "\n";
 		s+= "cost: " + this.getCostAmount() + "\n";
+		s+= "makespan: " + this.getMakespan() + "\n";
 		return s;
 	}
 	

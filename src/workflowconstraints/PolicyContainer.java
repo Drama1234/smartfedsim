@@ -117,9 +117,9 @@ public class PolicyContainer {
 
 	@Override
 	public String toString() {
-		return 
+		String s = "[MakePolicy] HiStorage HiRam HiCpuNum HiNetLatency HiProviBw HiNetBw " + "\n";
+		s += "[MakePolicy] " + highStorageValue + " " + highRamValue + " " + highCpuNumberValue  +  " " 
+							+ highNetworkLatencyValue + " " + highProviderBwValue + " " + highNetworkBwValue;
+		return s;
 	}
-	
-	
-	
 }

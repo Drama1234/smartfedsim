@@ -19,8 +19,18 @@ public class NormalModel implements InterArrivalModelItf{
 		
 		long[] timestamps = new long[applications.length];
 		long currentTimestamp = 0;
+		for(int i=0;i<applications.length;i++){
+			
+			timestamps[i] = currentTimestamp;
+			currentTimestamp += interval;
+			
+		}
 		
-		return null;
+		Object[] result =  new Object[2];
+		result[0] = applications;
+		result[1] = timestamps;
+		
+		return result;
 	}
 
 }

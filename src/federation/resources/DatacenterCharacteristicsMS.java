@@ -7,7 +7,6 @@ import java.util.List;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
 import org.cloudbus.cloudsim.Host;
 
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 
 public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{

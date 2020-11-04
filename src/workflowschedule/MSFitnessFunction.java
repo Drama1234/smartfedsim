@@ -16,7 +16,7 @@ import workflowschedule.iface.MSProviderAdapter;
 public class MSFitnessFunction extends FitnessFunction{
 	
 	public final static int AWARD = 100;
-	private final double EQUALITY = 0.0001;
+	private final double EQUALITY = 0.1;
 	private final static Logger log = Logger.getLogger(Logger.class.getName());
 	
 	private static final long serialVersionUID = 1L;
@@ -41,10 +41,15 @@ public class MSFitnessFunction extends FitnessFunction{
 		for (int i = 0; i < policy.size(); i++) {
 			weightedDistance[i] = policy.get(i).evaluatePolicy(gene_index, chromos, _state.getApplication(), provider, _state.getInternet());
 		}
+		for (int i = 0; i < weightedDistance.length; i++) {
+			if(weightedDistance[i] > 0) {
+				
+			}
+		}
 		for (int i=0; i<weightedDistance.length; i++){
 			if (weightedDistance[i] > 0){
 				weightedDistance[i] = 0;
-				fitness = 0; // for construction, distances in the positive space are not good, not satisfying constraints as inequality
+//				fitness = 0; // for construction, distances in the positive space are not good, not satisfying constraints as inequality
 			}
 			else if (weightedDistance[i] == 0){
 				weightedDistance[i] = EQUALITY;
@@ -89,7 +94,7 @@ public class MSFitnessFunction extends FitnessFunction{
 			System.out.print(((CIntegerGene) genes[i]).getFitness() + " | ");
 		}
 		System.out.println();
-		System.out.println("\t染色体 " + Monitor.chromosomeToString(chromos) + " 的适应度值: " + fitness);
+		System.out.println("染色体: " + Monitor.chromosomeToString(chromos) + " 的适应度值: " + fitness);
 		System.out.println();
 	}
 }

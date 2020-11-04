@@ -63,7 +63,7 @@ public class BudgetConstraint extends MSPolicy{
 	@Override
 	protected double evaluateLocalPolicy(Gene g, MSApplicationNode node, IMSProvider prov, InternetEstimator internet) {
 		// TODO Auto-generated method stub
-		return 0;
+		throw new Error("Local evaluation not supported");
 	}
 	
 	@Override
@@ -109,14 +109,29 @@ public class BudgetConstraint extends MSPolicy{
 				int target_index = MSPolicy.getGeneIndexFromNodeId(e.getTargetVmId(), genes, app);
 				
 				int tProvId = (int) genes[target_index].getAllele();
-				
 				InternetLink link = null;
-				try {link = internet.getInternetLink(prov.getID(), tProvId);} 
-				catch (Exception e1) {e1.printStackTrace();}
+				try {
+					link = internet.getInternetLink(prov.getID(), tProvId);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if(link != null) {
+					double interBwCost = link.getBwcost();
+					cost += CostComputer.computeLinkCost(e, geneVmId, current_prov, tProvId, interBwCost);
+				}
 				
-				double interBwCost = link.getBwcost();
-				
-				cost += CostComputer.computeLinkCost(e, geneVmId, current_prov, tProvId, interBwCost);
+//				System.out.println("目标云服务供应商ID:"+tProvId);
+//				InternetLink link = null;
+//				try {link = internet.getInternetLink(prov.getID(), tProvId);} 
+//				catch (Exception e1) {e1.printStackTrace();}
+//				if(link==null) {
+//					System.out.println("原云服务供应商"+prov.getID()+"---------->"+"目标云服务供应商："+tProvId);
+//					System.out.println("该边没有通");
+//				}
+//				double interBwCost = link.getBwcost();
+//				
+//				cost += CostComputer.computeLinkCost(e, geneVmId, current_prov, tProvId, interBwCost);
 			}
 		}
 		return cost;

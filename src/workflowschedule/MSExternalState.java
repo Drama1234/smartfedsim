@@ -32,17 +32,17 @@ public class MSExternalState {
 			this._providers.add(newp);
 		}
 		
-		// ascending sort by datacenter id
-		Collections.sort(this._providers, new Comparator<IMSProvider>() {
-			@Override
-			public int compare(IMSProvider first, IMSProvider second) {
-				if (first.getID() > second.getID()) 
-					return 1; //greater
-				else if (first.getID() < second.getID())
-					return -1; //smaller
-				return 0; // equal
-			}
-		});
+//		// ascending sort by datacenter id
+//		Collections.sort(this._providers, new Comparator<IMSProvider>() {
+//			@Override
+//			public int compare(IMSProvider first, IMSProvider second) {
+//				if (first.getID() > second.getID()) 
+//					return 1; //greater
+//				else if (first.getID() < second.getID())
+//					return -1; //smaller
+//				return 0; // equal
+//			}
+//		});
 	}
 	
 	public IMSApplication getApplication() {

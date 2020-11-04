@@ -162,12 +162,14 @@ public class Allocation {
 	public Integer pickDatacenter(Vm vm, List<FederationDatacenter> datacenters)
 	{
 		// recover the cloudlet from the VM
+//		System.out.println("虚拟机对应的任务"+application.getVertexForVm(vm).getAssociatedCloudlet(vm));
 		Cloudlet cloudlet = application.getVertexForVm(vm).getAssociatedCloudlet(vm);
 		boolean foundDC = false;
 		int i = 0;
 		
 		Integer dcid = null; 
 		while (i < solutions.length && !foundDC) {
+//			System.out.println("任务id"+cloudlet.toString());
 			FederationDatacenter dc = solutions[i].getMapping().get(cloudlet);
 		
 			if (dc != null)

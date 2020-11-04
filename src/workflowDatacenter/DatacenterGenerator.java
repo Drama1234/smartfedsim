@@ -157,4 +157,10 @@ public class DatacenterGenerator extends AbstractGenerator{
 		}
 		return list;
 	}
+	
+//	public static void main(String[] args) {
+//		Range coreAmount = new Range(1, 32);
+//		int core = (int) coreAmount.denormalize(0.23);
+//		System.out.println("coreamount:"+core);
+//	}
 }

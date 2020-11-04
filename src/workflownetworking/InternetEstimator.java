@@ -118,7 +118,9 @@ public class InternetEstimator {
 	{
 		FederationDatacenter a = (FederationDatacenter) CloudSim.getEntity(id_a);
 		FederationDatacenter b = (FederationDatacenter) CloudSim.getEntity(id_b);
-		
+//		for(int i =0;i<20;i++) {
+//			System.out.println(""+CloudSim.getEntity(i));
+//		}
 		return this.getInternetLink(a, b);
 	}
 	
