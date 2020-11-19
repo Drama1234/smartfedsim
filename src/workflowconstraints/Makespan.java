@@ -54,17 +54,17 @@ public class Makespan {
 				if(link !=null) {
 					latency = link.getLatency();
 					transfer_time = (e.getMessageLength() * 1024)/link.getBandwidth() + latency;
-					System.out.println("============跨云传输=============");
-					System.out.println("数据传输长度："+e.getMessageLength());
-					System.out.println("网络传输带宽："+link.getBandwidth());
-					System.out.println("网络延迟："+latency);
-					System.out.println("传输时间为："+transfer_time);
+//					System.out.println("============跨云传输=============");
+//					System.out.println("数据传输长度："+e.getMessageLength());
+//					System.out.println("网络传输带宽："+link.getBandwidth());
+//					System.out.println("网络延迟："+latency);
+//					System.out.println("传输时间为："+transfer_time);
 				}else {
 					transfer_time = (e.getMessageLength() * 1024)/(Integer)prov.getNetwork().getCharacteristic().get(Constant.BW);
-					System.out.println("============云内传输=============");
-					System.out.println("传输数据长度为："+e.getMessageLength());
-					System.out.println("云服务供应商带宽："+prov.getNetwork().getCharacteristic().get(Constant.BW));
-					System.out.println("传输时间为："+transfer_time);
+//					System.out.println("============云内传输=============");
+//					System.out.println("传输数据长度为："+e.getMessageLength());
+//					System.out.println("云服务供应商带宽："+prov.getNetwork().getCharacteristic().get(Constant.BW));
+//					System.out.println("传输时间为："+transfer_time);
 				}
 				time += transfer_time;
 			}

@@ -12,11 +12,10 @@ import org.cloudbus.cloudsim.core.CloudSim;
 
 import application.Application;
 import application.ApplicationVertex;
-import application.WorkflowApplication;
 import federation.resources.FederationDatacenter;
 import federation.resources.ResourceCounter;
-import it.cnr.isti.smartfed.test.PreciseDataset;
 import it.cnr.isti.smartfed.test.TestResult;
+import workflowDatacenter.WorkflowGenerator;
 import workflowfederation.Allocation;
 import workflowfederation.CostComputer;
 import workflowfederation.Federation;
@@ -47,7 +46,8 @@ public class Experiment {
 		this.randomSeed = seed;
 	}
 	
-	public void run() {
+	public void run() 
+	{
 		// init the cloudsim simulator
 		Log.enable();
 		int num_user = 1;   // users
@@ -58,11 +58,7 @@ public class Experiment {
 		//创建Federation
 		Federation federation = new Federation(allocator,randomSeed);
 		CloudSim.addEntity(federation);
-		
-		//初始化联盟云
-		if (dataset instanceof PreciseDataset)
-			((PreciseDataset)dataset).init(federation.getId());
-		
+				
 		// 重新设置资源统计
 		ResourceCounter.reset();
 		
@@ -85,6 +81,11 @@ public class Experiment {
 		
 		//创建应用程序
 		List<Application> applications = dataset.createApplications(federation.getId(),datacenters);
+//		System.out.println("应用类型："+applications.get(0).toString());
+		if(applications.get(0) instanceof Application)
+			System.out.println("对象是application实例");
+		else if(applications.get(0) instanceof WorkflowGenerator)
+			System.out.println("对象是WorkflowGenerator实例");
 		
 	
 		// create the queue (is that still needed)?
@@ -98,8 +99,10 @@ public class Experiment {
 		// actually start the simulation
 		CloudSim.startSimulation();
 		
+		
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
+//		System.out.println("任务数量："+newList.size());
 		UtilityPrint.printCloudletList(newList);
 		
 //		// calculates the vendor lock-in metric on the mapping plan
@@ -116,27 +119,23 @@ public class Experiment {
 		// add the values to the TestResult class
 		//for (int i = 0; i < federation.getAllocations().size(); i++) {
 
-			for (Allocation a: federation.getAllocations()) {
-				//Collection<Allocation> a = federation.getAllocations();
-		
-			if (a.isCompleted())
-			{
-				System.out.println("分配方案：");
-				double budget = 0;
-				for (ApplicationVertex av : a.getApplication().vertexSet())
-					budget += av.getBudget();
-			
+		for (Allocation a: federation.getAllocations()) {
+			//Collection<Allocation> a = federation.getAllocations();
+	
+		if (a.isCompleted())
+		{
+			System.out.println("分配结果：");
+			double budget = 0;
+			for (ApplicationVertex av : a.getApplication().vertexSet())
+				budget += av.getBudget();
 
-				if (applications.get(0) instanceof WorkflowApplication)
-				{			
-					double completion = WorkflowComputer.getFlowCompletionTime((WorkflowApplication) applications.get(0), datacenters, internetEstimator);
-					double cost = WorkflowComputer.getFlowCost((WorkflowApplication) applications.get(0), datacenters, a, completion, internetEstimator);
+			double completion = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator) applications.get(0), datacenters, internetEstimator);
+			double cost = WorkflowComputer.getFlowCost((WorkflowGenerator) applications.get(0), datacenters, a, completion, internetEstimator);
 //					TestResult.getCompletion().addValue(completion);
 //					TestResult.getCost().addValue(cost);
-					System.out.println("BUDGET：------------------->" + budget);
-					System.out.println("COST：-------------------> " + cost);
-					System.out.println("COMPLETION：----------------> " + completion);
-				}
+			System.out.println("BUDGET：------------------->" + budget);
+			System.out.println("COST：-------------------> " + cost);
+			System.out.println("COMPLETION：----------------> " + completion);
 //				else
 //				{
 //					double total = CostComputer.actualCost(a,internetEstimator);
@@ -147,9 +146,8 @@ public class Experiment {
 //					TestResult.getNetCost().addValue(netcost);
 //					TestResult.getBerger().addValue(Math.log(total / budget));
 //				}	
-			}
-			else
-				System.out.println("Not completed");
+		}else
+			System.out.println("Not completed");
 		}
 	}
 }

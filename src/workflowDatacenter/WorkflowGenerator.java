@@ -38,7 +38,7 @@ public class WorkflowGenerator extends Application{
 //	protected AbstractRealDistribution distribution;
 	
 	public String daxPath;
-	public static String filename = "resources/RemoteSense_23.xml";
+	public static String filename = "resources/RemoteSense_13.xml";
 	
 	protected Range coreAmount;
 	protected Range mipsAmount;
@@ -132,32 +132,32 @@ public class WorkflowGenerator extends Application{
 	private Vm createSmallVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18*4, 
-				4, 
-				new Double(6*1024).intValue(),//ram
-				new Long(100 * 1024 * 1024),//100MB/s
-				new Long(200 * 1024)//200GB
+				6502.18, 
+				1, 
+				8*1024,//ram
+				100 * 1024 * 1024,//100MB/s
+				200 * 1024//200GB
 				);
 	}
 	
 	private Vm createMediumVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18*10, 
-				10, 
-				new Double(10*1024).intValue(),//ram
-				new Long(100 * 1024 * 1024),//100MB/s
-				new Long(500 * 1024)//500GB
+				6502.18*2, 
+				2, 
+				16*1024,//ram
+				100 * 1024 * 1024,//100MB/s
+				500 * 1024//500GB
 				);
 	}
 	private Vm createlLargeVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18*16, 
-				116, 
-				new Double(20*1024).intValue(),//ram
-				new Long(100 * 1024 * 1024),//100MB/s
-				new Long(1024 * 1024)//1TB
+				6502.18*4, 
+				4, 
+				32*1024,//ram
+				100 * 1024 * 1024,//100MB/s
+				1024 * 1024//1TB
 				);
 	}
 	
@@ -375,7 +375,7 @@ public class WorkflowGenerator extends Application{
         	
         	WorkflowDataset dataset = new WorkflowDataset(20, filename);
         	List<FederationDatacenter> datacenters = dataset.createDatacenters();
-        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_23", 0, taskClustering, datacenters);
+        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_13", 0, taskClustering, datacenters);
         	
 			//app.export("plots/" + "RemoteSense_1" + ".dot");
 		} catch (Exception e) {

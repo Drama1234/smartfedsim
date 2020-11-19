@@ -68,6 +68,4 @@ public class UtilityPrint {
 		
 		return sb.toString();
 	}
-	
-	
 }

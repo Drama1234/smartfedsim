@@ -76,10 +76,10 @@ public class InternetEstimator {
 					long interbw;
 					double interlatency,costinterbw;
 					
-					double value = distribution.sample();
-					interbw = (long)interBwAmount.denormalize(value);
-					interlatency = interLatencyAmount.denormalize(value);
-					costinterbw = costInterBw.denormalize(value);
+					interbw = (long)interBwAmount.denormalize(distribution.sample());
+					System.out.println();
+					interlatency = interLatencyAmount.denormalize(distribution.sample());
+					costinterbw = costInterBw.denormalize(distribution.sample());
 					
 					InternetLink il = new InternetLink(interbw, interlatency, costinterbw, SecuritySupport.ADVANCED);
 					graph.addEdge(outer, inner, il);
@@ -167,10 +167,4 @@ public class InternetEstimator {
 	public String toString() {
 		return "HighestLatency:"+getHighestLatency()+"HighestBw:"+getHighestBw()+"HighestCostBw"+getHighestCostBw();
 	}
-	
-	
-
-	
-	
-	
 }

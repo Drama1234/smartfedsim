@@ -68,7 +68,6 @@ public class VmFactory
 			{
 				return createSmall(userId);
 			}
-			
 		}
 	}
 	
@@ -183,7 +182,7 @@ public class VmFactory
 				vm.getBw(),
 				vm.getSize(),
 				vm.getVmm(), 
-				vm.getCloudletScheduler());		
+				vm.getCloudletScheduler());	
 		return result;
 	}
 }

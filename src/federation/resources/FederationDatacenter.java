@@ -19,8 +19,7 @@ import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEvent;
 
-import it.cnr.isti.smartfed.federation.resources.VmTyped;
-import it.cnr.isti.smartfed.federation.resources.VmFactory.VmType;
+import federation.resources.VmFactory.vmType;
 import workflowfederation.CostComputer;
 import workflowfederation.FederationLog;
 import workflowfederation.UtilityPrint;
@@ -163,7 +162,6 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 					int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
 					sendNow(cl.getUserId(), tag, data);
 				}
-
 				sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
 
 				return;
@@ -176,12 +174,12 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 
 			// time to transfer the files
 			double fileTransferTime = predictFileTransferTime(cl.getRequiredFiles());
-
+//			System.out.println("虚拟机创建");
 			Host host = getVmAllocationPolicy().getHost(vmId, userId);
 			Vm vm = host.getVm(vmId, userId);
 			CloudletScheduler scheduler = vm.getCloudletScheduler();
 			double estimatedFinishTime = scheduler.cloudletSubmit(cl, fileTransferTime);
-			FederationLog.timeLog("Estimated finish time for cloudlet " + cl.getCloudletId() + estimatedFinishTime);
+			FederationLog.timeLog("Estimated finish time for cloudlet " + cl.getCloudletId() + " " + estimatedFinishTime);
 
 			// if this cloudlet is in the exec queue
 			if (estimatedFinishTime > 0.0 && !Double.isInfinite(estimatedFinishTime)) {
@@ -199,6 +197,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 				int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
 				sendNow(cl.getUserId(), tag, data);
 			}
+			
 		} catch (ClassCastException c) {
 			Log.printLine(getName() + ".processCloudletSubmit(): " + "ClassCastException error.");
 			c.printStackTrace();
@@ -206,9 +205,29 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			Log.printLine(getName() + ".processCloudletSubmit(): " + "Exception error.");
 			e.printStackTrace();
 		}
+
 		checkCloudletCompletion();
+		
+		
+//		List<? extends Host> list = getVmAllocationPolicy().getHostList();
+//		System.out.println("虚拟机分配策略得到的主机列表大小:"+list.size());
+//		for (int i = 0; i < list.size(); i++) {
+//			Host host = list.get(i);
+//			for (Vm vm : host.getVmList()) {
+//				System.out.println("虚拟机大小"+vm.getSize());
+////				System.out.println("虚拟机分配大小："+vm.getCloudletScheduler().);
+//				if (vm.getCloudletScheduler().isFinishedCloudlets()) {
+//					System.out.println("是否任务完成："+vm.getCloudletScheduler().isFinishedCloudlets());
+//					Cloudlet cl = vm.getCloudletScheduler().getNextFinishedCloudlet();
+//					System.out.println("任务："+cl.getCloudletId());
+//				}else
+//					System.out.println("任务列表为空");
+//			}
+//		}
 	}
 	
+
+
 	public Double getDebtsForUser(Integer user_id)
 	{
 		return this.getDebts().get(user_id);
@@ -260,11 +279,12 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 	 */
 	protected void processVmCreate(SimEvent ev, boolean ack) {
 		
-			Vm generic_vm = (Vm) ev.getData();
-			Vm vm = new VmTyped(generic_vm, VmType.CUSTOM);
+		Vm generic_vm = (Vm) ev.getData();
+		Vm vm = new VmTyped(generic_vm, vmType.CUSTOM);
 		
 
 		boolean result = getVmAllocationPolicy().allocateHostForVm(vm);
+//		System.out.println("分配成功与否："+result);
 
 		if (ack) {
 			int[] data = new int[3];
@@ -306,6 +326,4 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 					.getAllocatedMipsForVm(vm));
 		}
 	}
-	
-	
 }

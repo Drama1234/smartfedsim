@@ -159,6 +159,7 @@ public class Allocation {
 	 * @param net
 	 * @return
 	 */
+
 	public Integer pickDatacenter(Vm vm, List<FederationDatacenter> datacenters)
 	{
 		// recover the cloudlet from the VM
@@ -169,8 +170,14 @@ public class Allocation {
 		
 		Integer dcid = null; 
 		while (i < solutions.length && !foundDC) {
+			
 //			System.out.println("任务id"+cloudlet.toString());
+//			System.out.println("解的值："+solutions[i].toString());
+//			System.out.println("解的长度："+solutions.length);
 			FederationDatacenter dc = solutions[i].getMapping().get(cloudlet);
+//			System.out.println("解的大小："+solutions[i].getMapping().size());
+//			
+//			System.out.println("云服务供应商ID:"+dc.getId());
 		
 			if (dc != null)
 				dcid = dc.getId();

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Application;
-import application.WorkflowApplication;
-import federation.resources.City;
 import federation.resources.FederationDatacenter;
 import workflowDatacenter.DatacenterGenerator;
 import workflowDatacenter.WorkflowGenerator;

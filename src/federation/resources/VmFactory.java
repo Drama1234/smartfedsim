@@ -31,6 +31,7 @@ public class VmFactory {
 	 }
 	
 	private static Vm createSmall(int userId) {
+		
 		Vm vm = new Vm(ResourceCounter.nextVmID(), 
 				userId, 
 				6502.18 * 2, //mips
@@ -46,7 +47,7 @@ public class VmFactory {
 	private static Vm createMedium(int userId) {
 		Vm vm = new Vm(ResourceCounter.nextVmID(), 
 				userId, 
-				6502.18 * 4, //mips
+				5202.15 * 4, //mips
 				4, 
 				new Double(8 * 1024 ).intValue(),//8GB ram
 				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
@@ -59,8 +60,8 @@ public class VmFactory {
 	private static Vm createLarge(int userId) {
 		Vm vm = new Vm(ResourceCounter.nextVmID(), 
 				userId, 
-				6502.18 * 8, //mips
-				8, 
+				5202.15 * 6, //mips
+				6, 
 				new Double(16 * 1024 ).intValue(),//16GB ram
 				new Long(100 * 1024 * 1024), // i assume at least 100MB p/s  
 				new Long(1024 * 1024), //1TB硬盘

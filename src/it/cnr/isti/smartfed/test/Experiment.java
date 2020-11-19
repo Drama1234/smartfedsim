@@ -151,7 +151,6 @@ public class Experiment
 				}
 				else
 				{
-					
 					double total = CostComputer.actualCost(a);
 					double netcost = CostComputer.actualNetCost(a);
 					System.out.println("TOTAL --------> "+total);
@@ -160,12 +159,10 @@ public class Experiment
 					TestResult.getNetCost().addValue(netcost);
 					TestResult.getBerger().addValue(Math.log(total / budget));
 				}
-					
 			}
 			else
 				System.out.println("Not completed");
 		}
-		
 	}
 	
 

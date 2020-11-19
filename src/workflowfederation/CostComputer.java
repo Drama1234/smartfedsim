@@ -11,8 +11,8 @@ import org.workflowsim.Task;
 import application.Application;
 import application.ApplicationEdge;
 import application.ApplicationVertex;
-import application.WorkflowApplication;
 import federation.resources.FederationDatacenter;
+import workflowDatacenter.WorkflowGenerator;
 import workflowmapping.MappingSolution;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
@@ -76,7 +76,7 @@ public class CostComputer {
 			Task task = (Task) allocation.getApplication().getCloudletFromVertex(av);
 			FederationDatacenter datacenter = allocation.getAllocatedDatacenter(vm);
 			Set<ApplicationEdge> edges = allocation.getApplication().edgesOf(av);
-			WorkflowApplication application = (WorkflowApplication)allocation.getApplication();
+			WorkflowGenerator application = (WorkflowGenerator)allocation.getApplication();
 			//计算虚拟机存在时间
 			//Set<ApplicationEdge> edges = workflow.edgesOf(av);
 			//虚拟机执行时间
@@ -260,7 +260,7 @@ public class CostComputer {
 		double costCPU = vm.getNumberOfPes() * getCostPerCpu(fd);
 		double costRam = vm.getRam() * getCostPerMem(fd); 
 		double costStorage = vm.getSize() * getCostPerStorage(fd);
-		FederationLog.timeLogDebug("(CostComputer) custom_vm: " + costRam + " + " + costStorage + "+" + costCPU);
+		FederationLog.timeLogDebug("(CostComputer) custom_vm: " + costRam + " + " + costStorage + " + " + costCPU);
 		double costVm = costRam + costStorage + costCPU;
 		return costVm;
 	}

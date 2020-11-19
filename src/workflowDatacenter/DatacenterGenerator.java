@@ -55,11 +55,11 @@ public class DatacenterGenerator extends AbstractGenerator{
 		//costPerBw = new Range(0.05, 0.15); //former (0.001, 0.05)
 		//Bw = new Range(100*1024*1024, 500*1024*1024);
 		//host
-		ramAmount = new Range(1024*1, 1024*64);//1GB-64GB
+		ramAmount = new Range(1024*4, 1024*64);//40GB-60GB
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
-		stoAmount = new Range(250*1024, 1*1024*1024); // 250GB - 1TB max
-		coreAmount = new Range(1, 32);
-		mipsAmount = new Range(1000, 50000);
+		stoAmount = new Range(3*1024*1024, 6*1024*1024); // 3TB - 6TB max
+		coreAmount = new Range(6, 10);
+		mipsAmount = new Range(6502.18*6, 6502.18*10);
 		
 		cities = City.values();	
 	}
@@ -108,15 +108,26 @@ public class DatacenterGenerator extends AbstractGenerator{
 			int numCore, mips, ram, bw, sto;
 			double costCpu, costSto, costMem;
 			
-			numCore = (int) coreAmount.denormalize(distribution.sample());
-			mips = (int) mipsAmount.denormalize(distribution.sample());
-			ram = (int) ramAmount.denormalize(distribution.sample());
-			bw = (int) bwAmount.denormalize(distribution.sample());
-			sto = (int) stoAmount.denormalize(distribution.sample());
+			double value = distribution.sample();
+			numCore = (int) coreAmount.denormalize(value);
+			mips = (int) mipsAmount.denormalize(value);
+			ram = (int) ramAmount.denormalize(value);
+			bw = (int) bwAmount.denormalize(value);
+			sto = (int) stoAmount.denormalize(value);
 			
-			costCpu = costPerCpu.denormalize(distribution.sample());
-			costSto = costPerSto.denormalize(distribution.sample());
-			costMem = costPerMem.denormalize(distribution.sample());
+			costCpu = costPerCpu.denormalize(value);
+			costSto = costPerSto.denormalize(value);
+			costMem = costPerMem.denormalize(value);
+			
+//			numCore = (int) coreAmount.denormalize(distribution.sample());
+//			mips = (int) mipsAmount.denormalize(distribution.sample());
+//			ram = (int) ramAmount.denormalize(distribution.sample());
+//			bw = (int) bwAmount.denormalize(distribution.sample());
+//			sto = (int) stoAmount.denormalize(distribution.sample());
+//			
+//			costCpu = costPerCpu.denormalize(distribution.sample());
+//			costSto = costPerSto.denormalize(distribution.sample());
+//			costMem = costPerMem.denormalize(distribution.sample());
 			
 			// create the datacenters
 			FederationDatacenterProfile profile = FederationDatacenterProfile.getDefault();

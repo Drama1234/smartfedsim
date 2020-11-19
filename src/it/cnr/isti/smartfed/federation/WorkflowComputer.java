@@ -32,10 +32,12 @@ public class WorkflowComputer
 				
 				// check for the entering edges to compute the time of 
 				Set<ApplicationEdge> in_edges = workflow.incomingEdgesOf(av);
+				System.out.println("工作流应用程序的入边："+in_edges.size());
 				double offset_time = 0;
 				for (ApplicationEdge ae: in_edges)
 				{
 					double time = edgeTimeMap.get(ae);
+					System.out.println("时间大小"+time);
 					if (time > offset_time)
 						offset_time = time;
 				}

@@ -74,6 +74,7 @@ public class Federation extends SimEntity{
 	}
 	
 	public void processEvent(SimEvent ev) {
+//		System.out.println("事件标志："+ev.getTag());
 		switch (ev.getTag()) {
 			// Resource characteristics request
 			case CloudSimTags.RESOURCE_CHARACTERISTICS_REQUEST:
@@ -102,6 +103,7 @@ public class Federation extends SimEntity{
 			// A finished cloudlet returned
 			case CloudSimTags.CLOUDLET_RETURN:
 				FederationLog.timeLogDebug("Event received: " + "CLOUDLET_RETURN (" + ev.getTag() +")");
+//				System.out.println("打个断点");
 				processCloudletReturn(ev);
 				break;
 			// if the simulation finishes
@@ -184,6 +186,7 @@ public class Federation extends SimEntity{
 		Vm vm = allocation.getNextVm();
 				
 		int dcid = allocation.pickDatacenter(vm, datacenters);
+		System.out.println("分配选择的数据中心id"+dcid);
 		if (dcid == -1)
 		{
 			FederationLog.timeLog("WARNING: FAILED mapping of "+app);
@@ -256,8 +259,9 @@ public class Federation extends SimEntity{
 	protected void processCloudletReturn(SimEvent ev) 
 	{
 		Cloudlet cloudlet = (Cloudlet) ev.getData();
+//		System.out.println("获得的任务ID:"+cloudlet.getCloudletId());
 		receivedCloudlet.add(cloudlet);	
-		FederationLog.timeLog("    Cloudlet" + cloudlet.getCloudletId() +" received");
+		FederationLog.timeLog("Cloudlet" + cloudlet.getCloudletId() +" received");
 
 		// if all the cloudlet are finished, shutdown the monitoring
 		if (receivedCloudlet.size() >= vmToDatacenter.size() && this.emptyQueue) {

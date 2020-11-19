@@ -13,7 +13,6 @@ public class HostProfile {
 		STORAGE_MB(new Long(10l*1024*1024)+""), // 10TB
 		VM_SCHEDULER("org.cloudbus.cloudsim.VmSchedulerSpaceShared");
 		
-		
 		private String def;
 		
 		private HostParams(String def)

@@ -9,7 +9,6 @@ import java.util.Set;
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.Vm;
 
-import com.sun.net.ssl.internal.ssl.Provider;
 
 import application.Application;
 import application.ApplicationEdge;
