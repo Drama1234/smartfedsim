@@ -16,12 +16,11 @@ import org.jgap.impl.CrossoverOperator;
 import org.jgap.impl.MutationOperator;
 import org.jgap.util.ICloneable;
 
-
+import Constraints.costConstraint;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
-import workflowconstraints.BudgetConstraint;
-import workflowconstraints.Makespan;
+import workflowconstraint.Makespan;
 import workflowfederation.FederationLog;
 import workflownetworking.InternetEstimator;
 import workflowschedule.iface.MSProviderAdapter;
@@ -32,13 +31,13 @@ public class JGAPMapping {
 	public static int EVOLUTION_STEP = 1;
 	
 	public static final int INTERNAL_SOLUTION_NUMBER = 10;
-	public static final int SOLUTION_NUMBER = 5;
+	public static final int SOLUTION_NUMBER = 1;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
 	public static Genotype population = null;
 	static Configuration conf = null;
 	
-	public static Solution[] execute(MSExternalState state, List<MSPolicy> policy, long randomSeed) {
+	public static Solution[] execute(MSExternalState state, List<Policy> policy, long randomSeed) {
 		List<IMSProvider> providerList = state.getProviders();
 		InternetEstimator internet = state.getInternet();
 		IMSApplication application = state.getApplication();
@@ -114,8 +113,6 @@ public class JGAPMapping {
 					sol[i].chromosome.setGenes(mygenes);
 					sol[i].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
 					sol[i].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
-					//sol[i].setCostAmount(calculateCostSolution(nodes, providerList, array[i]));
-					//sol[i].setCostAmount(calculateCostSolution(array[i]));
 				}
 			}
 			Configuration.reset();
@@ -142,7 +139,7 @@ public class JGAPMapping {
 		for (int j=0; j<genes.length; j++){
 			IMSProvider provider = MSProviderAdapter.findProviderById(providerList, (int) genes[j].getAllele());
 			//tmp += ((CIntegerGene) genes[j]).getAllocationCost();
-			tmp += BudgetConstraint.calculateCost_Network(j, c, application, provider, internet);
+			tmp += costConstraint.calculateCost_Network(j, c, application, provider, internet);
 //			tmp += BudgetConstraint.vmCost(nodes.get(j), provider, c);
 		}
 		return tmp;

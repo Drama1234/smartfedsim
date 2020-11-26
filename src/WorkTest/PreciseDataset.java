@@ -1,4 +1,4 @@
-package workflowtest;
+package WorkTest;
 /*
  * 该类的策略如下：
  * 1，根据传递过来的任务的数量创建应用程序
@@ -22,6 +22,7 @@ import federation.resources.HostFactory;
 import federation.resources.HostProfile;
 import federation.resources.HostProfile.HostParams;
 import workflownetworking.InternetEstimator;
+import workflowtest.InterfaceDataSet;
 
 
 public class PreciseDataset implements InterfaceDataSet{

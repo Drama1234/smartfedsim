@@ -10,19 +10,7 @@ import org.cloudbus.cloudsim.Host;
 
 
 public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
-//	private City city;
-	private int DatacenterBw = 0;
-	
-//	private double costVmCustom = 0;
-	
-	
-//	public City getCity() {
-//		return city;
-//	}
-
-//	public double[] getCostVmTypes() {
-//		return costVmTypes;
-//	}
+	private long DatacenterBw = 0;
 	
 	public DatacenterCharacteristicsMS(String architecture, String os, 
 			String vmm, List<? extends Host> hostList,double timeZone, 
@@ -44,7 +32,7 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	public String toString() {
 		String str = new String();
 //		str += " City: " + city;
-		str += " BW: " + getDatacenterBw();
+		str += " BW: " + getDatacenterBw()+"MB/s";
 		str	+= " Cost " + "(mem: " + super.getCostPerMem();
 		str += " and cpu "+ getCostPerCpu();
 		str += " and sto " + super.getCostPerStorage();
@@ -52,10 +40,10 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 		str += ") ";
 		str += "Host: " + super.getHostList().size();
 		str += " and core " + super.getHostList().get(0).getNumberOfPes();
-		str += " and Ram " + super.getHostList().get(0).getRam();
+		str += " and Ram " + super.getHostList().get(0).getRam()/1024+"GB";
 		str += " and Mips " + super.getHostList().get(0).getTotalMips();
-		str += " and Storage " + super.getHostList().get(0).getStorage();
-		str += " and Bw " +super.getHostList().get(0).getBw();
+		str += " and Storage " + super.getHostList().get(0).getStorage()/1024/1024+"TB";
+		str += " and Bw " +super.getHostList().get(0).getBw()/1024/1024+"MB/s";
 		return str;
 	}
 	
@@ -112,11 +100,11 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	}
 	
 //	
-	public int getDatacenterBw() {
+	public long getDatacenterBw() {
 		return this.DatacenterBw;
 	}
 	
-	public void setDatacenterBw(int bw) {
+	public void setDatacenterBw(long bw) {
 		this.DatacenterBw = bw;
 	}
 	

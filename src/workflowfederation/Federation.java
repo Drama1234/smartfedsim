@@ -186,7 +186,7 @@ public class Federation extends SimEntity{
 		Vm vm = allocation.getNextVm();
 				
 		int dcid = allocation.pickDatacenter(vm, datacenters);
-		System.out.println("分配选择的数据中心id"+dcid);
+//		System.out.println("分配选择的数据中心id"+dcid);
 		if (dcid == -1)
 		{
 			FederationLog.timeLog("WARNING: FAILED mapping of "+app);
@@ -262,7 +262,7 @@ public class Federation extends SimEntity{
 //		System.out.println("获得的任务ID:"+cloudlet.getCloudletId());
 		receivedCloudlet.add(cloudlet);	
 		FederationLog.timeLog("Cloudlet" + cloudlet.getCloudletId() +" received");
-
+//		System.out.println("接收到的任务数量"+receivedCloudlet.size()+"");
 		// if all the cloudlet are finished, shutdown the monitoring
 		if (receivedCloudlet.size() >= vmToDatacenter.size() && this.emptyQueue) {
 			
@@ -311,5 +311,4 @@ public class Federation extends SimEntity{
 		}
 		return null;
 	}
-
 }

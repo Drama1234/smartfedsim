@@ -69,10 +69,8 @@ public class Experiment {
 		allocator.setRandomSeed(randomSeed);
 		
 		// 创建网络
-//		allocator.setNetEstimator(dataset.createInternetEstimator(datacenters));
 		InternetEstimator internetEstimator = dataset.createInternetEstimator(datacenters);
 		allocator.setNetEstimator(internetEstimator);
-//		System.out.println(internetEstimator.toString());
 		//创建监控
 		int schedulingInterval = 1; // probably simulation time
 		MonitoringHub monitor = new MonitoringHub(datacenters, schedulingInterval);
@@ -81,12 +79,6 @@ public class Experiment {
 		
 		//创建应用程序
 		List<Application> applications = dataset.createApplications(federation.getId(),datacenters);
-//		System.out.println("应用类型："+applications.get(0).toString());
-		if(applications.get(0) instanceof Application)
-			System.out.println("对象是application实例");
-		else if(applications.get(0) instanceof WorkflowGenerator)
-			System.out.println("对象是WorkflowGenerator实例");
-		
 	
 		// create the queue (is that still needed)?
 		FederationQueueProfile queueProfile = FederationQueueProfile.getDefault();
@@ -99,55 +91,30 @@ public class Experiment {
 		// actually start the simulation
 		CloudSim.startSimulation();
 		
-		
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
-//		System.out.println("任务数量："+newList.size());
 		UtilityPrint.printCloudletList(newList);
 		
-//		// calculates the vendor lock-in metric on the mapping plan
-//		MappingSolution sol = allocator.getSolution();
-//		System.out.println(sol);
-//		Set<FederationDatacenter> myset = new HashSet<FederationDatacenter>();
-//		for (FederationDatacenter fd: sol.getMapping().values()){
-//			myset.add(fd);
-//		}
-//
-//		int usedDc = myset.size();// datacenters.size();
-//		TestResult.getLockDegree().addValue(usedDc);
 		
-		// add the values to the TestResult class
-		//for (int i = 0; i < federation.getAllocations().size(); i++) {
-
-		for (Allocation a: federation.getAllocations()) {
-			//Collection<Allocation> a = federation.getAllocations();
+		int i = 0;
+		for (Allocation allocation: federation.getAllocations()) {
+			if (allocation.isCompleted())
+			{
+				i++;
+				System.out.println("分配成功：第"+i+"个分配方案");
+				double budget = 0;
+				for (ApplicationVertex av : allocation.getApplication().vertexSet())
+					budget += av.getBudget();
 	
-		if (a.isCompleted())
-		{
-			System.out.println("分配结果：");
-			double budget = 0;
-			for (ApplicationVertex av : a.getApplication().vertexSet())
-				budget += av.getBudget();
-
-			double completion = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator) applications.get(0), datacenters, internetEstimator);
-			double cost = WorkflowComputer.getFlowCost((WorkflowGenerator) applications.get(0), datacenters, a, completion, internetEstimator);
-//					TestResult.getCompletion().addValue(completion);
-//					TestResult.getCost().addValue(cost);
-			System.out.println("BUDGET：------------------->" + budget);
-			System.out.println("COST：-------------------> " + cost);
-			System.out.println("COMPLETION：----------------> " + completion);
-//				else
-//				{
-//					double total = CostComputer.actualCost(a,internetEstimator);
-//					double netcost = CostComputer.actualNetCost(a,internetEstimator);
-//					System.out.println("TOTAL --------> "+total);
-//					
-//					TestResult.getCost().addValue(total);
-//					TestResult.getNetCost().addValue(netcost);
-//					TestResult.getBerger().addValue(Math.log(total / budget));
-//				}	
-		}else
-			System.out.println("Not completed");
-		}
+				double completion = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator) applications.get(0), datacenters, internetEstimator);
+				double cost = WorkflowComputer.getFlowCost( datacenters, allocation, internetEstimator);
+	
+				System.out.println("BUDGET：------------------->" + budget);
+				System.out.println("COST：-------------------> " + cost);
+				System.out.println("makespan：----------------> " + completion);
+	
+			}else
+				System.out.println("Not completed");
+		}	
 	}
 }

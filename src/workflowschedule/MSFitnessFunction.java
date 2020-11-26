@@ -1,6 +1,5 @@
 package workflowschedule;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,17 +15,17 @@ import workflowschedule.iface.MSProviderAdapter;
 public class MSFitnessFunction extends FitnessFunction{
 	
 	public final static int AWARD = 100;
-	private final double EQUALITY = 0.1;
+//	private final double EQUALITY = 0.1;
 	private final static Logger log = Logger.getLogger(Logger.class.getName());
 	
 	private static final long serialVersionUID = 1L;
 
 	static private MSExternalState _state;
-	static private List<MSPolicy> policy;
+	static private List<Policy> policy;
 
-	private HashMap<Integer, Integer> association;
+//	private HashMap<Integer, Integer> association;
 	
-	public MSFitnessFunction(MSExternalState state, List<MSPolicy> policyList){
+	public MSFitnessFunction(MSExternalState state, List<Policy> policyList){
 		_state = state;
 		policy = policyList;
 	}
@@ -39,25 +38,27 @@ public class MSFitnessFunction extends FitnessFunction{
 		Integer providerID = (Integer) genes[gene_index].getAllele();
 		IMSProvider provider = MSProviderAdapter.findProviderById(_state.getProviders(), providerID);
 		for (int i = 0; i < policy.size(); i++) {
-			weightedDistance[i] = policy.get(i).evaluatePolicy(gene_index, chromos, _state.getApplication(), provider, _state.getInternet());
+			weightedDistance[i] = policy.get(i).evaluateGlobalPolicy(gene_index, chromos, _state.getApplication(), provider, _state.getInternet());
 		}
 		for (int i = 0; i < weightedDistance.length; i++) {
 			if(weightedDistance[i] > 0) {
-				
-			}
-		}
-		for (int i=0; i<weightedDistance.length; i++){
-			if (weightedDistance[i] > 0){
 				weightedDistance[i] = 0;
-//				fitness = 0; // for construction, distances in the positive space are not good, not satisfying constraints as inequality
+			}else {
+				weightedDistance[i] *= -1;
 			}
-			else if (weightedDistance[i] == 0){
-				weightedDistance[i] = EQUALITY;
-			}
-			else {
-				weightedDistance[i] *= -1; // absolute value of negative numbers
-			}	
 		}
+//		for (int i=0; i<weightedDistance.length; i++){
+//			if (weightedDistance[i] > 0){
+//				weightedDistance[i] = 0;
+////				fitness = 0; // for construction, distances in the positive space are not good, not satisfying constraints as inequality
+//			}
+//			else if (weightedDistance[i] == 0){
+//				weightedDistance[i] = EQUALITY;
+//			}
+//			else {
+//				weightedDistance[i] *= -1; // absolute value of negative numbers
+//			}	
+//		}
 		
 		if (fitness != 0){
 			fitness = 0;
@@ -81,7 +82,7 @@ public class MSFitnessFunction extends FitnessFunction{
 			fitness += g_fit;
 		}
 		
-		if (MSPolicy.DEBUG)
+		if (Policy.DEBUG)
 			printGenes(chromos, fitness);
 		
 		return fitness;

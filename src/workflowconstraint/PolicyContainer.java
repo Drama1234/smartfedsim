@@ -1,4 +1,4 @@
-package workflowconstraints;
+package workflowconstraint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import workflowschedule.MSPolicy;
 import workflowschedule.MSPolicy.ConstraintScope;
-
 
 public class PolicyContainer {
 	public static long highStorageValue = 0;
@@ -18,7 +17,6 @@ public class PolicyContainer {
 	public static double highNetworkLatencyValue = 0;
 	//public static double highCostValueVm = 0; 
 
-	
 	private double weightSum = 0;
 	private double weightNumber = 0;
 	

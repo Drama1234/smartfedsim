@@ -1,3 +1,4 @@
+package workflowconstraint;
 //package workflowconstraints;
 //
 //import org.jgap.Gene;

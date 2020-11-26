@@ -57,7 +57,10 @@ public class CostComputer {
 	public static double actualCost(Allocation allocation,List<FederationDatacenter> dcs,InternetEstimator internet){
 		double amount = 0d, cost = 0d;
 		double edge_time = 0;
+		double time = 0;
 		double vm_time = 0;
+		
+		
 //		int depth = 0;
 //		List<Task> tasks = workflow.getTasksWithDepth(depth);
 //		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
@@ -77,24 +80,23 @@ public class CostComputer {
 			FederationDatacenter datacenter = allocation.getAllocatedDatacenter(vm);
 			Set<ApplicationEdge> edges = allocation.getApplication().edgesOf(av);
 			WorkflowGenerator application = (WorkflowGenerator)allocation.getApplication();
-			//计算虚拟机存在时间
-			//Set<ApplicationEdge> edges = workflow.edgesOf(av);
-			//虚拟机执行时间
+			//计算任务在虚拟机上的执行时间
 			double task_time = WorkflowComputer.taskTime(task, application);
-			
+			//计算任务前序和后继节点之间网络传输的时间
 			for (ApplicationEdge ae: edges) {
-				edge_time = WorkflowComputer.edgeTime(ae, application, task, dcs, internet);
-				vm_time = task_time + edge_time;
-				if(datacenter != null) {
-					cost = singleVmCost(vm, datacenter) * vm_time;
-					System.out.println("Vm cost is " +vm.getId() +" is " + cost);
-					amount += cost;
-				}
+				//入边传输时间
+				time = WorkflowComputer.edgeTime(ae, application, task, dcs, internet);
+				edge_time += time;
 			}
-			//计算虚拟机成本
-			System.out.println("Net cost is for vm " + vm.getId() + " is " + computeNetCosts(vm, edges, allocation, datacenter,internet));
-			amount += computeNetCosts(vm, edges, allocation, datacenter,internet);
-			System.out.println("");
+			vm_time = task_time + edge_time;
+			if(datacenter != null) {
+				cost = singleVmCost(vm, datacenter) * vm_time;
+				System.out.println("Vm " +vm.getId() +" rent cost of task" + av.getId() + " is " + cost);
+				amount += cost;
+			}
+			//计算网络传输成本
+			System.out.println("Net cost is for vm " + vm.getId() + " is " + actualNetCost(allocation,internet));
+			amount += actualNetCost(allocation,internet);
 		}
 		return amount;
 	}
@@ -151,28 +153,36 @@ public class CostComputer {
 			Set<ApplicationEdge> edges = allocation.getApplication().edgesOf(vertex);
 			
 			if (datacenter != null){	
-					amount += computeNetCosts(vm, edges, allocation, datacenter,internet);
+				amount += computeNetCosts(vm, edges, allocation, datacenter, internet);
 			}
 		}
 		return amount;
 	}
 	
-	public static double computeNetCosts(Vm vm, Set<ApplicationEdge> es, Allocation a, FederationDatacenter f,InternetEstimator internet) {
+	public static double computeNetCosts(Vm vm, Set<ApplicationEdge> edges, Allocation a, FederationDatacenter f,InternetEstimator internet) {
 		double cost = 0;
 		int sourceVmId = vm.getId();
 		int sourceProvId = a.getAllocatedDatacenterId(vm);
-		for (ApplicationEdge e: es){
-			
+		System.out.println("虚拟机ID"+sourceVmId+"-供应商ID"+sourceProvId);
+		for (ApplicationEdge e: edges){
 			Vm targetVm  = e.getTargetVm();
 			int targetProvId = a.getAllocatedDatacenterId(targetVm);
+			System.out.println("原供应商ID"+sourceProvId+"目标供应商ID"+targetProvId);
 			
-			InternetLink link = null;
-			try {link = internet.getInternetLink(sourceProvId, targetProvId);} 
-			catch (Exception e1) {e1.printStackTrace();}
-			
-			double interBwCost = link.getBwcost();
-			
-			cost += computeLinkCost(e, sourceVmId, sourceProvId, targetProvId, interBwCost);
+			if(sourceProvId==targetProvId) {
+				cost += 0;
+			}else {
+				InternetLink link = null;
+				try {
+					link = internet.getInternetLink(sourceProvId, targetProvId);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					System.out.println(sourceProvId+"-->"+targetProvId+"边不存在");
+					e1.printStackTrace();
+				}
+				double interBwCost = link.getBwcost();
+				cost += computeLinkCost(e, sourceVmId, sourceProvId, targetProvId, interBwCost);
+			}
 		}
 		return cost;
 	}
@@ -187,7 +197,7 @@ public class CostComputer {
 	 * @param price	The cost of transmitting 1 MB
 	 * @return
 	 */
-	public static double computeLinkCost(ApplicationEdge e, int sVmId, int sProvId, int tProvId,double price){
+	public static double computeLinkCost(ApplicationEdge e, int sVmId, int sProvId, int tProvId, double price){
 		double cost = 0;
 		if (e.getSourceVmId() == sVmId){
 			if (sProvId != tProvId){

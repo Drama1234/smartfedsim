@@ -59,7 +59,6 @@ public class MappingSolution {
 		this.valid = valid;
 	}
 
-
 	public String getAllocatorName() {
 		return allocatorName;
 	}
@@ -71,17 +70,15 @@ public class MappingSolution {
 	@Override
 	public String toString() {
 		final int maxLen = 5;
-		// printMapping();
+		printMapping();
 		return "[MappingSolution] First " + maxLen + " results"
-				+ (mapping != null ? toString(mapping.entrySet(), maxLen): null)
-				;
+				+ (mapping != null ? toString(mapping.entrySet(), maxLen): null);
 	}
 	
-	public static
-	<T extends Comparable<? super T>> List<T> asSortedList(Collection<T> c) {
-	  List<T> list = new ArrayList<T>(c);
-	  java.util.Collections.sort(list);
-	  return list;
+	public static<T extends Comparable<? super T>> List<T> asSortedList(Collection<T> c) {
+		  List<T> list = new ArrayList<T>(c);
+		  java.util.Collections.sort(list);
+		  return list;
 	}
 	
 	public void printMapping(){
@@ -146,10 +143,6 @@ public class MappingSolution {
 					return false;
 			}
 		}
-		
 		return true;
 	}
-	
-	
-	
 }

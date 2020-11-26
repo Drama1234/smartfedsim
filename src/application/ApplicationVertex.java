@@ -58,19 +58,14 @@ public class ApplicationVertex
 	private List<Cloudlet> cloudlets;
 	private List<Vm> vms;
 	private List<FederationDatacenter> federationDatacenters;
-//	private Map<Cloudlet, FederationDatacenter> federationMap;
 	private Map<Cloudlet, Vm> cloudletMap;
 	private Map<Vm, Cloudlet> vmMap;
 	private String name;
-//	private String city = "";
 	private int id;
 	private static int counter = 0;
 	private double budget = 1.0;
-//	private String datacenterId = "";
 	private vmType vm_type;
 	private Vm desiredVm = null;
-//	private City cityenum;
-//	private FederationDatacenter federationDatacenter = null;
 	//得到用户期望的虚拟机
 	public Vm getDesiredVm() {
 		return desiredVm;
@@ -85,29 +80,29 @@ public class ApplicationVertex
 		this.desiredVm = desiredVm;
 	}
 	
-	private void construct(int userId, List<Cloudlet> cloudlets,vmType vmtype)
-	{
-		this.id = counter++;
-		this.cloudlets = cloudlets;
-		this.cloudletMap = new HashMap<Cloudlet, Vm>();
-		this.vmMap = new HashMap<Vm, Cloudlet>();
-		this.vms = new ArrayList<Vm>();
-		
-		for (Cloudlet c : cloudlets)
-		{
-			Vm clone = VmFactory.getVm(vmtype, userId);
-			VmTyped cloned = new VmTyped(clone, vmtype);
-			this.vms.add(cloned);
-			this.cloudletMap.put(c, cloned);
-			this.vmMap.put(cloned, c);
-		}
-	}
-	
-	public ApplicationVertex(String name, int userId, List<Cloudlet> cloudlets, vmType vmtype)
-	{
-		this.name = name;
-		construct(userId, cloudlets, vmtype);
-	}
+//	private void construct(int userId, List<Cloudlet> cloudlets,vmType vmtype)
+//	{
+//		this.id = counter++;
+//		this.cloudlets = cloudlets;
+//		this.cloudletMap = new HashMap<Cloudlet, Vm>();
+//		this.vmMap = new HashMap<Vm, Cloudlet>();
+//		this.vms = new ArrayList<Vm>();
+//		
+//		for (Cloudlet c : cloudlets)
+//		{
+//			Vm clone = VmFactory.getVm(vmtype, userId);
+//			VmTyped cloned = new VmTyped(clone, vmtype);
+//			this.vms.add(cloned);
+//			this.cloudletMap.put(c, cloned);
+//			this.vmMap.put(cloned, c);
+//		}
+//	}
+//	
+//	public ApplicationVertex(String name, int userId, List<Cloudlet> cloudlets, vmType vmtype)
+//	{
+//		this.name = name;
+//		construct(userId, cloudlets, vmtype);
+//	}
 	
 	/**
 	 * Constructor for ApplicationVertex
@@ -115,10 +110,10 @@ public class ApplicationVertex
 	 * @param cloudlets
 	 * @param vmtype
 	 */
-	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, vmType vmtype)
-	{
-		this("", userId, cloudlets, vmtype);
-	}
+//	public ApplicationVertex(int userId, List<Cloudlet> cloudlets, vmType vmtype)
+//	{
+//		this("", userId, cloudlets, vmtype);
+//	}
 	/**
 	 * Constructor for ApplicationVertex
 	 * @param userId
@@ -168,34 +163,9 @@ public class ApplicationVertex
 			this.cloudletMap.put(c, cloned);
 			this.vmMap.put(cloned, c);
 			this.federationDatacenters.add(federationDatacenter);
-//			this.federationMap.put(c,federationDatacenter);
 		}
 	}
 	
-	
-//	public String getFederationDatacenterName() {
-//		return federationDatacenter.getMSCharacteristics().getResourceName();
-//	}
-	
-//	public FederationDatacenter getFederationDatacenter() {
-//		return federationDatacenter;
-//	}
-//
-//	public void setFederationDatacenter(FederationDatacenter federationDatacenter) {
-//		this.federationDatacenter = federationDatacenter;
-//	}
-
-//	public String getCity() {
-//		return city;
-//	}
-//	
-//	public City getEnumCity() {
-//		return cityenum;
-//	}
-//	public void setCity(City city) {
-//		this.cityenum = city;
-//		this.city = city.toString();
-//	}
 
 	public double getBudget() {
 		return budget;
@@ -268,19 +238,13 @@ public class ApplicationVertex
 		
 		res.append("Vertex [");
 		res.append(" id: ").append(this.getId());
-		res.append(" size: ").append(this.getCloudlets().size());
+		res.append(" size: ").append(this.getCloudlets().get(0).getCloudletLength());
 		res.append(" budget: ").append(this.getBudget());
-//		res.append(" city: ").append(this.getCity());
-//		if(this.getCity().contains(city.toString())) {
-//			res.append(" city: ").append(this.getCity());
-//		}
 		
 		if(this.getfeFederationDatacenters() != null) {
 			res.append(" datacenter: ").append(this.getfeFederationDatacenters().get(0).toString());
 		} 
 		
-//		if(this.getFederationDatacenterName().contains(cityenum.toString())) {
-//			res.append(" datacenter: ").append(this.getFederationDatacenterName());}
 		res.append(" VMs: {");
 		String prefix = "";
 		for (Vm vm: this.getVms())
@@ -298,36 +262,8 @@ public class ApplicationVertex
 	public vmType getVmType() {
 		return vm_type;
 	}
-	
-//	public char getVmTypeChar() {
-//		char c;
-//		switch (vm_type){
-//		case SMALL:
-//			c= 's';
-//			break;
-//		case MEDIUM:
-//			c='m';
-//			break;
-//		case LARGE:
-//			c = 'l';
-//			break;
-//		case XLARGE:
-//			c = 'x';
-//			break;
-//		case X2LARGE:
-//			c = 'X';
-//		case CUSTOM:
-//			c = 'c';
-//			break;
-//		default:
-//			c='c';
-//		}
-//		return c;
-//	}
 
 	public void cloningFeatures(ApplicationVertex vertexForVm) {
 		budget = vertexForVm.getBudget();
-//		city = vertexForVm.getCity();
-//		federationDatacenter = vertexForVm.;
 	}
 }

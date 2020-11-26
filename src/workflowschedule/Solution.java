@@ -10,11 +10,12 @@ import org.jgap.IChromosome;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 
 public class Solution {
+	//vmId->dcId
 	private HashMap<Integer, Integer> associationMap;
 	List<String> messages;
 	private double fit;
 	IChromosome chromosome = null;
-	private double costAmount;
+	private double cost;
 	private double makespan;
 	private boolean valid;
 	
@@ -46,10 +47,11 @@ public class Solution {
 		this.setChromosome(chromosome);
 		this.associationMap = createMapping(nodes);
 		this.fit = chromosome.getFitnessValue();
-		this.valid = checkCompleteRequirementsSatisfaction(chromosome);
+		this.valid = checkCompleteSatisfaction(chromosome);
 	}
 	
-	private boolean checkCompleteRequirementsSatisfaction(IChromosome chromosome){
+	private boolean checkCompleteSatisfaction(IChromosome chromosome){
+		//对染色体中的每个基因的适应度是否有值进行判断，全部有值为true.
 		boolean res = true;
 		Gene[] genes = chromosome.getGenes();
 		int i = 0;
@@ -133,11 +135,11 @@ public class Solution {
 	 * @param cost
 	 */
 	public void setCostAmount(double cost){
-		this.costAmount = cost; 
+		this.cost = cost; 
 	}
 	
 	public double getCostAmount(){
-		return costAmount; 
+		return cost; 
 	}
 	
 	

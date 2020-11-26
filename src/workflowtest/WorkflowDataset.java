@@ -30,7 +30,6 @@ public class WorkflowDataset implements InterfaceDataSet{
 	@Override
 	public List<FederationDatacenter> createDatacenters(){
 		DatacenterGenerator dg = new DatacenterGenerator(this.seed*15);
-//		dg.setCities(City.values());
 		int numHost = 50  * numOfDatacenters; // it will assign more or less 1000 host to each datacenter
 		List<FederationDatacenter> dcs = dg.getDatacenters(numOfDatacenters, numHost);
 		return dcs;
@@ -39,7 +38,7 @@ public class WorkflowDataset implements InterfaceDataSet{
 	@Override
 	public List<Application> createApplications(int userId,List<FederationDatacenter> datacenters) {
 		List<Application> apps = new ArrayList<Application>();
-		apps.add(new WorkflowGenerator(filename, userId, false, datacenters));
+		apps.add(new WorkflowGenerator(filename, userId, datacenters));
 		return apps;
 	}
 

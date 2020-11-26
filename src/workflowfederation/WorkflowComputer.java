@@ -120,45 +120,62 @@ public class WorkflowComputer {
 		
 		return input_time;
 	}
+
 	
 	public static double edgeTime(ApplicationEdge edge, WorkflowGenerator workflow, Task t, List<FederationDatacenter> dcs, InternetEstimator internet)
 	{
-		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
-		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
-		
-		FederationDatacenter dc_source = Federation.findDatacenter(dcs, t.getResourceId());
-		FederationDatacenter dc_target = Federation.findDatacenter(dcs, target_task.getResourceId());
 		double latency = 0;
 		double transfer_time = 0;
-		if (dc_source.getId() != dc_target.getId())
-		{
-			InternetLink link = null;
-			try { link = internet.getInternetLink(dc_source, dc_target);} 
-			catch (Exception e) {e.printStackTrace();}
-					
-			latency = link.getLatency();
-			
-			transfer_time = (edge.getMessageLength() * 1024 * 1024)/link.getBandwidth();
-			System.out.println("跨云传输带宽:MB/s"+link.getBandwidth()/(1024*1024));
-		}
-		else {
-			transfer_time = (edge.getMessageLength() * 1024 * 1024)/dc_source.getMSCharacteristics().getDatacenterBw();
-			System.out.println("云内传输带宽：MB/s"+dc_source.getMSCharacteristics().getDatacenterBw()/(1024*1024));
-		}
 		
-		//qdouble transfer_time = (edge.getMessageLength() * 1024) / dc_source.getMSCharacteristics().getHighestBw();
+		//任务所在的云服务供应商
+		FederationDatacenter dc_source = Federation.findDatacenter(dcs, t.getResourceId());
+		//入边传输时间
+		ApplicationVertex input_vertex = workflow.getEdgeSource(edge);
+		Task input_task = (Task) workflow.getCloudletFromVertex(input_vertex);
+		FederationDatacenter dc_input = Federation.findDatacenter(dcs, input_task.getResourceId());
+		//出边传输时间
+		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
+		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
+		FederationDatacenter dc_target = Federation.findDatacenter(dcs, target_task.getResourceId());
+		
+		if (dc_source.getId() == dc_target.getId()||dc_source.getId()==dc_input.getId()){
+			transfer_time = (edge.getMessageLength() * 1024 * 1024)/dc_source.getMSCharacteristics().getDatacenterBw();
+			System.out.println("联盟云Id:"+dc_source.getId()+" 云内传输带宽："+dc_source.getMSCharacteristics().getDatacenterBw()/(1024*1024)+" MB/s");
+		}else if(!dc_input.equals(null)){
+			InternetLink link = null;
+			try { 
+				link = internet.getInternetLink(dc_input, dc_source);
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			}		
+			latency = link.getLatency();
+			transfer_time = (edge.getMessageLength() * 1024 * 1024)/link.getBandwidth() + latency;
+			System.out.println("跨云传输带宽:"+link.getBandwidth()/(1024*1024)+"MB/s");
+		}else if(!dc_target.equals(null)){
+			InternetLink link = null;
+			try { 
+				link = internet.getInternetLink(dc_source,dc_target);
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			latency = link.getLatency();
+			transfer_time = (edge.getMessageLength() * 1024 * 1024)/link.getBandwidth() + latency;
+			System.out.println("跨云传输带宽:"+link.getBandwidth()/(1024*1024)+"MB/s");
+		}
+		//double transfer_time = (edge.getMessageLength() * 1024) / dc_source.getMSCharacteristics().getHighestBw();
 		
 //		System.out.println("--- Length: "+ edge.getMessageLength());
 //		System.out.println("--- Transfer_time: "+ transfer_time);
 //		System.out.println("--- Latency: " + latency);
 		
-		return latency + transfer_time;
+		return transfer_time;
 	}
 	
-	public static double getFlowCost(WorkflowGenerator workflow,List<FederationDatacenter> dcs,Allocation allocation, double completionTime, InternetEstimator internet)
+	public static double getFlowCost(List<FederationDatacenter> dcs,Allocation allocation, InternetEstimator internet)
 	{
 		double total = CostComputer.actualCost(allocation,dcs,internet);
-//		double net = CostComputer.actualNetCost(allocation,internet);
 		return total;
 //		
 //		// cost of only resources per hour

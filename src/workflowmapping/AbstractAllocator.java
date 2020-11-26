@@ -82,7 +82,6 @@ public abstract class AbstractAllocator {
 		this.monitoring = monitoring;
 	}
 	
-
 	/**
 	 * Given an application, it returns a MappingSolution.
 	 * @param application
@@ -103,7 +102,6 @@ public abstract class AbstractAllocator {
 			if (h.isSuitableForVm(vm))
 				return h;
 		}
-		
 		return null;
 	}
 	

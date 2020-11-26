@@ -1,4 +1,4 @@
-package workflowconstraints;
+package workflowconstraint;
 
 import java.util.Set;
 

@@ -32,50 +32,54 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			VmAllocationPolicy vmAllocationPolicy,List<Storage> storageList, double schedulingInterval) 
 					throws Exception {
 		super(name, characteristics, vmAllocationPolicy, storageList, schedulingInterval);
+//		System.out.println("数据中心名称："+name);
+//		System.out.println("特征:"+characteristics.toString());
+//		System.out.println("虚拟机分配策略："+vmAllocationPolicy.toString());
+//		System.out.println("存储列表："+storageList.size());
+//		System.out.println("调度间隔:"+schedulingInterval);
 	}
 
 	
-	public String getDatacenterRepresentation() {
-		long ram = 0;
-		long net = 0;
-		long netTot = 0;
-		long mips = 0;
-		long storage = 0;
-		String  result = new String();
-		List<Host> hostlist = this.getHostList();
-		List<Vm> l = null;
-		for (int i = 0; i < hostlist.size(); i++) {
-			if (hostlist.get(i) instanceof HostDynamicWorkload){
-				HostDynamicWorkload h = (HostDynamicWorkload) hostlist.get(i);
-				ram += h.getRam()- h.getUtilizationOfRam();
-				//net += hostlist.get(i).getBw()- hostlist.get(i).getUtilizationOfBw();
-				net += h.getUtilizationOfBw();
-				netTot += h.getBw();
-				storage += h.getStorage();
-				mips += h.getTotalMips()- h.getUtilizationMips();
-			}
-			else {
-				Host h = (Host) hostlist.get(i);
-				ram += h.getRam();
-				l = h.getVmList();
-			}
-		}
-		result += "@@@@@@@@@@@@@@ Datacenter " + this.getName() + " @@@@@@@@@@@ " + hostlist.size() + " host\n";
-//		result += "City: " + ((DatacenterCharacteristicsMS) super.getCharacteristics()).getCity() + "\n";
-		result += "VMs: ";
-		if (l != null)
-			for (Vm vm : l)
-				result +=  vm.getId() + "\n";
-		else 
-			result += "none" + "\n";
-		result += "RAM: " + ram + "\n";
-		result += "NET used: " + net + "\n";
-		result += "NET tot: " + netTot + "\n";
-		result += "STORAGE: " + storage + "\n";
-		result += "MIPS: " + mips + "\n";
-		return result;
-		
-	}
+//	public String getDatacenterRepresentation() {
+//		long ram = 0;
+//		long net = 0;
+//		long netTot = 0;
+//		long mips = 0;
+//		long storage = 0;
+//		String  result = new String();
+//		List<Host> hostlist = this.getHostList();
+//		List<Vm> l = null;
+//		for (int i = 0; i < hostlist.size(); i++) {
+//			if (hostlist.get(i) instanceof HostDynamicWorkload){
+//				HostDynamicWorkload h = (HostDynamicWorkload) hostlist.get(i);
+//				ram += h.getRam()- h.getUtilizationOfRam();
+//				//net += hostlist.get(i).getBw()- hostlist.get(i).getUtilizationOfBw();
+//				net += h.getUtilizationOfBw();
+//				netTot += h.getBw();
+//				storage += h.getStorage();
+//				mips += h.getTotalMips()- h.getUtilizationMips();
+//			}
+//			else {
+//				Host h = (Host) hostlist.get(i);
+//				ram += h.getRam();
+//				l = h.getVmList();
+//			}
+//		}
+//		result += "@@@@@@@@@@@@@@ Datacenter " + this.getName() + " @@@@@@@@@@@ " + hostlist.size() + " host\n";
+////		result += "City: " + ((DatacenterCharacteristicsMS) super.getCharacteristics()).getCity() + "\n";
+//		result += "VMs: ";
+//		if (l != null)
+//			for (Vm vm : l)
+//				result +=  vm.getId() + " \n";
+//		else 
+//			result += "none" + "\n";
+//		result += "RAM: " + ram + "\n";
+//		result += "NET used: " + net + "\n";
+//		result += "NET tot: " + netTot + "\n";
+//		result += "STORAGE: " + storage + "\n";
+//		result += "MIPS: " + mips + "\n";
+//		return result;
+//	}
 	
 	public String getDatacenterCharacteristicString(){
 		return ((DatacenterCharacteristicsMS) super.getCharacteristics()).toString();
@@ -86,8 +90,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		StringBuilder sb = new StringBuilder();
 		DatacenterCharacteristicsMS chars = this.getMSCharacteristics();
 		sb.append("name:").append(chars.getResourceName()).append(",");
-//		sb.append("city:").append(chars.getCity()).append(",");
-		sb.append("bw:").append(chars.getDatacenterBw()).append(",");
+		sb.append("bw:").append(chars.getDatacenterBw()/1024/1024).append("MB/s,");
 		sb.append("host_num:").append(this.getHostList().size()).append(",");
 		Host host = this.getHostList().get(0);
 		if (host != null)
@@ -100,7 +103,6 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		sb.append("cost-custom:").append("{");
 		sb.append("ram:").append(chars.getCostPerMem()).append(",");
 		sb.append("storage:").append(chars.getCostPerStorage()).append(",");
-		//sb.append("mips:").append(chars.getCostPerMi()).append(",");
 		sb.append("bw:").append(chars.getCostPerBw()).append(",");
 		sb.append("cpu:").append(chars.getCostPerCpu()).append("}").append(",");
 
@@ -111,7 +113,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		return (DatacenterCharacteristicsMS) super.getCharacteristics();
 	}
 	
-	public int getDatacenterBw() {
+	public long getDatacenterBw() {
 		return ((DatacenterCharacteristicsMS)super.getCharacteristics()).getDatacenterBw();
 	}
 	
@@ -137,7 +139,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		try {
 			// gets the Cloudlet object
 			Cloudlet cl = (Cloudlet) ev.getData();
-
+			
 			// checks whether this Cloudlet has finished or not
 			if (cl.isFinished()) {
 				Log.printLine("Already finished");
@@ -160,6 +162,8 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 
 					// unique tag = operation tag
 					int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
+					
+					
 					sendNow(cl.getUserId(), tag, data);
 				}
 				sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
@@ -322,8 +326,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 				vm.setBeingInstantiated(false);
 			}
 
-			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler()
-					.getAllocatedMipsForVm(vm));
+			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler().getAllocatedMipsForVm(vm));
 		}
 	}
 }

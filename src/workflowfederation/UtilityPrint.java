@@ -54,16 +54,15 @@ public class UtilityPrint {
 	
 	public static String toStringDetail(Vm vm)
 	{
-		return "RAM: "+vm.getRam()+" DISK: "+vm.getSize() + " MIPS: "+vm.getMips()+ " NET: "+vm.getBw();
+		return "RAM: "+vm.getRam()/1024+"GB"+" DISK: "+vm.getSize()/1024+"GB" + " MIPS: "+vm.getMips()+ " NET: "+vm.getBw()/1024/1024+"MB/s";
 	}
-
 	public static String toStringDetail(Host host)
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("ram:").append(host.getRam()).append(",");
-		sb.append("net:").append(host.getBw()).append(",");
-		sb.append("storage:").append(host.getStorage()).append(",");
+		sb.append("ram:").append(host.getRam()/1024).append("GB,");
+		sb.append("net:").append(host.getBw()/1024/1024).append("MB/s,");
+		sb.append("storage:").append(host.getStorage()/1024/1024).append("TB,");
 		sb.append("mips:").append(host.getTotalMips());
 		
 		return sb.toString();

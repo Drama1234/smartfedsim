@@ -1,4 +1,4 @@
-package workflowconstraints;
+package workflowconstraint;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
 import workflowschedule.Constant;
-import workflowschedule.MSPolicy;
+import workflowschedule.Policy;
 
 public class Makespan {
 	public static Double calculateMakespan_Network(int gene_index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet) {
@@ -45,7 +45,7 @@ public class Makespan {
 		Set<ApplicationEdge> set = am.getEdges();
 		for (ApplicationEdge e: set) {
 			if (e.getSourceVmId() == geneVmId) {
-				int target_index = MSPolicy.getGeneIndexFromNodeId(e.getTargetVmId(), genes, app);
+				int target_index = Policy.getGeneIndexFromNodeId(e.getTargetVmId(), genes, app);
 				
 				int tProvId = (int) genes[target_index].getAllele();
 				InternetLink link = null;
@@ -60,7 +60,7 @@ public class Makespan {
 //					System.out.println("网络延迟："+latency);
 //					System.out.println("传输时间为："+transfer_time);
 				}else {
-					transfer_time = (e.getMessageLength() * 1024)/(Integer)prov.getNetwork().getCharacteristic().get(Constant.BW);
+					transfer_time = (e.getMessageLength() * 1024)/(Long)prov.getNetwork().getCharacteristic().get(Constant.BW);
 //					System.out.println("============云内传输=============");
 //					System.out.println("传输数据长度为："+e.getMessageLength());
 //					System.out.println("云服务供应商带宽："+prov.getNetwork().getCharacteristic().get(Constant.BW));

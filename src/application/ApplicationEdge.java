@@ -20,10 +20,7 @@ along with SmartFed. If not, see <http://www.gnu.org/licenses/>.
 
 package application;
 
-
 import java.util.Locale;
-
-import it.cnr.isti.smartfed.networking.SecuritySupport;
 
 import org.cloudbus.cloudsim.Vm;
 import org.jgrapht.graph.DefaultEdge;
@@ -33,57 +30,22 @@ public class ApplicationEdge extends DefaultEdge
 	private static final long serialVersionUID = 1423234l;
 	
 	/* requirements */
-	private double bandwidth;
-//	private SecuritySupport security;
+	private long bandwidth;
 	private double latency;
 	private double messageLength;
 	
-	public ApplicationEdge(double mlength, double bandwidth, double latency)
+	public ApplicationEdge(double mlength, long bandwidth, double latency)
 	{
 		this.messageLength = mlength;
 		this.bandwidth = bandwidth;
 		this.latency = latency;
 	}
 	
-	
-//	/**
-//	 * 
-//	 * @param mlenght message length in KB sent in this link 
-//	 * @param mlenght message rate in Hz sent in this link 
-//	 * @param security
-//	 * @param latency
-//	 */
-//	public ApplicationEdge(double mlength, double mrate, SecuritySupport security, double latency)
-//	{
-//		this.messageLength = mlength;
-//		this.messageRate = mrate;
-//		this.bandwidth = messageLength / messageRate;
-//		this.security = security;
-//		this.latency = latency;
-//	}
-	
-	
-//	/**
-//	 * 
-//	 * @param mlenght message length in KB sent in this link 
-//	 * @param mlenght message rate in Hz sent in this link 
-//	 * @param latency
-//	 */
-//	public ApplicationEdge(double mlength, double mrate)
-//	{
-//		this(mlength,mrate,SecuritySupport.NO, 0);
-//	}
-//	
-//	public ApplicationEdge(double mlength, double mrate, double latency)
-//	{
-//		this(mlength,mrate,SecuritySupport.NO, latency);
-//	}
-	
 	/**
 	 * Estimated required bandwidth of this link in KB/s
 	 * @return
 	 */
-	public double getBandwidth()
+	public long getBandwidth()
 	{
 		return this.bandwidth;
 	}
@@ -94,10 +56,6 @@ public class ApplicationEdge extends DefaultEdge
 		return this.messageLength;
 	}
 
-//	public SecuritySupport getSecurity()
-//	{
-//		return this.security;
-//	}
 
 	public double getLatency()
 	{
@@ -113,10 +71,10 @@ public class ApplicationEdge extends DefaultEdge
 		StringBuilder res = new StringBuilder();
 		
 		double message = this.messageLength;
-		String size = message > 1024 ? "MB": "KB";
-		message = message > 1024 ? message/1024: message;
+		String size = message > (1024*1024) ? "MB": "KB";
+		message = message > (1024*1024) ? message/1024/1024: message/1024;
 		String messages = String.format(Locale.ENGLISH, "%.2f", message);
-		double bandwidth = this.bandwidth/(1024);
+		double bandwidth = this.bandwidth/(1024*1024);
 		String bw = String.format(Locale.ENGLISH, "%.0f",bandwidth);
 		
 		

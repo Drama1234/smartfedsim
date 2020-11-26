@@ -1,4 +1,4 @@
-package workflowconstraints;
+package workflowconstraint;
 
 import java.util.List;
 import java.util.Set;
@@ -104,6 +104,7 @@ public class BudgetConstraint extends MSPolicy{
 		MSApplication am = (MSApplication) app;
 		double cost = 0;
 		Set<ApplicationEdge> set = am.getEdges();
+		
 		for (ApplicationEdge e: set){
 			if (e.getSourceVmId() == geneVmId){
 				int target_index = MSPolicy.getGeneIndexFromNodeId(e.getTargetVmId(), genes, app);

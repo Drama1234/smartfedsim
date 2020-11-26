@@ -1,4 +1,4 @@
-package workflowconstraints;
+package workflowconstraint;
 
 import org.jgap.Gene;
 import org.jgap.IChromosome;

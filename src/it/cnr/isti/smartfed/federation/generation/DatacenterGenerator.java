@@ -195,8 +195,6 @@ public class DatacenterGenerator extends AbstractGenerator
 			// populate the list
 			list.add(FederationDatacenterFactory.get(profile, hostList, storageList));		
 		}
-		
-				
 		return list;
 	}
 

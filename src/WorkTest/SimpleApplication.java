@@ -1,4 +1,4 @@
-package workflowtest;
+package WorkTest;
 
 import java.util.ArrayList;
 import java.util.List;

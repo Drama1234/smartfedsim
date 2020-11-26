@@ -27,4 +27,5 @@ public class AbstractGenerator {
 	public AbstractGenerator() {
 		distribution = new UniformRealDistribution();
 	}
+
 }

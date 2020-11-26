@@ -1,5 +1,6 @@
 package workflownetworking;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
@@ -11,6 +12,8 @@ import org.junit.Test.None;
 import federation.resources.FederationDatacenter;
 import it.cnr.isti.smartfed.federation.generation.Range;
 import it.cnr.isti.smartfed.networking.SecuritySupport;
+import workflowDatacenter.DatacenterGenerator;
+import workflowtest.WorkflowDataset;
 
 /**
  * This class encloses methods for the generation of a "provider networks" that
@@ -69,23 +72,22 @@ public class InternetEstimator {
 					// graph.addEdge(outer, inner, il);
 				}
 				// regular edge,云供应商a到云供应商b之间方向不同参数不同
-				else{
-					
-					distribution.reseedRandomGenerator(seed);
-					
+				else{					
 					long interbw;
 					double interlatency,costinterbw;
 					
 					interbw = (long)interBwAmount.denormalize(distribution.sample());
-					System.out.println();
 					interlatency = interLatencyAmount.denormalize(distribution.sample());
 					costinterbw = costInterBw.denormalize(distribution.sample());
+					interlatency = Double.valueOf(String.format("%.2f", interlatency));
+					costinterbw = Double.valueOf(String.format("%.2f", costinterbw));
 					
-					InternetLink il = new InternetLink(interbw, interlatency, costinterbw, SecuritySupport.ADVANCED);
+					InternetLink il = new InternetLink(interbw, interlatency, costinterbw);
 					graph.addEdge(outer, inner, il);
 				}
 			}	
-		}	
+		}
+//		this.networkRepresation(list);
 	}	
 	
 	/**
@@ -118,8 +120,8 @@ public class InternetEstimator {
 	{
 		FederationDatacenter a = (FederationDatacenter) CloudSim.getEntity(id_a);
 		FederationDatacenter b = (FederationDatacenter) CloudSim.getEntity(id_b);
-//		for(int i =0;i<20;i++) {
-//			System.out.println(""+CloudSim.getEntity(i));
+//		for(int i =3;i<23;i++) {
+//			System.out.println("云服务供应商实体"+CloudSim.getEntity(i));
 //		}
 		return this.getInternetLink(a, b);
 	}
@@ -166,5 +168,43 @@ public class InternetEstimator {
 	@Override
 	public String toString() {
 		return "HighestLatency:"+getHighestLatency()+"HighestBw:"+getHighestBw()+"HighestCostBw"+getHighestCostBw();
+	}
+	
+	public void networkRepresation(List<FederationDatacenter> list) {
+		for (FederationDatacenter outer: list) {
+			for (FederationDatacenter inner: list) {
+				InternetLink link;
+				if (outer.getId() == inner.getId()) {
+					System.out.println("云服务供应商ID"+outer.getId());
+				}else {
+					try {
+						link = this.getInternetLink(outer.getId(), inner.getId());
+						System.out.println("出云服务供应商ID"+outer.getId()+"入云服务供应商ID"+inner.getId()+"网络特性："+link.getBandwidth()/1024/1024+"MB/s"+link.getLatency()+" s"+link.getBwcost()+" USD");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		int num_user = 1;   // number of grid users
+        Calendar calendar = Calendar.getInstance();
+        boolean trace_flag = false;  // mean trace events
+
+        // Initialize the CloudSim library
+        CloudSim.init(num_user, calendar, trace_flag);
+		try {
+			String filename = "resources/RemoteSense_13.xml";
+        	WorkflowDataset dataset = new WorkflowDataset(20, filename);
+        	List<FederationDatacenter> datacenters = dataset.createDatacenters();
+	    	InternetEstimator internetEstimator = new InternetEstimator(datacenters,11);
+	    	internetEstimator.networkRepresation(datacenters);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 }
