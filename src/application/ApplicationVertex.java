@@ -241,6 +241,7 @@ public class ApplicationVertex
 		res.append(" size: ").append(this.getCloudlets().get(0).getCloudletLength());
 		res.append(" budget: ").append(this.getBudget());
 		
+		
 		if(this.getfeFederationDatacenters() != null) {
 			res.append(" datacenter: ").append(this.getfeFederationDatacenters().get(0).toString());
 		} 

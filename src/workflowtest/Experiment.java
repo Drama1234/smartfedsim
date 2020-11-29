@@ -98,6 +98,7 @@ public class Experiment {
 		
 		int i = 0;
 		for (Allocation allocation: federation.getAllocations()) {
+			System.out.println("分配结果的数量："+federation.getAllocations().size());
 			if (allocation.isCompleted())
 			{
 				i++;
@@ -105,13 +106,13 @@ public class Experiment {
 				double budget = 0;
 				for (ApplicationVertex av : allocation.getApplication().vertexSet())
 					budget += av.getBudget();
+				
+				double makespan = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
+				double cost = WorkflowComputer.getFlowCost(datacenters, allocation, internetEstimator);
 	
-				double completion = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator) applications.get(0), datacenters, internetEstimator);
-				double cost = WorkflowComputer.getFlowCost( datacenters, allocation, internetEstimator);
-	
-				System.out.println("BUDGET：------------------->" + budget);
-				System.out.println("COST：-------------------> " + cost);
-				System.out.println("makespan：----------------> " + completion);
+				System.out.println("budget：------------------->" + budget);
+				System.out.println("cost：-------------------> " + cost);
+				System.out.println("makespan：----------------> " + makespan);
 	
 			}else
 				System.out.println("Not completed");

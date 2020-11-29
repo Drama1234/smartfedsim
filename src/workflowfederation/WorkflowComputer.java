@@ -1,23 +1,51 @@
 package workflowfederation;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.cloudbus.cloudsim.File;
+import org.cloudbus.cloudsim.Log;
+import org.cloudbus.cloudsim.core.CloudSim;
 import org.workflowsim.Task;
 
-
+import application.Application;
 import application.ApplicationEdge;
 import application.ApplicationVertex;
 import federation.resources.FederationDatacenter;
+import workflowDatacenter.DatacenterGenerator;
 import workflowDatacenter.WorkflowGenerator;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
 
 
 public class WorkflowComputer {
+	public static double makespan(WorkflowGenerator workflow,List<FederationDatacenter> dcs,InternetEstimator internet) {
+		int depth = 1;
+		double input_time = 0;
+		List<Task> tasks = workflow.getTasksWithDepth(depth);
+		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
+		if(tasks.size() != 0) {
+			for (Task task : tasks) {
+				@SuppressWarnings("unchecked")
+				List<File> files = task.getFileList();
+				double inputSize = 0;
+				for(File file : files) {
+					if(file.getType() == 1) {
+						System.out.println("文件名称："+file.getName());
+						System.out.println("文件大小："+file.getSize());
+						inputSize += file.getSize();
+					}
+				}
+				input_time = inputTime(inputSize, task, workflow);
+			}
+		}
+		return input_time;
+	}
+	
 	public static double getFlowCompletionTime(WorkflowGenerator workflow, List<FederationDatacenter> dcs, InternetEstimator internet) {
 		int depth = 1;
 		List<Task> tasks = workflow.getTasksWithDepth(depth);
@@ -116,6 +144,8 @@ public class WorkflowComputer {
 	
 	private static double inputTime(double inputSize,Task t,WorkflowGenerator workflow) {
 		double bw = workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw();
+		System.out.println("数据中心带宽："+bw);
+		System.out.println("任务ID："+t.getCloudletId()+"数据中心ID："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0));
 		double input_time = inputSize / bw;
 		
 		return input_time;
@@ -131,12 +161,15 @@ public class WorkflowComputer {
 		FederationDatacenter dc_source = Federation.findDatacenter(dcs, t.getResourceId());
 		//入边传输时间
 		ApplicationVertex input_vertex = workflow.getEdgeSource(edge);
+		workflow.incomingEdgesOf(input_vertex);
 		Task input_task = (Task) workflow.getCloudletFromVertex(input_vertex);
 		FederationDatacenter dc_input = Federation.findDatacenter(dcs, input_task.getResourceId());
 		//出边传输时间
 		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
 		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
 		FederationDatacenter dc_target = Federation.findDatacenter(dcs, target_task.getResourceId());
+		
+		System.out.println("dc_input:"+dc_input+"dc_source:"+dc_source+"dc_target:"+dc_target);
 		
 		if (dc_source.getId() == dc_target.getId()||dc_source.getId()==dc_input.getId()){
 			transfer_time = (edge.getMessageLength() * 1024 * 1024)/dc_source.getMSCharacteristics().getDatacenterBw();
@@ -191,5 +224,33 @@ public class WorkflowComputer {
 //		double netPerHour = netOneRun * workflowPerHour;
 //		
 //		return resourcesPerHour + netPerHour;
+	}
+	
+	public static void main(String[] args) {
+		Log.enable();
+		int num_user = 1;   // users
+		Calendar calendar = Calendar.getInstance();
+		boolean trace_flag = true;  // trace events
+		CloudSim.init(num_user, calendar, trace_flag);
+		try {
+//		    String filename = "resources/RemoteSense_13.xml";
+			DatacenterGenerator dg = new DatacenterGenerator(77*15);
+			int numHost = 50 * 20; // it will assign more or less 1000 host to each datacenter
+			List<FederationDatacenter> dcs = dg.getDatacenters(20, numHost);
+			
+//			List<Application> apps = new ArrayList<Application>();
+//			apps.add(new WorkflowGenerator(filename, 1, dcs));
+			
+			WorkflowGenerator app = new WorkflowGenerator("RemoteSense_13", 0, dcs);
+			
+			InternetEstimator inetEst = new InternetEstimator(dcs, 77);
+			
+			double makespan = WorkflowComputer.makespan(app, dcs, inetEst);
+			
+			System.out.println("最大完工时间："+makespan);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package federation.resources;
+package WorkTest;
 
 public enum Region {
 	Europe,

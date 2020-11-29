@@ -52,8 +52,8 @@ public class DatacenterGenerator extends AbstractGenerator{
 		ramAmount = new Range(1024*40, 1024*64);//40GB-64GB
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
 		stoAmount = new Range(3*1024*1024, 6*1024*1024); // 3TB - 6TB max
-		coreAmount = new Range(6, 10);
-		mipsAmount = new Range(6, 10);
+		coreAmount = new Range(1, 8);
+		mipsAmount = new Range(5000, 55000);
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 			
 			for (int j=0; j<numCore; j++)
 			{
-				peList.add(new Pe(j, new PeProvisionerSimple(mips*6502.18)));
+				peList.add(new Pe(j, new PeProvisionerSimple(mips)));
 			}
 			
 			// create the hosts
@@ -172,7 +172,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 //			System.out.println("CPU成本："+profile.get(DatacenterParams.COST_PER_CPU)+"GB/h");
 //			System.out.println("内存成本："+profile.get(DatacenterParams.COST_PER_MEM)+"GB/h");
 //			System.out.println("虚拟机最大带宽："+profile.get(DatacenterParams.MAX_BW_FOR_VM)+"MB/s");
-//			System.out.println(list.get(i).toStringDetail());
+			System.out.println(list.get(i).toStringDetail());
 		}
 		return list;
 	}

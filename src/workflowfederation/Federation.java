@@ -103,7 +103,6 @@ public class Federation extends SimEntity{
 			// A finished cloudlet returned
 			case CloudSimTags.CLOUDLET_RETURN:
 				FederationLog.timeLogDebug("Event received: " + "CLOUDLET_RETURN (" + ev.getTag() +")");
-//				System.out.println("打个断点");
 				processCloudletReturn(ev);
 				break;
 			// if the simulation finishes
@@ -251,8 +250,8 @@ public class Federation extends SimEntity{
 			cloudlet.setVmId(vm.getId());
 			cloudlet.setUserId(this.getId());	
 			Integer dcId = allocation.getAllocatedDatacenterId(vm);
-			FederationLog.timeLogDebug("    Cloudlet" + cloudlet.getCloudletId() +" is going to be submitted to "+(FederationDatacenter)CloudSim.getEntity(dcId));
-			sendNow(dcId, CloudSimTags.CLOUDLET_SUBMIT, cloudlet);
+			FederationLog.timeLogDebug(" Cloudlet" + cloudlet.getCloudletId() +" is going to be submitted to "+(FederationDatacenter)CloudSim.getEntity(dcId));
+			sendNow(dcId, CloudSimTags.CLOUDLET_SUBMIT_ACK, cloudlet);
 		}
 	}
 	

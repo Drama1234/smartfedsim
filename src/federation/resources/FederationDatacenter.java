@@ -9,6 +9,7 @@ import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.CloudletScheduler;
 import org.cloudbus.cloudsim.Datacenter;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
+import org.cloudbus.cloudsim.File;
 import org.cloudbus.cloudsim.Host;
 import org.cloudbus.cloudsim.HostDynamicWorkload;
 import org.cloudbus.cloudsim.Log;
@@ -18,6 +19,7 @@ import org.cloudbus.cloudsim.VmAllocationPolicy;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEvent;
+import org.workflowsim.Task;
 
 import federation.resources.VmFactory.vmType;
 import workflowfederation.CostComputer;
@@ -138,7 +140,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 		updateCloudletProcessing();
 		try {
 			// gets the Cloudlet object
-			Cloudlet cl = (Cloudlet) ev.getData();
+			Task cl = (Task) ev.getData();
 			
 			// checks whether this Cloudlet has finished or not
 			if (cl.isFinished()) {
@@ -163,11 +165,9 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 					// unique tag = operation tag
 					int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
 					
-					
 					sendNow(cl.getUserId(), tag, data);
 				}
 				sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
-
 				return;
 			}
 			
@@ -175,13 +175,28 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			cl.setResourceParameter(getId(),getMSCharacteristics().getCostPerCpu(), getMSCharacteristics().getCostPerBw());
 			int userId = cl.getUserId();
 			int vmId = cl.getVmId();
-
+//			System.out.println("任务"+cl.getCloudletId()+"所需的文件："+cl.getRequiredFiles().size());
+//			List<String> files = cl.getRequiredFiles();
+//			for (String string : files) {
+//				System.out.println("文件:"+string);
+//			}
+			
 			// time to transfer the files
-			double fileTransferTime = predictFileTransferTime(cl.getRequiredFiles());
-//			System.out.println("虚拟机创建");
+			double fileTransferTime = predictFileTransferTimes(cl.getFileList());
+//			System.out.println("任务ID:" + cl.getCloudletId() + "文件传输时间:"+fileTransferTime);
 			Host host = getVmAllocationPolicy().getHost(vmId, userId);
 			Vm vm = host.getVm(vmId, userId);
 			CloudletScheduler scheduler = vm.getCloudletScheduler();
+//			System.out.println("调度："+scheduler.toString());
+			
+//			List<Double> mipsShare = scheduler.getCurrentMipsShare();
+//			double capacity = 0.0;
+//			for (Double mips : mipsShare) {
+//				capacity += mips;
+//			}
+//			System.out.println("任务分配得到得MIPS:"+capacity);
+//			System.out.println("任务分配得到内核数量："+mipsShare.size());
+			
 			double estimatedFinishTime = scheduler.cloudletSubmit(cl, fileTransferTime);
 			FederationLog.timeLog("Estimated finish time for cloudlet " + cl.getCloudletId() + " " + estimatedFinishTime);
 
@@ -189,18 +204,22 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			if (estimatedFinishTime > 0.0 && !Double.isInfinite(estimatedFinishTime)) {
 				estimatedFinishTime += fileTransferTime;
 				send(getId(), estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
+//				System.out.println("VMID:"+vm.getId()+"已经完成的任务数量"+vm.getCloudletScheduler().isFinishedCloudlets());
 			}
-
+			
 			if (ack) {
 				int[] data = new int[3];
 				data[0] = getId();
 				data[1] = cl.getCloudletId();
 				data[2] = CloudSimTags.TRUE;
-
+//				System.out.println("cloudletID:"+cl.getCloudletId());
 				// unique tag = operation tag
 				int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
 				sendNow(cl.getUserId(), tag, data);
 			}
+			
+//			System.out.println("任务是否完成："+scheduler.isFinishedCloudlets());
+//			sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
 			
 		} catch (ClassCastException c) {
 			Log.printLine(getName() + ".processCloudletSubmit(): " + "ClassCastException error.");
@@ -209,9 +228,8 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			Log.printLine(getName() + ".processCloudletSubmit(): " + "Exception error.");
 			e.printStackTrace();
 		}
-
-		checkCloudletCompletion();
 		
+		checkCloudletCompletion();
 		
 //		List<? extends Host> list = getVmAllocationPolicy().getHostList();
 //		System.out.println("虚拟机分配策略得到的主机列表大小:"+list.size());
@@ -230,7 +248,59 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 //		}
 	}
 	
-
+	protected void updateCloudletProcessing() {
+		if (CloudSim.clock() < 0.111 || CloudSim.clock() > getLastProcessTime() + 0.1) {
+			List<? extends Host> list = getVmAllocationPolicy().getHostList();
+			double smallerTime = Double.MAX_VALUE;
+			for (int i = 0; i < list.size(); i++) {
+				Host host = list.get(i);
+				// inform VMs to update processing
+				double time = host.updateVmsProcessing(CloudSim.clock());
+				// what time do we expect that the next cloudlet will finish?
+				if (time < smallerTime) {
+					smallerTime = time;
+				}
+			}
+			// gurantees a minimal interval before scheduling the event
+			if (smallerTime < CloudSim.clock() + 0.11) {
+				smallerTime = CloudSim.clock() + 0.11;
+			}
+			if (smallerTime != Double.MAX_VALUE) {
+				schedule(getId(), (smallerTime - CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
+			}
+			setLastProcessTime(CloudSim.clock());
+		}
+	}
+	
+	protected double predictFileTransferTimes(List<File> requiredFiles) {
+		double time = 0.0;
+		
+		for (File file : requiredFiles) {
+			if(file!=null)
+				time += file.getSize() / this.getDatacenterBw();
+		}
+		
+//		Iterator<File> iter = requiredFiles.iterator();
+//		while (iter.hasNext()) {
+//			String fileName = iter.next();
+//			
+////			System.out.println("数据中心存储大小:"+getStorageList().size());
+//			for (int i = 0; i < getStorageList().size(); i++) {
+//				Storage tempStorage = getStorageList().get(i);
+//				File tempFile = tempStorage.getFile(fileName);
+//				System.out.println("文件名称："+fileName);
+//				System.out.println("文件大小："+tempFile.getSize());
+//				if (tempFile != null) {
+//					System.out.println("数据中心存储传输速率："+tempStorage.getMaxTransferRate());
+//					time += tempFile.getSize() / tempStorage.getMaxTransferRate();
+////					time += 
+//					break;
+//				}
+//			}
+//		}
+		return time;
+	}
+	
 
 	public Double getDebtsForUser(Integer user_id)
 	{
@@ -325,7 +395,12 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			if (vm.isBeingInstantiated()) {
 				vm.setBeingInstantiated(false);
 			}
-
+			List<Double> mips = getVmAllocationPolicy().getHost(vm).getVmScheduler().getAllocatedMipsForVm(vm);
+			System.out.println("vm属性："+vm.getMips());
+			System.out.println("虚拟机分配得MIPS大小："+mips.size());
+			for (Double double1 : mips) {
+				System.out.println("mips的值："+mips);
+			}
 			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler().getAllocatedMipsForVm(vm));
 		}
 	}

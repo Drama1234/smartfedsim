@@ -11,7 +11,7 @@ public class HostProfile {
 		BW_PROVISIONER("org.cloudbus.cloudsim.provisioners.BwProvisionerSimple"),
 		BW_AMOUNT(10*1024*1024+""), // 10MB/sec, overall amount of bandwidth available in the host
 		STORAGE_MB(new Long(10l*1024*1024)+""), // 10TB
-		VM_SCHEDULER("org.cloudbus.cloudsim.VmSchedulerSpaceShared");
+		VM_SCHEDULER("org.cloudbus.cloudsim.VmSchedulerTimeShared");
 		
 		private String def;
 		

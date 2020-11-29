@@ -213,7 +213,6 @@ public class WorkflowGenerator extends Application{
 			
 //				size = size/1024d;// obtaining KB as applicationEdge requires
 			
-		
 				bandwidth = 20*1024*1024; //20MB/s
 				latency = 0.12;//0.12s
 				addEdge(new ApplicationEdge(size, bandwidth, latency), base, child);
@@ -221,8 +220,9 @@ public class WorkflowGenerator extends Application{
 		}
 //		System.out.println(super.toString());
 //		System.out.println(super.vertexSet().size() + "+" + super.getEdges().size());
+		System.out.println(super.toString());
 	}
-		//System.out.println(super.toString());
+		
 		
 //		for (T t : tasks) {
 //			ApplicationVertex base = this.getVertexForCloudlet(t);
@@ -252,11 +252,9 @@ public class WorkflowGenerator extends Application{
         // Initialize the CloudSim library
         CloudSim.init(num_user, calendar, trace_flag);
         try {
-        	
         	WorkflowDataset dataset = new WorkflowDataset(20, filename);
         	List<FederationDatacenter> datacenters = dataset.createDatacenters();
         	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_13", 0, datacenters);
-        	
 //			app.export("plots/" + "RemoteSense_1" + ".dot");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
