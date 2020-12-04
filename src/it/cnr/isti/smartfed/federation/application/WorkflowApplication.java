@@ -131,13 +131,13 @@ public class WorkflowApplication extends Application
 	
 	private Vm createSmallVm_NoID(int userId){
 		return VmFactory.getDesiredVm(
-					userId, 
-					6502.18, 
-					1, 
-					new Double(1.7 * 1024 ).intValue(), // RAM: 1.7 GB
-					new Long(1 * 1024 * 1024), // i assume at least 1MB p/s  
-					new Long(160 * 1024) // DISK: 160 GB
-					);
+			userId, 
+			6502.18, 
+			1, 
+			new Double(1.7 * 1024 ).intValue(), // RAM: 1.7 GB
+			new Long(1 * 1024 * 1024), // i assume at least 1MB p/s
+			new Long(160 * 1024) // DISK: 160 GB
+			);
 	}
 	
 	private Vm createXLargeVm_NoID(int userId){

@@ -14,17 +14,16 @@ import application.Application;
 import application.ApplicationVertex;
 import federation.resources.FederationDatacenter;
 import federation.resources.ResourceCounter;
-import it.cnr.isti.smartfed.test.TestResult;
 import workflowDatacenter.WorkflowGenerator;
 import workflowfederation.Allocation;
-import workflowfederation.CostComputer;
 import workflowfederation.Federation;
 import workflowfederation.FederationQueue;
 import workflowfederation.FederationQueueProfile;
 import workflowfederation.FederationQueueProvider;
 import workflowfederation.MonitoringHub;
 import workflowfederation.UtilityPrint;
-import workflowfederation.WorkflowComputer;
+import workflowfederation.WorkflowCost;
+import workflowfederation.WorkflowMakespan;
 import workflowmapping.AbstractAllocator;
 import workflownetworking.InternetEstimator;
 
@@ -93,6 +92,7 @@ public class Experiment {
 		
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
+		System.out.println("任务大小："+newList.size());
 		UtilityPrint.printCloudletList(newList);
 		
 		
@@ -107,13 +107,12 @@ public class Experiment {
 				for (ApplicationVertex av : allocation.getApplication().vertexSet())
 					budget += av.getBudget();
 				
-				double makespan = WorkflowComputer.getFlowCompletionTime((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
-				double cost = WorkflowComputer.getFlowCost(datacenters, allocation, internetEstimator);
-	
-				System.out.println("budget：------------------->" + budget);
-				System.out.println("cost：-------------------> " + cost);
-				System.out.println("makespan：----------------> " + makespan);
-	
+				double makespan = WorkflowMakespan.getWorkflowMakespan((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
+				double cost = WorkflowCost.getWorkflowCost( datacenters, allocation, internetEstimator);
+				
+				System.out.println("budget：-------------------> " + Double.valueOf(String.format("%.2f", budget)));
+				System.out.println("cost：-------------------> " + Double.valueOf(String.format("%.2f", cost)));
+				System.out.println("makespan：----------------> " + Double.valueOf(String.format("%.2f", makespan)));
 			}else
 				System.out.println("Not completed");
 		}	

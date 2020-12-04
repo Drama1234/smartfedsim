@@ -53,10 +53,13 @@ public class IntercloudBwConstraint extends Policy{
 				if(link!=null) {
 					long internet_interBw = link.getBandwidth();//what I have
 					long application_interbw = e.getBandwidth();//what I want
-					//应用程序带宽需求KB/s转换为MB/s
-					long application_interBw = application_interbw / 1024; 
-					
-					double res = calculateDistance_ErrHandling(internet_interBw, application_interBw, highNetworkBwValue);
+					application_interbw = application_interbw/1024/1024; 
+					internet_interBw = internet_interBw/1024/1024;
+					double maxBW = highNetworkBwValue/1024/1024;
+					maxBW = Double.valueOf(String.format("%.2f", maxBW));
+					if (DEBUG)
+						System.out.println("Eval before applying weights for " + "NodeID " + prov.getID()+ " - ProvID " + target_Provider);
+					double res = calculateDistance_ErrHandling(internet_interBw, application_interbw, maxBW);
 					sumofdifference += res;
 					numofdifference ++;
 				}

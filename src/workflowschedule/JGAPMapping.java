@@ -27,11 +27,11 @@ import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
-	public static int POP_SIZE = 1;
-	public static int EVOLUTION_STEP = 1;
+	public static int POP_SIZE = 100;
+	public static int EVOLUTION_STEP = 150;
 	
 	public static final int INTERNAL_SOLUTION_NUMBER = 10;
-	public static final int SOLUTION_NUMBER = 1;
+	public static final int SOLUTION_NUMBER = 5;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
 	public static Genotype population = null;
@@ -107,6 +107,7 @@ public class JGAPMapping {
 				System.out.println("\n\nAlert!!!! Not all solution were satisfactory\n");
 			
 			if (k == 0){
+				System.out.println("并不是每个任务都成功执行。");
 				for (int i=0; i<JGAPMapping.SOLUTION_NUMBER && i<array.length; i++){
 					Gene[] mygenes = array[i].getGenes();
 					sol[i] = new Solution(array[i], nodes);

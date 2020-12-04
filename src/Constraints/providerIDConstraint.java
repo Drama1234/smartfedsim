@@ -26,6 +26,9 @@ public class providerIDConstraint extends Policy{
 		String nodeProviderId = node.getCharacteristic().get(Constant.providerID).toString(); //what I want
 		String provProviderId = prov.getCharacteristic().get(Constant.providerID).toString();
 		double distance = 0;
+		if (DEBUG)
+			System.out.println("Eval before applying weights for " + "NodeID " + node.getID() + " - ProvID " + prov.getID());
+		
 		if(nodeProviderId!="-1") {
 			distance = calculateDistance(nodeProviderId, provProviderId);
 		}else {

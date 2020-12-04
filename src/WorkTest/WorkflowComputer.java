@@ -1,6 +1,5 @@
-package workflowfederation;
+package WorkTest;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.workflowsim.Task;
 
-import application.Application;
 import application.ApplicationEdge;
 import application.ApplicationVertex;
 import federation.resources.FederationDatacenter;
@@ -23,6 +21,106 @@ import workflownetworking.InternetLink;
 
 
 public class WorkflowComputer {
+	public static double getInputDataTransfer(WorkflowGenerator workflow, List<FederationDatacenter> dcs, InternetEstimator internet) {
+		int depth = 1;
+		double input_time = 0;
+		List<Task> tasks = workflow.getTasksWithDepth(depth);
+		if(tasks.size() != 0) {
+			for (Task task : tasks) {
+				@SuppressWarnings("unchecked")
+				List<File> files = task.getFileList();
+				double inputSize = 0;
+				for(File file : files) {
+					if(file.getType() == 1) {
+//						System.out.println("文件名称："+file.getName());
+//						System.out.println("文件大小："+file.getSize());
+						inputSize += file.getSize();
+					}
+				}
+				input_time += inputTime(inputSize, task, workflow);
+			}
+		}
+		return input_time;
+	}
+	
+	public static double getWorkflowID(WorkflowGenerator workflow) {
+		int depth = 1;
+		List<Task> tasks = workflow.getTasksWithDepth(depth);
+		while (tasks.size() != 0) {
+			System.out.println("任务数量："+tasks.size());
+			for (Task t: tasks) {
+				System.out.println("任务ID："+t.getCloudletId());
+			}
+			depth++;
+			tasks = workflow.getTasksWithDepth(depth);
+		}
+		return 0;
+	}
+	
+	public static double getWorkFlowCompletionTime(WorkflowGenerator workflow,List<FederationDatacenter> dcs,Allocation allocation,InternetEstimator internet) {
+		int depth = 1;
+		List<Task> tasks = workflow.getTasksWithDepth(depth);
+		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
+		double total_time = 0;
+		double offset_time = getInputDataTransfer(workflow, dcs, internet);
+		while (tasks.size() != 0) {
+			for (Task t: tasks) {
+				System.out.println("任务ID："+t.getResourceId());
+				ApplicationVertex av = workflow.getVertexForCloudlet(t);
+				
+				// check for the entering edges to compute the time of
+				Set<ApplicationEdge> in_edges = workflow.incomingEdgesOf(av);
+				for (ApplicationEdge ae: in_edges) {
+					double time = edgeTimeMap.get(ae);
+					if (time > offset_time)
+						offset_time = time;
+				}
+				
+				// compute the time of the task here
+				double task_time = taskTime(t, workflow);
+				
+				// set the time for the outer edges
+				Set<ApplicationEdge> out_edges = workflow.outgoingEdgesOf(av);
+				
+				if (out_edges.size() <= 0) // last node
+				{
+					total_time = offset_time + task_time;
+				}
+				else 
+				{
+					for (ApplicationEdge ae: out_edges) {
+						double edge_time = edgeTime(ae, workflow, t, dcs, internet);
+						total_time = offset_time + task_time + edge_time;
+						edgeTimeMap.put(ae, total_time);
+					}
+				}
+			}
+			depth ++;
+			tasks = workflow.getTasksWithDepth(depth);
+		}
+		double output_time = 0;		
+		//计算输出数据从计算中心传输到存储中心的时间
+		tasks = workflow.getTasksWithDepth(depth--);
+		if(tasks.size() != 0) 
+		{
+			for (Task t: tasks)
+			{
+				List<File> files = t.getFileList();
+				double outputSize = 0;
+				for (File file : files) {
+					if (file.getType() == 2) {
+						outputSize += file.getSize();
+					}
+				}
+				output_time = inputTime(outputSize,t,workflow);
+			}
+		}
+		total_time = total_time + output_time;
+		System.out.println("Total time: "+total_time);
+		return total_time;
+	}
+	
+	
 	public static double makespan(WorkflowGenerator workflow,List<FederationDatacenter> dcs,InternetEstimator internet) {
 		int depth = 1;
 		double input_time = 0;
@@ -46,7 +144,8 @@ public class WorkflowComputer {
 		return input_time;
 	}
 	
-	public static double getFlowCompletionTime(WorkflowGenerator workflow, List<FederationDatacenter> dcs, InternetEstimator internet) {
+	public static double getFlowCompletionTime(WorkflowGenerator workflow, List<FederationDatacenter> dcs, InternetEstimator internet) 
+	{
 		int depth = 1;
 		List<Task> tasks = workflow.getTasksWithDepth(depth);
 		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
@@ -125,6 +224,7 @@ public class WorkflowComputer {
 					}
 				}
 				output_time = inputTime(outputSize,t,workflow);
+				System.out.println("输出时间为："+output_time);
 			}
 		}
 		double totaltime = input_time + output_time + process_time;
@@ -137,7 +237,7 @@ public class WorkflowComputer {
 	{
 		long filesize = t.getCloudletLength();	
 		double expected_service_time = filesize / workflow.getVertexForCloudlet(t).getAssociatedVm(t).getMips();
-		double cloudsim_service_time = t.getActualCPUTime();
+//		double cloudsim_service_time = t.getActualCPUTime();
 		
 		return expected_service_time;
 	}
@@ -154,48 +254,34 @@ public class WorkflowComputer {
 	
 	public static double edgeTime(ApplicationEdge edge, WorkflowGenerator workflow, Task t, List<FederationDatacenter> dcs, InternetEstimator internet)
 	{
+		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
+		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
+//		System.out.println("数据中心大小："+dcs.size());
+//		for (FederationDatacenter federationDatacenter : dcs) {
+//			System.out.println("联盟云ID："+federationDatacenter.getId());
+//		}
+//		System.out.println("任务ID："+t.getResourceId());
+		FederationDatacenter dc_source = Federation.findDatacenter(dcs, t.getResourceId());
+//		System.out.println("源数据中心："+dc_source.getId());
+//		System.out.println("目标数据中心："+target_task.getId());
+		FederationDatacenter dc_target = Federation.findDatacenter(dcs, target_task.getResourceId());
+//		System.out.println("目标数据中心:"+dc_target.getId());
 		double latency = 0;
 		double transfer_time = 0;
 		
-		//任务所在的云服务供应商
-		FederationDatacenter dc_source = Federation.findDatacenter(dcs, t.getResourceId());
-		//入边传输时间
-		ApplicationVertex input_vertex = workflow.getEdgeSource(edge);
-		workflow.incomingEdgesOf(input_vertex);
-		Task input_task = (Task) workflow.getCloudletFromVertex(input_vertex);
-		FederationDatacenter dc_input = Federation.findDatacenter(dcs, input_task.getResourceId());
-		//出边传输时间
-		ApplicationVertex target_vertex = workflow.getEdgeTarget(edge);
-		Task target_task = (Task) workflow.getCloudletFromVertex(target_vertex);
-		FederationDatacenter dc_target = Federation.findDatacenter(dcs, target_task.getResourceId());
-		
-		System.out.println("dc_input:"+dc_input+"dc_source:"+dc_source+"dc_target:"+dc_target);
-		
-		if (dc_source.getId() == dc_target.getId()||dc_source.getId()==dc_input.getId()){
-			transfer_time = (edge.getMessageLength() * 1024 * 1024)/dc_source.getMSCharacteristics().getDatacenterBw();
-			System.out.println("联盟云Id:"+dc_source.getId()+" 云内传输带宽："+dc_source.getMSCharacteristics().getDatacenterBw()/(1024*1024)+" MB/s");
-		}else if(!dc_input.equals(null)){
+		if (dc_source.getId() != dc_target.getId())
+		{
 			InternetLink link = null;
 			try { 
-				link = internet.getInternetLink(dc_input, dc_source);
-			} 
-			catch (Exception e) {
-				e.printStackTrace();
-			}		
-			latency = link.getLatency();
-			transfer_time = (edge.getMessageLength() * 1024 * 1024)/link.getBandwidth() + latency;
-			System.out.println("跨云传输带宽:"+link.getBandwidth()/(1024*1024)+"MB/s");
-		}else if(!dc_target.equals(null)){
-			InternetLink link = null;
-			try { 
-				link = internet.getInternetLink(dc_source,dc_target);
+				link = internet.getInternetLink(dc_source, dc_target);
 			} 
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 			latency = link.getLatency();
-			transfer_time = (edge.getMessageLength() * 1024 * 1024)/link.getBandwidth() + latency;
-			System.out.println("跨云传输带宽:"+link.getBandwidth()/(1024*1024)+"MB/s");
+			transfer_time = (edge.getMessageLength() * 1024* 1024) / link.getBandwidth()+latency;
+		}else {
+			transfer_time = (edge.getMessageLength() * 1024 * 1024) / dc_source.getMSCharacteristics().getDatacenterBw();
 		}
 		//double transfer_time = (edge.getMessageLength() * 1024) / dc_source.getMSCharacteristics().getHighestBw();
 		
@@ -245,9 +331,11 @@ public class WorkflowComputer {
 			
 			InternetEstimator inetEst = new InternetEstimator(dcs, 77);
 			
-			double makespan = WorkflowComputer.makespan(app, dcs, inetEst);
+//			WorkflowComputer.getWorkflowID(app);
+			WorkflowComputer.getInputDataTransfer(app, dcs, inetEst);
+//			double makespan = WorkflowComputer.getWorkFlowCompletionTime(app, dcs, inetEst);
 			
-			System.out.println("最大完工时间："+makespan);
+//			System.out.println("最大完工时间："+makespan);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

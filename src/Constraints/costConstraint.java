@@ -11,7 +11,7 @@ import it.cnr.isti.smartfed.metascheduler.resources.MSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
-import workflowfederation.CostComputer;
+import workflowfederation.WorkflowCost;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
 import workflowschedule.CIntegerGene;
@@ -29,9 +29,13 @@ public class costConstraint extends Policy{
 	protected double evaluateGlobalPolicy(int gene_index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet) {
 		List<MSApplicationNode> nodes = app.getNodes();
 		MSApplicationNode node = nodes.get(gene_index);
+		
 		Double budget = (Double) node.getCharacteristic().get(Constant.BUDGET);
 		Double cost = calculateCost_Network(gene_index, chromos, app, prov,internet);
+		cost = Double.valueOf(String.format("%.2f", cost));
 		Double maxCost = budget;
+		if (DEBUG)
+			System.out.println("Eval before applying weights for " + "NodeID " + node.getID() + " - ProvID " + prov.getID());
 		double distance = calculateDistance_ErrHandling(cost, budget, maxCost);
 		((CIntegerGene) chromos.getGene(gene_index)).setAllocationCost(cost);
 		return distance * getWeight();
@@ -40,9 +44,14 @@ public class costConstraint extends Policy{
 	public static Double calculateCost_Network(int index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
 		MSApplicationNode node = app.getNodes().get(index);
 		Double cpu_cost = cpuCost(node, prov);
+		System.out.println("cpu_cost:"+cpu_cost);
 		Double ram_cost = ramCost(node, prov);
+		System.out.println("ram_cost:"+ram_cost);
 		Double storage_cost = storageCost(node, prov);
+		System.out.println("storage_cost:"+storage_cost);
 		Double net_cost = netCost(index, chromos, app, prov,internet);
+		net_cost = Double.valueOf(String.format("%.2f",net_cost));
+		System.out.println("net_cost："+net_cost);
 		// System.out.println(r_cost + " + " + s_cost);
 		return ram_cost + storage_cost + cpu_cost + net_cost;
 	}
@@ -89,7 +98,7 @@ public class costConstraint extends Policy{
 					link = internet.getInternetLink(prov.getID(), target_Provider);
 					if(link!=null) {
 						double interBwCost = link.getBwcost();
-						cost += CostComputer.computeLinkCost(e, geneVmId, current_prov, target_Provider, interBwCost);
+						cost += WorkflowCost.computeLinkCost(e, geneVmId, current_prov, target_Provider, interBwCost);
 					}else {
 						cost += 0;
 					}

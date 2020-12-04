@@ -29,8 +29,11 @@ public class providerBwConstraint extends Policy{
 		
 		long nodeBW = (long)node.getNetwork().getCharacteristic().get(Constant.BW);//what I want
 		long provBW = (long)prov.getNetwork().getCharacteristic().get(Constant.BW);//what I have
-		
-		double distance = super.calculateDistance_ErrHandling(provBW, nodeBW, highProviderBwValue);
+		nodeBW = nodeBW/1024/1024;
+		provBW = provBW/1024/1024;
+		double maxBW = highProviderBwValue/1024/1024;
+		maxBW = Double.valueOf(String.format("%.2f", maxBW));
+		double distance = super.calculateDistance_ErrHandling(provBW, nodeBW, maxBW);
 		
 		return distance * getWeight();
 	}

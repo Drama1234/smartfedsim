@@ -13,7 +13,7 @@ import it.cnr.isti.smartfed.metascheduler.resources.MSProviderComputing;
 import it.cnr.isti.smartfed.metascheduler.resources.MSProviderNetwork;
 import it.cnr.isti.smartfed.metascheduler.resources.MSProviderStorage;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
-import workflowfederation.CostComputer;
+import workflowfederation.WorkflowCost;
 import workflowschedule.Constant;
 
 public class MSProviderAdapter {
@@ -114,12 +114,12 @@ public class MSProviderAdapter {
 
 		//storage
 		storageCharacteristic.put(Constant.STORE, aggregateHost.get(Constant.STORE));
-		storageCharacteristic.put(Constant.COST_STORAGE, CostComputer.getCostPerStorage(datacenter));
+		storageCharacteristic.put(Constant.COST_STORAGE, WorkflowCost.getCostPerStorage(datacenter));
 
 		//provider
 		providerCharacteristic.put(Constant.providerID, dcCharacter.getId());
 		providerCharacteristic.put(Constant.COST_CPU, dcCharacter.getCostPerCpu());
-		providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
+		providerCharacteristic.put(Constant.COST_MEM, WorkflowCost.getCostPerMem(datacenter));
 		//providerCharacteristic.put(Constant.COST_MEM, CostComputer.getCostPerMem(datacenter));
 //		providerCharacteristic.put(Constant.CITY, dcCharacter.getCity());
 		providerCharacteristic.put(Constant.VM_INSTANCES, hostList.size());

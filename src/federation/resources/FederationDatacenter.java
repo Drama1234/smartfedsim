@@ -22,9 +22,9 @@ import org.cloudbus.cloudsim.core.SimEvent;
 import org.workflowsim.Task;
 
 import federation.resources.VmFactory.vmType;
-import workflowfederation.CostComputer;
 import workflowfederation.FederationLog;
 import workflowfederation.UtilityPrint;
+import workflowfederation.WorkflowCost;
 
 
 
@@ -385,7 +385,7 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 			// amount += getCharacteristics().getCostPerStorage() * vm.getSize();
 			
 			// our code
-			myamount = CostComputer.singleVmCost(vm, this);
+			myamount = WorkflowCost.singleVmCost(vm, this);
 			amount += myamount;
 			
 			getDebts().put(vm.getUserId(), amount);
@@ -396,11 +396,11 @@ public class FederationDatacenter extends Datacenter implements Comparable<Feder
 				vm.setBeingInstantiated(false);
 			}
 			List<Double> mips = getVmAllocationPolicy().getHost(vm).getVmScheduler().getAllocatedMipsForVm(vm);
-			System.out.println("vm属性："+vm.getMips());
-			System.out.println("虚拟机分配得MIPS大小："+mips.size());
-			for (Double double1 : mips) {
-				System.out.println("mips的值："+mips);
-			}
+//			System.out.println("vm属性："+vm.getMips());
+//			System.out.println("虚拟机分配的MIPS大小："+mips.size());
+//			for (Double double1 : mips) {
+//				System.out.println("mips的值："+mips);
+//			}
 			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler().getAllocatedMipsForVm(vm));
 		}
 	}

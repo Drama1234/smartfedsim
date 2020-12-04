@@ -45,15 +45,15 @@ public class DatacenterGenerator extends AbstractGenerator{
 	public DatacenterGenerator(long seed) {
 		super(seed);
 		//Datacenter
-		costPerMem = new Range(0.01, 0.1);//USD GB hour
+		costPerMem = new Range(0.01, 0.1);//USD GB h
 		costPerSto = new Range(0.0002, 0.0020);
 		costPerCpu = new Range(0.10, 0.80); 
 		//host
-		ramAmount = new Range(1024*40, 1024*64);//40GB-64GB
+		ramAmount = new Range(1024*10, 1024*30);//40GB-64GB
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
-		stoAmount = new Range(3*1024*1024, 6*1024*1024); // 3TB - 6TB max
+		stoAmount = new Range(1024*1024, 10*1024*1024); // 1TB - 10TB max
 		coreAmount = new Range(1, 8);
-		mipsAmount = new Range(5000, 55000);
+		mipsAmount = new Range(1, 8);		
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 			
 			for (int j=0; j<numCore; j++)
 			{
-				peList.add(new Pe(j, new PeProvisionerSimple(mips)));
+				peList.add(new Pe(j, new PeProvisionerSimple(mips*6502)));
 			}
 			
 			// create the hosts
@@ -177,13 +177,13 @@ public class DatacenterGenerator extends AbstractGenerator{
 		return list;
 	}
 
-//	public static void main(String[] args) {
-//		//空指针异常原因：未将数据中心添加到实体中，导致entities.size()为空，因为压根没有创建
-//		Range coreAmount = new Range(1, 32);
-//		int core = (int) coreAmount.denormalize(0.23);
-//		System.out.println("coreamount:"+core);
-//		DatacenterGenerator datacenterGenerator = new DatacenterGenerator(77);
-//		datacenterGenerator.getDatacenters(20, 1000);
-//		//System.out.println("云服务供应商大小:"+list.size());
-//	}
+	public static void main(String[] args) {
+		//空指针异常原因：未将数据中心添加到实体中，导致entities.size()为空，因为压根没有创建
+		Range coreAmount = new Range(1, 32);
+		int core = (int) coreAmount.denormalize(0.23);
+		System.out.println("coreamount:"+core);
+		DatacenterGenerator datacenterGenerator = new DatacenterGenerator(77);
+		datacenterGenerator.getDatacenters(20, 1000);
+		//System.out.println("云服务供应商大小:"+list.size());
+	}
 }

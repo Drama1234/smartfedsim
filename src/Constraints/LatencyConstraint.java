@@ -51,7 +51,8 @@ public class LatencyConstraint extends Policy{
 				if(link!=null) {
 					double internet_latency = link.getLatency();
 					double application_latency = e.getLatency();
-					
+					if (DEBUG)
+						System.out.println("Eval before applying weights for " + "NodeID " + prov.getID() + " - ProvID " + targetProvider);
 					double res = calculateDistance_ErrHandling(internet_latency, application_latency, highNetworkLatencyValue);
 					sumofdifference += res;
 					numofdifference ++;

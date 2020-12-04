@@ -147,7 +147,7 @@ public class GeneticAllocator extends AbstractAllocator{
 		this.monitoring = monitoring;
 		this.setDcs(monitoring.getView());
 		if (constraint == null){
-			this.setConstraint(PolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1, 1, 1, 1, 1},this.netEstimator));
+			this.setConstraint(PolicyFactory.createPoliciesDefaultNetBw(dcs,new double[]{1, 1, 1, 1, 100, 1, 100, 100},this.netEstimator));
 		}
 	}
 }

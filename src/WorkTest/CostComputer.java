@@ -1,4 +1,4 @@
-package workflowfederation;
+package WorkTest;
 
 
 import java.util.List;
@@ -91,7 +91,7 @@ public class CostComputer {
 			vm_time = task_time + edge_time;
 			if(datacenter != null) {
 				cost = singleVmCost(vm, datacenter) * vm_time;
-				System.out.println("Vm " +vm.getId() +" rent cost of task" + av.getId() + " is " + cost);
+//				System.out.println("Vm " +vm.getId() +" rent cost of task" + av.getId() + " is " + cost);
 				amount += cost;
 			}
 			//计算网络传输成本
@@ -159,6 +159,8 @@ public class CostComputer {
 		return amount;
 	}
 	
+	
+	
 	public static double computeNetCosts(Vm vm, Set<ApplicationEdge> edges, Allocation a, FederationDatacenter f,InternetEstimator internet) {
 		double cost = 0;
 		int sourceVmId = vm.getId();
@@ -204,6 +206,7 @@ public class CostComputer {
 				//System.out.println("Data: "+e.getMBperHour()+ "Price: "+price);
 				//传输过来是MB，转换为GB
 				cost += e.getMessageLength() / (1024*1024) * price;
+//				System.out.println("边的文件大小："+e.getMessageLength());
 				//cost += e.getMBperHour() / 1024 * price;
 			}else {
 				cost += 0;

@@ -120,7 +120,7 @@ public class InternetEstimator {
 	{
 		FederationDatacenter a = (FederationDatacenter) CloudSim.getEntity(id_a);
 		FederationDatacenter b = (FederationDatacenter) CloudSim.getEntity(id_b);
-//		for(int i =3;i<23;i++) {
+//		for(int i =3;i<22;i++) {
 //			System.out.println("云服务供应商实体"+CloudSim.getEntity(i));
 //		}
 		return this.getInternetLink(a, b);
@@ -167,7 +167,7 @@ public class InternetEstimator {
 
 	@Override
 	public String toString() {
-		return "HighestLatency:"+getHighestLatency()+"HighestBw:"+getHighestBw()+"HighestCostBw"+getHighestCostBw();
+		return "HighestLatency:"+getHighestLatency()+"HighestBw:"+getHighestBw()+"HighestCostBw:"+getHighestCostBw();
 	}
 	
 	public void networkRepresation(List<FederationDatacenter> list) {

@@ -3,7 +3,7 @@
 <!-- part 1: list of all referenced files (may be empty) -->
 <!-- part 2: definition of all jobs (at least one) -->
 	<job id="ID00000" namespace="RemoteSense" name="SpiltData" version="1.0" runtime="0.5" >
-		<uses file="regionyear.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="123456789101112"/><!-- 1000KB -->
+		<uses file="regionyear.hdfs" link="input" register="true" transfer="true" optional="false" type="data" size="1024000"/><!-- 1000KB -->
    		<uses file="regionyear_RID000_YID000_DID001_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/><!-- 133.34KB -->
    		<uses file="regionyear_RID000_YID000_DID002_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>
    		<uses file="regionyear_RID000_YID000_DID003_p2p5.hdfs" link="output" register="true" transfer="true" optional="false" type="data" size="136540"/>

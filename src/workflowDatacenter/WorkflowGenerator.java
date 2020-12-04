@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.math3.distribution.AbstractRealDistribution;
-import org.apache.commons.math3.distribution.UniformRealDistribution;
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.File;
 import org.cloudbus.cloudsim.Vm;
@@ -26,10 +24,8 @@ import org.workflowsim.utils.ReplicaCatalog;
 import application.Application;
 import application.ApplicationEdge;
 import application.ApplicationVertex;
-import federation.resources.City;
 import federation.resources.FederationDatacenter;
 import federation.resources.VmFactory;
-import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
 import workflowtest.Range;
 import workflowtest.WorkflowDataset;
 
@@ -88,7 +84,9 @@ public class WorkflowGenerator extends Application{
 		setWorkflowSimConfig();
 		
 		WorkflowParser parser = new WorkflowParser(userId, null, null, daxPath);
+		
 		parser.parse();
+		
 		List<Task> tasks = parser.getTaskList();
 		
 		build(userId, tasks, datacenterlist);
@@ -110,9 +108,9 @@ public class WorkflowGenerator extends Application{
 	private Vm createSmallVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18, 
+				6502, 
 				1, 
-				8*1024,//ram GB
+				4*1024,//ram GB
 				100 * 1024 * 1024,//100MB/s
 				200 * 1024//200GB
 				);
@@ -121,20 +119,20 @@ public class WorkflowGenerator extends Application{
 	private Vm createMediumVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18*2, 
+				6502*2, 
 				2, 
-				16*1024,//ram
-				100 * 1024 * 1024,//100MB/s
+				8*1024,//ram
+				250 * 1024 * 1024,//250MB/s
 				500 * 1024//500GB
 				);
 	}
 	private Vm createlLargeVm(int userId) {
 		return VmFactory.getDesiredVm(
 				userId, 
-				6502.18*4, 
+				6502*4, 
 				4, 
-				32*1024,//ram
-				100 * 1024 * 1024,//100MB/s
+				16*1024,//ram
+				300 * 1024 * 1024,//300MB/s
 				1024 * 1024//1TB
 				);
 	}
@@ -153,17 +151,17 @@ public class WorkflowGenerator extends Application{
 			if(task.getCloudletLength() < 900) {
 				vm = createSmallVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm, datacenterlist.get(0));
-				v.setBudget(10);
+				v.setBudget(3);
 				addVertex(v);
 			}else if(task.getCloudletLength() < 2000) {
 				vm = createMediumVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
-				v.setBudget(20);
+				v.setBudget(3);
 				addVertex(v);
 			}else {
 				vm = createlLargeVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
-				v.setBudget(30);
+				v.setBudget(3);
 				addVertex(v);
 			}
 		}
@@ -206,7 +204,7 @@ public class WorkflowGenerator extends Application{
 				for (File file : cfiles) {
 					for (File file2 : pfiles) {
 						if(file2.getFileAttribute().getName().equals(file.getFileAttribute().getName())) {
-							size+=file2.getSize();
+							size+=file2.getSize();//KB
 						}
 					}
 				}
@@ -214,13 +212,13 @@ public class WorkflowGenerator extends Application{
 //				size = size/1024d;// obtaining KB as applicationEdge requires
 			
 				bandwidth = 20*1024*1024; //20MB/s
-				latency = 0.12;//0.12s
+				latency = 0.11;//0.12s
 				addEdge(new ApplicationEdge(size, bandwidth, latency), base, child);
 			}
 		}
 //		System.out.println(super.toString());
 //		System.out.println(super.vertexSet().size() + "+" + super.getEdges().size());
-		System.out.println(super.toString());
+//		System.out.println(super.toString());
 	}
 		
 		
