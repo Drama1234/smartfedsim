@@ -11,6 +11,7 @@ import it.cnr.isti.smartfed.metascheduler.resources.MSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
+import workflowfederation.FederationLog;
 import workflowfederation.WorkflowCost;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
@@ -44,14 +45,14 @@ public class costConstraint extends Policy{
 	public static Double calculateCost_Network(int index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet){
 		MSApplicationNode node = app.getNodes().get(index);
 		Double cpu_cost = cpuCost(node, prov);
-		System.out.println("cpu_cost:"+cpu_cost);
+//		FederationLog.print("cpu_cost:"+cpu_cost);
 		Double ram_cost = ramCost(node, prov);
-		System.out.println("ram_cost:"+ram_cost);
+//		FederationLog.print("ram_cost:"+ram_cost);
 		Double storage_cost = storageCost(node, prov);
-		System.out.println("storage_cost:"+storage_cost);
+//		FederationLog.print("storage_cost:"+storage_cost);
 		Double net_cost = netCost(index, chromos, app, prov,internet);
 		net_cost = Double.valueOf(String.format("%.2f",net_cost));
-		System.out.println("net_cost："+net_cost);
+//		FederationLog.print("net_cost:"+net_cost);
 		// System.out.println(r_cost + " + " + s_cost);
 		return ram_cost + storage_cost + cpu_cost + net_cost;
 	}

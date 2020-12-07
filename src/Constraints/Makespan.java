@@ -21,13 +21,14 @@ public class Makespan {
 		MSApplicationNode node = app.getNodes().get(gene_index);
 		double tasktime = tasktime(node,prov);
 		double networktime = networktime(gene_index, chromos, app, prov,internet);
-		FederationLog.timeLogDebug("(makespan:)");
-		return tasktime+networktime;
+//		FederationLog.timeLogDebug("(makespan:)");
+		return tasktime + networktime;
 	}
 	
 	private static Double tasktime(MSApplicationNode node, IMSProvider prov){
-		Double providerMips = (Double)prov.getComputing().getCharacteristic().get(Constant.MIPS)* (Integer)prov.getComputing().getCharacteristic().get(Constant.CPU_NUMBER);
-		//Double providerMips = (Double)prov.getCharacteristic().get(Constant.MIPS) * (Double)prov.getCharacteristic().get(Constant.CPU_NUMBER);0
+		Double providerMips = (Double)prov.getComputing().getCharacteristic().get(Constant.MIPS);
+//				* (Integer)prov.getComputing().getCharacteristic().get(Constant.CPU_NUMBER);
+		//Double providerMips = (Double)prov.getCharacteristic().get(Constant.MIPS) * (Double)prov.getCharacteristic().get(Constant.CPU_NUMBER);
 		Long cloudletlength = (Long)node.getCharacteristic().get(Constant.vertextLength);
 		Double tasktime = (Double) (cloudletlength / providerMips);
 		return tasktime;
@@ -55,14 +56,14 @@ public class Makespan {
 				catch (Exception e1) {e1.printStackTrace();}
 				if(link !=null) {
 					latency = link.getLatency();
-					transfer_time = (e.getMessageLength() * 1024)/link.getBandwidth() + latency;
+					transfer_time = e.getMessageLength()/link.getBandwidth() + latency;
 //					System.out.println("============跨云传输=============");
 //					System.out.println("数据传输长度："+e.getMessageLength());
 //					System.out.println("网络传输带宽："+link.getBandwidth());
 //					System.out.println("网络延迟："+latency);
 //					System.out.println("传输时间为："+transfer_time);
 				}else {
-					transfer_time = (e.getMessageLength() * 1024)/(Integer)prov.getNetwork().getCharacteristic().get(Constant.BW);
+					transfer_time = e.getMessageLength()/(Long)prov.getNetwork().getCharacteristic().get(Constant.BW);
 //					System.out.println("============云内传输=============");
 //					System.out.println("传输数据长度为："+e.getMessageLength());
 //					System.out.println("云服务供应商带宽："+prov.getNetwork().getCharacteristic().get(Constant.BW));

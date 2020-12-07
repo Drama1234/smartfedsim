@@ -56,7 +56,8 @@ public class Monitor implements IEvolutionMonitor{
 		iterationCount++;
 		System.out.println("[MONITOR] (nextCycle) Iteration: " + iterationCount);
 		List<IChromosome> chlist = arg0.getChromosomes();
-		if (Policy.DEBUG) {
+//		if (Policy.DEBUG) 
+		if(true){
 			for(IChromosome ch : chlist) {
 				System.out.println(chromosomeToString(ch));
 			}
@@ -65,7 +66,8 @@ public class Monitor implements IEvolutionMonitor{
 		double maxFitPopul = arg0.determineFittestChromosome().getFitnessValue();
 		double numGenes = arg0.getChromosome(0).getGenes().length;
 		double acceptableFitness = (numGenes * MSFitnessFunction.AWARD);
-		
+//		System.out.println("iterationCount："+iterationCount);
+//		System.out.println("maxIteration："+maxIteration);
 		if (iterationCount >= maxIteration) {
 			arg1.add("\n[MONITOR] \nIterations: " + iterationCount + "/" + maxIteration);
 			arg1.add("BestFitness " + maxFitPopul + " vs Expected " + acceptableFitness);

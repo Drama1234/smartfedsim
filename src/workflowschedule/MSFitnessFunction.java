@@ -92,10 +92,10 @@ public class MSFitnessFunction extends FitnessFunction{
 		Gene[] genes = chromos.getGenes();
 		System.out.print("基因的适应度值: ");
 		for (int i = 0; i < genes.length; i++) {
-			System.out.print(((CIntegerGene) genes[i]).getFitness() + " | ");
+			System.out.print(Double.valueOf(String.format("%.2f", ((CIntegerGene) genes[i]).getFitness())) + " | ");
 		}
 		System.out.println();
-		System.out.println("染色体: " + Monitor.chromosomeToString(chromos) + " 的适应度值: " + fitness);
+		System.out.println("染色体: " + Monitor.chromosomeToString(chromos) + " 的适应度值: " + Double.valueOf(String.format("%.2f", fitness)));
 		System.out.println();
 	}
 }

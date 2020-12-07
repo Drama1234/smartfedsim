@@ -16,6 +16,64 @@ import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
 
 public class WorkflowMakespan {
+	
+	public static double getWorkflowTime(List<FederationDatacenter> dcs,InternetEstimator internet,Allocation allocation) {
+		WorkflowGenerator workflow = (WorkflowGenerator)allocation.getApplication();
+		
+		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
+		double total_time = 0;
+		int depth = 1;
+		List<Task> tasks = workflow.getTasksWithDepth(depth);
+		while (tasks.size() != 0) {
+//			System.out.println("任务大小："+tasks.size());
+			for (Task t: tasks) {
+//				System.out.println("任务ID："+t.getCloudletId()+"数据中心ID："+t.getResourceId());
+				ApplicationVertex av = workflow.getVertexForCloudlet(t);
+				// check for the entering edges to compute the time of
+				Set<ApplicationEdge> in_edges = workflow.incomingEdgesOf(av);
+				double offset_time = 0;
+				for (ApplicationEdge ae: in_edges) {
+//					System.out.println("入边："+ae.toString());
+					double time = edgeTimeMap.get(ae);
+//					System.out.println("时间为："+time);
+					if (time > offset_time)
+						offset_time = time;
+				}
+				
+				// compute the time of the task here
+				double task_time = taskTime(t, workflow);
+				
+				// set the time for the outer edges
+				Set<ApplicationEdge> out_edges = workflow.outgoingEdgesOf(av);
+				
+				if (out_edges.size() <= 0) // last node
+				{
+					total_time = offset_time + task_time;
+				}
+				else 
+				{
+					for (ApplicationEdge ae: out_edges) {
+						double edge_time = edgeTime(ae, workflow, t, dcs, internet);
+						total_time = offset_time + task_time + edge_time;
+						edgeTimeMap.put(ae, total_time);
+					}
+				}
+			}
+			depth ++;
+			tasks = workflow.getTasksWithDepth(depth);
+		}	
+		//计算输出数据从计算中心传输到存储中心的时间
+		double output_time = getOutputDataTransfer(workflow,dcs,internet,--depth);
+//		System.out.println("输出时间："+output_time);
+		//计算输入数据从存储中心传输到计算中心的时间
+		double input_time = getInputDataTransfer(workflow, dcs, internet);
+//		System.out.println("输入时间："+input_time);
+		total_time = total_time + output_time + input_time;
+//		System.out.println("Makespan:"+total_time);
+		return total_time;
+	}
+	
+	
 	public static double getWorkflowMakespan(WorkflowGenerator workflow,List<FederationDatacenter> dcs,InternetEstimator internet) {
 		Map<ApplicationEdge, Double> edgeTimeMap = new HashMap<ApplicationEdge, Double>();
 		double total_time = 0;
@@ -63,10 +121,10 @@ public class WorkflowMakespan {
 		}	
 		//计算输出数据从计算中心传输到存储中心的时间
 		double output_time = getOutputDataTransfer(workflow,dcs,internet,--depth);
-		System.out.println("输出时间："+output_time);
+//		System.out.println("输出时间："+output_time);
 		//计算输入数据从存储中心传输到计算中心的时间
 		double input_time = getInputDataTransfer(workflow, dcs, internet);
-		System.out.println("输入时间："+input_time);
+//		System.out.println("输入时间："+input_time);
 		total_time = total_time + output_time + input_time;
 //		System.out.println("Makespan:"+total_time);
 		return total_time;
@@ -74,8 +132,8 @@ public class WorkflowMakespan {
 	public static double getOutputDataTransfer(WorkflowGenerator workflow, List<FederationDatacenter> dcs, InternetEstimator internet,int depth) {
 		double output_time = 0;
 		List<Task> tasks = workflow.getTasksWithDepth(depth);
-		System.out.println("输出depth:"+depth);
-		System.out.println("任务大小："+tasks.size());
+//		System.out.println("输出depth:"+depth);
+//		System.out.println("任务大小："+tasks.size());
 		if(tasks.size() != 0) 
 		{
 			for (Task t: tasks)
@@ -87,7 +145,7 @@ public class WorkflowMakespan {
 						outputSize += file.getSize();
 					}
 				}
-				System.out.println("输出文件大小："+outputSize);
+//				System.out.println("输出文件大小："+outputSize);
 				output_time = inputTime(outputSize,t,workflow);
 			}
 		}
@@ -127,9 +185,11 @@ public class WorkflowMakespan {
 	
 	public static double taskTime(Task t, WorkflowGenerator workflow)
 	{
-		long filesize = t.getCloudletLength();	
+		long filesize = t.getCloudletLength();
+		
 		double expected_service_time = filesize / workflow.getVertexForCloudlet(t).getAssociatedVm(t).getCurrentRequestedTotalMips();
 //		double cloudsim_service_time = t.getActualCPUTime();
+//		System.out.println("mips:"+workflow.getVertexForCloudlet(t).getAssociatedVm(t).getCurrentRequestedTotalMips());
 		
 		return expected_service_time;
 	}

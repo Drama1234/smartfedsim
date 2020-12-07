@@ -41,8 +41,8 @@ public class WorkflowCost {
 			if(datacenter != null) {
 				cost = (singleVmCost(vm, datacenter)/60) * vm_time;
 				cost = Double.valueOf(String.format("%.2f",cost));
-				System.out.println("vm cost:"+Double.valueOf(String.format("%.2f",singleVmCost(vm, datacenter)))+" vm_time:"+vm_time);
-				System.out.println("Vm " +vm.getId() +" rent cost of task" + av.getId() + " is " + cost);
+//				System.out.println("vm cost:"+Double.valueOf(String.format("%.2f",singleVmCost(vm, datacenter)))+" vm_time:"+vm_time);
+//				System.out.println("Vm " +vm.getId() +" rent cost of task" + av.getId() + " is " + cost);
 				amount += cost;
 			}			
 		}

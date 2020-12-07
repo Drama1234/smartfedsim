@@ -87,7 +87,7 @@ public class InternetEstimator {
 				}
 			}	
 		}
-//		this.networkRepresation(list);
+		this.networkRepresation(list);
 	}	
 	
 	/**
@@ -179,7 +179,7 @@ public class InternetEstimator {
 				}else {
 					try {
 						link = this.getInternetLink(outer.getId(), inner.getId());
-						System.out.println("出云服务供应商ID"+outer.getId()+"入云服务供应商ID"+inner.getId()+"网络特性："+link.getBandwidth()/1024/1024+"MB/s"+link.getLatency()+" s"+link.getBwcost()+" USD");
+						System.out.print(outer.getId()+"------->"+inner.getId()+" 网络特性："+link.getBandwidth()/1024/1024+"MB/s "+link.getLatency()+"s "+link.getBwcost()+"USD");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

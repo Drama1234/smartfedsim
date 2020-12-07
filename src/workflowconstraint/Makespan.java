@@ -24,9 +24,12 @@ public class Makespan {
 	}
 	
 	private static Double tasktime(MSApplicationNode node, IMSProvider prov){
-		Double providerMips = (Double)prov.getComputing().getCharacteristic().get(Constant.MIPS)* (Integer)prov.getComputing().getCharacteristic().get(Constant.CPU_NUMBER);
+		Double providerMips = (Double)prov.getComputing().getCharacteristic().get(Constant.MIPS);
+				//(Integer)prov.getComputing().getCharacteristic().get(Constant.CPU_NUMBER);
 		//Double providerMips = (Double)prov.getCharacteristic().get(Constant.MIPS) * (Double)prov.getCharacteristic().get(Constant.CPU_NUMBER);0
 		Long cloudletlength = (Long)node.getCharacteristic().get(Constant.vertextLength);
+//		System.out.println("供应商MIPS:"+providerMips);
+//		System.out.println("任务长度："+cloudletlength);
 		Double tasktime = (Double) (cloudletlength / providerMips);
 		return tasktime;
 	}

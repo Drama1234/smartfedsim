@@ -93,8 +93,8 @@ public class Experiment {
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
 		System.out.println("任务大小："+newList.size());
-		UtilityPrint.printCloudletList(newList);
-		
+		UtilityPrint.printCloudletList(newList); 
+////////////////////		
 		
 		int i = 0;
 		for (Allocation allocation: federation.getAllocations()) {
@@ -107,8 +107,9 @@ public class Experiment {
 				for (ApplicationVertex av : allocation.getApplication().vertexSet())
 					budget += av.getBudget();
 				
-				double makespan = WorkflowMakespan.getWorkflowMakespan((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
-				double cost = WorkflowCost.getWorkflowCost( datacenters, allocation, internetEstimator);
+//				double makespan = WorkflowMakespan.getWorkflowMakespan((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
+				double makespan = WorkflowMakespan.getWorkflowTime(datacenters,internetEstimator,allocation);
+				double cost = WorkflowCost.getWorkflowCost(datacenters, allocation, internetEstimator);
 				
 				System.out.println("budget：-------------------> " + Double.valueOf(String.format("%.2f", budget)));
 				System.out.println("cost：-------------------> " + Double.valueOf(String.format("%.2f", cost)));

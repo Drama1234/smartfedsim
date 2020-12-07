@@ -53,7 +53,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
 		stoAmount = new Range(1024*1024, 10*1024*1024); // 1TB - 10TB max
 		coreAmount = new Range(1, 8);
-		mipsAmount = new Range(1, 8);		
+		mipsAmount = new Range(4, 6);		
 	}
 	
 	/**
