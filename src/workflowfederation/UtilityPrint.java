@@ -64,7 +64,7 @@ public class UtilityPrint {
 		sb.append("net:").append(host.getBw()/1024/1024).append("MB/s,");
 		sb.append("storage:").append(host.getStorage()/1024/1024).append("TB,");
 		sb.append("core:").append(host.getNumberOfPes());
-		sb.append("mips:").append(host.getTotalMips()/host.getNumberOfFreePes());
+		sb.append(",mips:").append(host.getTotalMips()/host.getNumberOfPes());
 		
 		return sb.toString();
 	}

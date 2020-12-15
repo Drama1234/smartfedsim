@@ -45,6 +45,7 @@ public class Makespan {
 		double latency = 0;
 		double transfer_time = 0;
 		double time = 0;
+
 		Set<ApplicationEdge> set = am.getEdges();
 		for (ApplicationEdge e: set) {
 			if (e.getSourceVmId() == geneVmId) {

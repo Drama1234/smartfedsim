@@ -36,12 +36,9 @@ import federation.resources.FederationDatacenter;
 public class MSApplication implements IMSApplication, Cloneable {
 	
 	private int ID;
-	private String city;
 	private double budget;
 	private FederationDatacenter fDatacenter;
 	
-	
-
 	private List<MSApplicationNode> nodes;
 	
 	/* for simplicity using the same edges of smartfed applications.
@@ -53,13 +50,12 @@ public class MSApplication implements IMSApplication, Cloneable {
 	private int firstVmIndex;
 
 	public MSApplication() {
-		new MSApplication(-1, null, 0, null,null);
+		new MSApplication(-1, 0, null,null);
 	}
 
-	public MSApplication(int ID, String city, double budget,
-			List<MSApplicationNode> nodes,FederationDatacenter Datacenter) {
+	public MSApplication(int ID, double budget, List<MSApplicationNode> nodes,FederationDatacenter Datacenter) {
 		this.ID = ID;
-		this.city = city;
+//		this.city = city;
 		this.setBudget(budget);
 		this.nodes = nodes;
 		this.fDatacenter = Datacenter;
@@ -74,7 +70,7 @@ public class MSApplication implements IMSApplication, Cloneable {
 		if (o == null)
 			return 1;
 		MSApplication app = (MSApplication) o;
-		if (ID == app.ID && city.equalsIgnoreCase(app.city) && fDatacenter.equals(app.fDatacenter) )
+		if (ID == app.ID && fDatacenter.equals(app.fDatacenter))
 			return 0;
 		return ID = app.ID;
 	}

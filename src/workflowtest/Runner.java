@@ -1,6 +1,5 @@
 package workflowtest;
 
-
 import it.cnr.isti.smartfed.test.TestResult;
 import workflowmapping.GeneticAllocator;
 

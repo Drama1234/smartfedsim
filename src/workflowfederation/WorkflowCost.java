@@ -148,7 +148,7 @@ public class WorkflowCost {
 	{
 		double amount = 0d;
 		amount = calculateCostCustomVm(datacenter, vm);
-//		FederationLog.timeLogDebug("(CostComputer) total vm cost: " + amount);
+		FederationLog.timeLogDebug("(CostComputer) total vm cost: " + amount);
 		return amount;
 	}
 	

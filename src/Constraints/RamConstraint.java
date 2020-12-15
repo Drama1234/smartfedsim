@@ -26,8 +26,8 @@ public class RamConstraint extends Policy{
 		MSApplicationNode node = nodes.get(gene_index);
 		if (DEBUG)
 			System.out.println("Eval before applying weights for " + "NodeID " + node.getID() + " - ProvID " + prov.getID());
-		long nodeCPU = (Integer) node.getComputing().getCharacteristic().get(Constant.CPU_NUMBER); //what I want
-		long provCPU = (Integer) prov.getComputing().getCharacteristic().get(Constant.CPU_NUMBER); //what I have
+		int nodeCPU = (Integer) node.getComputing().getCharacteristic().get(Constant.RAM); //what I want
+		int provCPU = (Integer) prov.getComputing().getCharacteristic().get(Constant.RAM); //what I have
 		
 		double distance = super.calculateDistance_ErrHandling(provCPU, nodeCPU, highRamValue);
 		

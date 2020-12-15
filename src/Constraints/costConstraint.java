@@ -58,14 +58,14 @@ public class costConstraint extends Policy{
 	}
 	
 	private static double storageCost(MSApplicationNode node, IMSProvider prov){
-		double costPerStorage = (Double) prov.getStorage().getCharacteristic().get(Constant.COST_STORAGE);
+		double costPerStorage = (Double) prov.getStorage().getCharacteristic().get(Constant.COST_STORAGE)/1024;
 		long storage = (Long) node.getStorage().getCharacteristic().get(Constant.STORE);
 		double cost = storage * costPerStorage;
 		return cost;
 	}
 	
 	private static double ramCost(MSApplicationNode node, IMSProvider prov){
-		double costPerMem = (Double) prov.getCharacteristic().get(Constant.COST_MEM);
+		double costPerMem = (Double) prov.getCharacteristic().get(Constant.COST_MEM)/1024;
 		int ram = (Integer) node.getComputing().getCharacteristic().get(Constant.RAM);
 		double cost = ram * costPerMem;
 		return cost;

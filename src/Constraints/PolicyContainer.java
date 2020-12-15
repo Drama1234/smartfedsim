@@ -69,14 +69,14 @@ public class PolicyContainer {
 	
 	public Policy RamConstraints(double weight) {
 		double normWeight = calculateNormWeight(weight);
-		Policy p = new RamConstraint(normWeight,highCoreNumberValue);
+		Policy p = new RamConstraint(normWeight,highRamValue);
 		log.info("Norm weight into " + p.getName() + " " + normWeight);
 		return p;
 	}
 	
 	public Policy StorageConstraints(double weight) {
 		double normWeight = calculateNormWeight(weight);
-		Policy p = new StorageConstraint(normWeight,highCoreNumberValue);
+		Policy p = new StorageConstraint(normWeight,highStorageValue);
 		log.info("Norm weight into " + p.getName() + " " + normWeight);
 		return p;
 	}

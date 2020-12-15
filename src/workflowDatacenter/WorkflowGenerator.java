@@ -218,7 +218,7 @@ public class WorkflowGenerator extends Application{
 		}
 //		System.out.println(super.toString());
 //		System.out.println(super.vertexSet().size() + "+" + super.getEdges().size());
-		System.out.println(super.toString());
+//		System.out.println(super.toString());
 	}
 		
 		

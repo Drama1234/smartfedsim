@@ -15,7 +15,7 @@ import workflowschedule.iface.MSProviderAdapter;
 public class MSFitnessFunction extends FitnessFunction{
 	
 	public final static int AWARD = 100;
-//	private final double EQUALITY = 0.1;
+	private final double EQUALITY = 0.1;
 	private final static Logger log = Logger.getLogger(Logger.class.getName());
 	
 	private static final long serialVersionUID = 1L;
@@ -43,6 +43,8 @@ public class MSFitnessFunction extends FitnessFunction{
 		for (int i = 0; i < weightedDistance.length; i++) {
 			if(weightedDistance[i] > 0) {
 				weightedDistance[i] = 0;
+			}else if(weightedDistance[i] == 0) {
+				weightedDistance[i] = EQUALITY;
 			}else {
 				weightedDistance[i] *= -1;
 			}

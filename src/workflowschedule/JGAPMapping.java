@@ -27,10 +27,10 @@ import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
-	public static int POP_SIZE = 1;
-	public static int EVOLUTION_STEP = 2;
+	public static int POP_SIZE = 50;
+	public static int EVOLUTION_STEP = 150;
 	
-	public static final int INTERNAL_SOLUTION_NUMBER = 1;
+	public static final int INTERNAL_SOLUTION_NUMBER = 2;
 //	public static final int SOLUTION_NUMBER = 10;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
@@ -177,8 +177,8 @@ class InternalDefaultConfiguration extends Configuration implements ICloneable {
 		super();
 		if (JGAPMapping.MUTATION == 0 || JGAPMapping.CROSSOVER == 0){
 			// throw new RuntimeException();
-			JGAPMapping.MUTATION = 10;
-			JGAPMapping.CROSSOVER = 0.35;
+			JGAPMapping.MUTATION = 20;
+			JGAPMapping.CROSSOVER = 0.4;
 		}
 		
 		BestChromosomesSelector bestSelector;

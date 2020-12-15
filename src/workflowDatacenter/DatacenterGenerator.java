@@ -49,11 +49,11 @@ public class DatacenterGenerator extends AbstractGenerator{
 		costPerSto = new Range(0.0002, 0.0020);
 		costPerCpu = new Range(0.10, 0.80); 
 		//host
-		ramAmount = new Range(1024*10, 1024*30);//40GB-64GB
+		ramAmount = new Range(1024*8, 1024*32);//8-32
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
-		stoAmount = new Range(1024*1024, 10*1024*1024); // 1TB - 10TB max
-		coreAmount = new Range(1, 8);
-		mipsAmount = new Range(4, 6);		
+		stoAmount = new Range(500*1024, 3*1024*1024); // 500GB - 3TB
+		coreAmount = new Range(2, 8);
+		mipsAmount = new Range(4, 8);		
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public class DatacenterGenerator extends AbstractGenerator{
 //			System.out.println("CPU成本："+profile.get(DatacenterParams.COST_PER_CPU)+"GB/h");
 //			System.out.println("内存成本："+profile.get(DatacenterParams.COST_PER_MEM)+"GB/h");
 //			System.out.println("虚拟机最大带宽："+profile.get(DatacenterParams.MAX_BW_FOR_VM)+"MB/s");
-			System.out.println(list.get(i).toStringDetail());
+//			System.out.println(list.get(i).toStringDetail());
 		}
 		return list;
 	}

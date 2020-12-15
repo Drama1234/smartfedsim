@@ -70,7 +70,7 @@ public abstract class Policy {
 		case DESCENDENT_TYPE:
 			throw new Exception("Wrong method for this type of constraint");
 		case EQUAL_TYPE:
-			double ret = (value.compareTo(u_constraint) == 0 ) ? -1 : 0; // 0 if different one each other
+			double ret = (value.compareTo(u_constraint) == 0 ) ? -1 : 1; // 0 if different one each other
 			return ret;
 		default:
 			return 0;

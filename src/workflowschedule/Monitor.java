@@ -9,6 +9,8 @@ import org.jgap.Population;
 import org.jgap.audit.IEvolutionMonitor;
 import org.jgap.eval.PopulationHistoryIndexed;
 
+import workflowfederation.FederationLog;
+
 public class Monitor implements IEvolutionMonitor{
 
 	private static final long serialVersionUID = 1L;
@@ -54,10 +56,11 @@ public class Monitor implements IEvolutionMonitor{
 	@Override
 	public boolean nextCycle(Population arg0, List<String> arg1) {
 		iterationCount++;
-		System.out.println("[MONITOR] (nextCycle) Iteration: " + iterationCount);
+		FederationLog.print("[MONITOR] (nextCycle) Iteration: " + iterationCount);
+//		System.out.println("[MONITOR] (nextCycle) Iteration: " + iterationCount);
 		List<IChromosome> chlist = arg0.getChromosomes();
-//		if (Policy.DEBUG) 
-		if(true){
+		if (Policy.DEBUG) { 
+//		if(true){
 			for(IChromosome ch : chlist) {
 				System.out.println(chromosomeToString(ch));
 			}

@@ -87,7 +87,7 @@ public class InternetEstimator {
 				}
 			}	
 		}
-		this.networkRepresation(list);
+//		this.networkRepresation(list);
 	}	
 	
 	/**
