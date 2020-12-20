@@ -32,7 +32,7 @@ import workflowtest.WorkflowDataset;
 public class WorkflowGenerator extends Application{
 		
 	public String daxPath;
-	public static String filename = "resources/RemoteSense_13.xml";
+	public static String filename = "resources/RemoteSense_103.xml";
 	
 	protected Range coreAmount;
 	protected Range mipsAmount;
@@ -138,30 +138,31 @@ public class WorkflowGenerator extends Application{
 	}
 	
 
-	private <T extends Cloudlet> void build(int userId, List<T> tasks,List<FederationDatacenter> datacenterlist) 
+	private void build(int userId, List<Task> tasks,List<FederationDatacenter> datacenterlist) 
 	{
 		//System.out.println("任务数量 "+tasks.size()+"数据中心数量：" +datacenterlist.size());
-		for (T task : tasks) {
+		for (Task task : tasks) {
 			
 //			System.out.println(task.getCloudletLength());
 			List<Cloudlet> cloudlets = new ArrayList<>();
 			cloudlets.add(task);
 			
 			Vm vm = null;
-			if(task.getCloudletLength() < 900) {
+			
+			if(task.getType().equalsIgnoreCase("SpiltData")||task.getType().equalsIgnoreCase("MergeData")) {
 				vm = createSmallVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm, datacenterlist.get(0));
-				v.setBudget(3);
+				v.setBudget(1);
 				addVertex(v);
-			}else if(task.getCloudletLength() < 2000) {
+			}else if(task.getCloudletLength() < 2100) {
 				vm = createMediumVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
-				v.setBudget(3);
+				v.setBudget(1);
 				addVertex(v);
 			}else {
 				vm = createlLargeVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
-				v.setBudget(3);
+				v.setBudget(1);
 				addVertex(v);
 			}
 		}
@@ -174,13 +175,13 @@ public class WorkflowGenerator extends Application{
 //		Range latencyValue = new Range(0.09, 0.13);
 		
 		
-		for(T t : tasks) {
+		for(Task t:tasks) {
 //			List<Task> parents = ((Task) t).getParentList();
 //			System.out.println("父亲数量：" +parents.size());
 			ApplicationVertex base = this.getVertexForCloudlet(t);
 			long bandwidth = 0;
 			double latency = 0;
-			List<File> files = ((Task) t).getFileList();
+			List<File> files = t.getFileList();
 			List<File> pfiles = new ArrayList<>();
 			for (File f: files){
 				if (f.getType() == 2)//output as constructed by parser
@@ -250,9 +251,9 @@ public class WorkflowGenerator extends Application{
         // Initialize the CloudSim library
         CloudSim.init(num_user, calendar, trace_flag);
         try {
-        	WorkflowDataset dataset = new WorkflowDataset(20, filename);
+        	WorkflowDataset dataset = new WorkflowDataset(100, filename);
         	List<FederationDatacenter> datacenters = dataset.createDatacenters();
-        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_13", 0, datacenters);
+        	WorkflowGenerator app = new WorkflowGenerator("RemoteSense_103", 0, datacenters);
 //			app.export("plots/" + "RemoteSense_1" + ".dot");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -193,7 +193,7 @@ public class ApplicationVertex
 	
 	public List<FederationDatacenter> getfeFederationDatacenters(){
 		if (this.federationDatacenters!=null) {
-			//System.out.println("指定了云服务供应商");
+//			System.out.println("指定了云服务供应商");
 			return this.federationDatacenters;
 		}
 		else {

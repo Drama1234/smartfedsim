@@ -61,9 +61,10 @@ public class WorkflowMakespan {
 			}
 			depth ++;
 			tasks = workflow.getTasksWithDepth(depth);
-		}	
+		}
+//		System.out.println("科学工作流深度："+depth);
 		//计算输出数据从计算中心传输到存储中心的时间
-		double output_time = getOutputDataTransfer(workflow,dcs,internet,--depth);
+		double output_time = getOutputDataTransfer(workflow,dcs,internet,depth--);
 //		System.out.println("输出时间："+output_time);
 		//计算输入数据从存储中心传输到计算中心的时间
 		double input_time = getInputDataTransfer(workflow, dcs, internet);
@@ -138,6 +139,7 @@ public class WorkflowMakespan {
 		{
 			for (Task t: tasks)
 			{
+//				System.out.println("输出任务ID："+t.getCloudletId());
 				List<File> files = t.getFileList();
 				double outputSize = 0;
 				for (File file : files) {
@@ -158,6 +160,7 @@ public class WorkflowMakespan {
 		List<Task> tasks = workflow.getTasksWithDepth(depth);
 		if(tasks.size() != 0) {
 			for (Task task : tasks) {
+//				System.out.println("输入任务ID："+task.getCloudletId());
 				@SuppressWarnings("unchecked")
 				List<File> files = task.getFileList();
 				double inputSize = 0;
@@ -175,9 +178,11 @@ public class WorkflowMakespan {
 	}
 	
 	private static double inputTime(double inputSize,Task t,WorkflowGenerator workflow) {
+//		System.out.println("id："+t.getCloudletId());
+//		System.out.println("数据中心大小："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw());
 		double bw = workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw();
-		System.out.println("数据中心带宽："+Double.valueOf(String.format("%.2f", bw/1024/1024))+"MB/s");
-		System.out.println("任务ID："+t.getCloudletId()+"数据中心ID："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0));
+//		System.out.println("数据中心带宽："+Double.valueOf(String.format("%.2f", bw/1024/1024))+"MB/s");
+//		System.out.println("任务ID："+t.getCloudletId()+"数据中心ID："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0));
 		double input_time = inputSize / bw;
 		
 		return input_time;
@@ -241,14 +246,14 @@ public class WorkflowMakespan {
 		int depth = 1;
 		List<Task> tasks = workflow.getTasksWithDepth(depth);
 		while (tasks.size() != 0) {
-			System.out.println("任务数量："+tasks.size());
+//			System.out.println("任务数量："+tasks.size());
 			for (Task t: tasks) {
-				System.out.println("任务ID："+t.getCloudletId());
+//				System.out.println("任务ID："+t.getCloudletId());
 				ApplicationVertex av = workflow.getVertexForCloudlet(t);
 				Set<ApplicationEdge> in_edges = workflow.incomingEdgesOf(av);
 				double offset_time = 0;
 				for (ApplicationEdge ae: in_edges) {
-					System.out.println("入边："+ae.toString());
+//					System.out.println("入边："+ae.toString());
 					double time = edgeTimeMap.get(ae);
 					if (time > offset_time)
 						offset_time = time;

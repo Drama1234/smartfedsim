@@ -18,6 +18,8 @@ import org.jgap.util.ICloneable;
 
 import Constraints.Makespan;
 import Constraints.costConstraint;
+import it.cnr.isti.smartfed.metascheduler.MyCrossoverOperator;
+import it.cnr.isti.smartfed.metascheduler.MyMutationOperator;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
@@ -30,8 +32,8 @@ public class JGAPMapping {
 	public static int POP_SIZE = 50;
 	public static int EVOLUTION_STEP = 150;
 	
-	public static final int INTERNAL_SOLUTION_NUMBER = 2;
-//	public static final int SOLUTION_NUMBER = 10;
+	public static final int INTERNAL_SOLUTION_NUMBER = 10;
+	public static final int SOLUTION_NUMBER = 1;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
 	public static Genotype population = null;
@@ -41,7 +43,7 @@ public class JGAPMapping {
 		List<IMSProvider> providerList = state.getProviders();
 		InternetEstimator internet = state.getInternet();
 		IMSApplication application = state.getApplication();
-		Solution sol[] = new Solution[INTERNAL_SOLUTION_NUMBER];
+		Solution sol[] = new Solution[SOLUTION_NUMBER];
 		try {
 			Configuration conf = new InternalDefaultConfiguration();
 			// making gene
@@ -94,7 +96,7 @@ public class JGAPMapping {
 			
 			boolean[] acceptable = selectingSatisfactorySolutions(array);
 			
-			for (int i=0; i<acceptable.length && k < JGAPMapping.INTERNAL_SOLUTION_NUMBER; i++) {
+			for (int i=0; i<acceptable.length && k < JGAPMapping.SOLUTION_NUMBER; i++) {
 				if (acceptable[i]){
 					Gene[] mygenes = array[i].getGenes();
 					sol[k] = new Solution(array[i], nodes);
@@ -104,12 +106,12 @@ public class JGAPMapping {
 					k++;
 				}
 			}
-			if (k != JGAPMapping.INTERNAL_SOLUTION_NUMBER)
+			if (k != JGAPMapping.SOLUTION_NUMBER)
 				System.out.println("\n\nAlert!!!! Not all solution were satisfactory\n");
 			
 			if (k == 0){
 				System.out.println("并不是每个任务都成功执行。");
-				for (int i=0; i<JGAPMapping.INTERNAL_SOLUTION_NUMBER && i<array.length; i++){
+				for (int i=0; i<JGAPMapping.SOLUTION_NUMBER && i<array.length; i++){
 					Gene[] mygenes = array[i].getGenes();
 					sol[i] = new Solution(array[i], nodes);
 					sol[i].chromosome.setGenes(mygenes);
@@ -123,6 +125,7 @@ public class JGAPMapping {
 		}	
 		return sol;
 	}
+	
 	private static double calculateMakespanSolution(IMSApplication application, List<IMSProvider> providerList,IChromosome c,InternetEstimator internet) {
 		Gene[] genes = c.getGenes();
 		double tmp = 0;
@@ -193,6 +196,8 @@ class InternalDefaultConfiguration extends Configuration implements ICloneable {
 			setKeepPopulationSizeConstant(true);
 			
 			this.setEventManager(new EventManager());
+//			addGeneticOperator(new MyCrossoverOperator());
+//			addGeneticOperator(new MyMutationOperator());
 			addGeneticOperator(new CrossoverOperator(this, JGAPMapping.CROSSOVER));
 			addGeneticOperator(new MutationOperator(this, JGAPMapping.MUTATION)); // 0 disable the mutation
 			this.setFitnessEvaluator(new DefaultFitnessEvaluator());

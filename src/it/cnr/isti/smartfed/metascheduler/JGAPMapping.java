@@ -96,6 +96,7 @@ public class JGAPMapping {
 			
 			for(String s : message){
 				FederationLog.print(s);
+				System.out.println(s);
 			}
 			
 			// IChromosome bestSolutionSoFar = population.getPopulation().determineFittestChromosome();
@@ -108,7 +109,6 @@ public class JGAPMapping {
 			}
 			
 			k = 0;
-			
 			
 			boolean[] acceptable = selectingSatisfactorySolutions(array);
 			for (int i=0; i<acceptable.length && k < JGAPMapping.SOLUTION_NUMBER; i++){
@@ -201,6 +201,7 @@ class InternalDefaultConfiguration extends Configuration implements ICloneable {
 			setKeepPopulationSizeConstant(true);
 			
 			this.setEventManager(new EventManager());
+			addGeneticOperator(new MyCrossoverOperator());
 			addGeneticOperator(new CrossoverOperator(this, JGAPMapping.CROSSOVER));
 			addGeneticOperator(new MutationOperator(this, JGAPMapping.MUTATION)); // 0 disable the mutation
 			this.setFitnessEvaluator(new DefaultFitnessEvaluator());

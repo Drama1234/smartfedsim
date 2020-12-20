@@ -14,6 +14,7 @@ import application.Application;
 import application.ApplicationVertex;
 import federation.resources.FederationDatacenter;
 import federation.resources.ResourceCounter;
+import it.cnr.isti.smartfed.test.TestResult;
 import workflowDatacenter.WorkflowGenerator;
 import workflowfederation.Allocation;
 import workflowfederation.Federation;
@@ -92,16 +93,16 @@ public class Experiment {
 		
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
-		System.out.println("任务大小："+newList.size());
-		UtilityPrint.printCloudletList(newList); 		
+//		System.out.println("任务大小："+newList.size());
+//		UtilityPrint.printCloudletList(newList); 		
 		
 		int i = 0;
 		for (Allocation allocation: federation.getAllocations()) {
-			System.out.println("分配结果的数量："+federation.getAllocations().size());
+//			System.out.println("分配结果的数量："+federation.getAllocations().size());
 			if (allocation.isCompleted())
 			{
 				i++;
-				System.out.println("分配成功：第"+i+"个分配方案");
+	//			System.out.println("分配成功：第"+i+"个分配方案");
 				double budget = 0;
 				for (ApplicationVertex av : allocation.getApplication().vertexSet())
 					budget += av.getBudget();
@@ -109,6 +110,8 @@ public class Experiment {
 //				double makespan = WorkflowMakespan.getWorkflowMakespan((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
 				double makespan = WorkflowMakespan.getWorkflowTime(datacenters,internetEstimator,allocation);
 				double cost = WorkflowCost.getWorkflowCost(datacenters, allocation, internetEstimator);
+				TestResult.getCompletion().addValue(makespan);
+				TestResult.getCost().addValue(cost);
 				
 				System.out.println("budget：-------------------> " + Double.valueOf(String.format("%.2f", budget)));
 				System.out.println("cost：-------------------> " + Double.valueOf(String.format("%.2f", cost)));

@@ -15,7 +15,7 @@ import workflowschedule.iface.MSProviderAdapter;
 public class MSFitnessFunction extends FitnessFunction{
 	
 	public final static int AWARD = 100;
-	private final double EQUALITY = 0.1;
+//	private final double EQUALITY = 0.1;
 	private final static Logger log = Logger.getLogger(Logger.class.getName());
 	
 	private static final long serialVersionUID = 1L;
@@ -44,7 +44,7 @@ public class MSFitnessFunction extends FitnessFunction{
 			if(weightedDistance[i] > 0) {
 				weightedDistance[i] = 0;
 			}else if(weightedDistance[i] == 0) {
-				weightedDistance[i] = EQUALITY;
+				weightedDistance[i] = 0.1;
 			}else {
 				weightedDistance[i] *= -1;
 			}
@@ -79,6 +79,7 @@ public class MSFitnessFunction extends FitnessFunction{
 		double g_fit = 0;
 		
 		for (int i = 0; i < genes.length; i++) {
+//			System.out.println("基因评估值"+evaluateGene(i, chromos));
 			g_fit = evaluateGene(i, chromos) * AWARD;
 			((CIntegerGene) genes[i]).setFitness(g_fit);
 			fitness += g_fit;

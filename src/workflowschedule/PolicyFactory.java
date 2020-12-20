@@ -21,8 +21,8 @@ public class PolicyFactory {
 		constraint.add(constraint.CoreNumberConstraints(weights[0]));
 		constraint.add(constraint.RamConstraints(weights[1]));
 		constraint.add(constraint.StorageConstraints(weights[2]));
-		constraint.add(constraint.latencyConstraints(weights[3]));
-		constraint.add(constraint.providerBwConstraints(weights[4]));
+		constraint.add(constraint.providerBwConstraints(weights[3]));
+		constraint.add(constraint.latencyConstraints(weights[4]));
 		constraint.add(constraint.IntercloudBwConstraints(weights[5]));
 		constraint.add(constraint.providerIDConstraints(weights[6]));
 		constraint.add(constraint.costConstraints(weights[7]));

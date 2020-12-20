@@ -52,8 +52,8 @@ public class DatacenterGenerator extends AbstractGenerator{
 		ramAmount = new Range(1024*8, 1024*32);//8-32
 		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
 		stoAmount = new Range(500*1024, 3*1024*1024); // 500GB - 3TB
-		coreAmount = new Range(2, 8);
-		mipsAmount = new Range(4, 8);		
+		coreAmount = new Range(6, 8);
+		mipsAmount = new Range(6, 10);		
 	}
 	
 	/**
