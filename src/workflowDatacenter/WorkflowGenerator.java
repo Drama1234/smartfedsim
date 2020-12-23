@@ -153,16 +153,19 @@ public class WorkflowGenerator extends Application{
 				vm = createSmallVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm, datacenterlist.get(0));
 				v.setBudget(1);
+				v.setTask_time(1);
 				addVertex(v);
 			}else if(task.getCloudletLength() < 2100) {
 				vm = createMediumVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				v.setBudget(1);
+				v.setTask_time(1);
 				addVertex(v);
 			}else {
 				vm = createlLargeVm(userId);
 				ApplicationVertex v = new ApplicationVertex(userId, cloudlets, vm);
 				v.setBudget(1);
+				v.setTask_time(1);
 				addVertex(v);
 			}
 		}

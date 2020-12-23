@@ -61,9 +61,11 @@ public class LatencyConstraint extends Policy{
 		}
 		if (numofdifference == 0) {
 			distance = MAXSATISFACTION_DISTANCE;
-		}else{
+		}else {
 			distance = sumofdifference / numofdifference;
 		}
+		System.out.println("跨云延迟约束："+distance * getWeight());
 		return distance * getWeight();
+		
 	}
 }

@@ -14,7 +14,7 @@ public abstract class Policy {
 	
 	protected final static int RUNTIME_ERROR = 1000;
 	protected final int MAXSATISFACTION_DISTANCE = -1;
-	protected static final boolean DEBUG = false;
+	protected static final boolean DEBUG = true;
 	
 	private double weight;
 	private char type;

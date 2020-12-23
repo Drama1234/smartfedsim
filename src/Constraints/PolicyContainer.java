@@ -60,6 +60,19 @@ public class PolicyContainer {
 		return normWeight;
 	}
 	
+	public Policy costssPolicy(double weight) {
+		double normWeight = calculateNormWeight(weight);
+		Policy p = new WorkflowParameterConstraints.costConstraint(normWeight);
+		log.info("Norm weight into " + p.getName() + " " + normWeight);
+		return p;
+	}
+	public Policy makespanPolicy(double weight) {
+		double normWeight = calculateNormWeight(weight);
+		Policy p = new WorkflowParameterConstraints.makespanConstraint(normWeight);
+		log.info("Norm weight into " + p.getName() + " " + normWeight);
+		return p;
+	}
+	
 	public Policy CoreNumberConstraints(double weight) {
 		double normWeight = calculateNormWeight(weight);
 		Policy p = new CoreNumberConstraint(normWeight,highCoreNumberValue);

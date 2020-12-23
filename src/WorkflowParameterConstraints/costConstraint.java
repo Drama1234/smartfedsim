@@ -1,4 +1,4 @@
-package Constraints;
+package WorkflowParameterConstraints;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +11,6 @@ import it.cnr.isti.smartfed.metascheduler.resources.MSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSApplication;
 import it.cnr.isti.smartfed.metascheduler.resources.iface.IMSProvider;
-import workflowfederation.FederationLog;
 import workflowfederation.WorkflowCost;
 import workflownetworking.InternetEstimator;
 import workflownetworking.InternetLink;
@@ -20,12 +19,11 @@ import workflowschedule.Constant;
 import workflowschedule.Policy;
 
 public class costConstraint extends Policy{
-
 	public costConstraint(double weight) {
 		super(weight, Policy.DESCENDENT_TYPE);
 		this.constraintName = "costConstraint";
 	}
-
+	
 	@Override
 	protected double evaluateGlobalPolicy(int gene_index, IChromosome chromos, IMSApplication app, IMSProvider prov,InternetEstimator internet) {
 		List<MSApplicationNode> nodes = app.getNodes();
@@ -39,7 +37,6 @@ public class costConstraint extends Policy{
 			System.out.println("Eval before applying weights for " + "NodeID " + node.getID() + " - ProvID " + prov.getID());
 		double distance = calculateDistance_ErrHandling(cost, budget, maxCost);
 		((CIntegerGene) chromos.getGene(gene_index)).setAllocationCost(cost);
-		System.out.println("基因成本约束："+distance*getWeight());
 		return distance * getWeight();
 	}
 	
@@ -58,7 +55,7 @@ public class costConstraint extends Policy{
 		return ram_cost + storage_cost + cpu_cost + net_cost;
 	}
 	
-	private static double storageCost(MSApplicationNode node, IMSProvider prov){
+	private static double storageCost(MSApplicationNode node, IMSProvider prov) {
 		double costPerStorage = (Double) prov.getStorage().getCharacteristic().get(Constant.COST_STORAGE)/1024;
 		long storage = (Long) node.getStorage().getCharacteristic().get(Constant.STORE);
 		double cost = storage * costPerStorage;

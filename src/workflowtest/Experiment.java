@@ -93,8 +93,8 @@ public class Experiment {
 		
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
-//		System.out.println("任务大小："+newList.size());
-//		UtilityPrint.printCloudletList(newList); 		
+		System.out.println("任务大小："+newList.size());
+		UtilityPrint.printCloudletList(newList); 		
 		
 		int i = 0;
 		for (Allocation allocation: federation.getAllocations()) {

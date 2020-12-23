@@ -29,6 +29,14 @@ public class PolicyFactory {
 		return constraint;
 	}
 	
+	public static PolicyContainer createPolicies(List<FederationDatacenter> dcList, double[] weights,InternetEstimator internet) {
+		System.out.println("*** Creating global policy with net and bw ***");
+		PolicyContainer constraint = new PolicyContainer(weights);
+		constraint.add(constraint.costssPolicy(weights[0]));
+		constraint.add(constraint.makespanPolicy(weights[1]));
+		return constraint;
+	}
+	
 	private static void findCommonMaxValues(List<FederationDatacenter> dcList) {
 		Collections.sort(dcList);
 		long highBw = findMaxBwAllDatacenters(dcList);

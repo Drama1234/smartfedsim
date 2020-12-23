@@ -31,6 +31,8 @@ public class CoreNumberConstraint extends Policy{
 		
 		double distance = super.calculateDistance_ErrHandling(provCPU, nodeCPU, highCoreNumberValue);
 		
+		System.out.println("基因内核值："+distance * getWeight());
+		
 		return distance * getWeight();
 	}
 }

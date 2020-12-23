@@ -29,10 +29,10 @@ import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
-	public static int POP_SIZE = 50;
-	public static int EVOLUTION_STEP = 150;
+	public static int POP_SIZE = 1;
+	public static int EVOLUTION_STEP = 1;
 	
-	public static final int INTERNAL_SOLUTION_NUMBER = 10;
+	public static final int INTERNAL_SOLUTION_NUMBER = 1;
 	public static final int SOLUTION_NUMBER = 1;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
@@ -85,7 +85,7 @@ public class JGAPMapping {
 			}
 			//IChromosome bestSolutionSoFar = population.getPopulation().determineFittestChromosome();
 			@SuppressWarnings("unchecked")
-			List<IChromosome> list = population.getFittestChromosomes(JGAPMapping.INTERNAL_SOLUTION_NUMBER);
+			List<IChromosome> list = population.getFittestChromosomes(JGAPMapping.SOLUTION_NUMBER);
 			IChromosome[] array = new IChromosome[list.size()];
 			int k=0;
 			for (IChromosome ic: list){ // converting list to array - not using list.toArray(array); because it will call wrong constructor for genes

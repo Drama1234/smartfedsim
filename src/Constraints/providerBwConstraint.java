@@ -34,7 +34,7 @@ public class providerBwConstraint extends Policy{
 		double maxBW = highProviderBwValue/1024/1024;
 		maxBW = Double.valueOf(String.format("%.2f", maxBW));
 		double distance = super.calculateDistance_ErrHandling(provBW, nodeBW, maxBW);
-		
+		System.out.println("云服务供应商带宽："+distance*getWeight());
 		return distance * getWeight();
 	}
 }

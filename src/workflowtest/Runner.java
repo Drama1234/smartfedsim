@@ -7,10 +7,10 @@ public class Runner {
 	private static StringBuilder sb = new StringBuilder();
 	
 	public static void main(String[] args) {
-		sb.append("\t\tmakespan").append("\t\t").append("budget\t").append("\n");
+		sb.append("\t\texecution time").append("\t\t").append("budget\t").append("\n");
 //		String[] files = new String[]{"RemoteSense_13","RemoteSense_23","RemoteSense_53","RemoteSense_83","RemoteSense_103","RemoteSense_143"};
 //		String[] files = new String[] {"RemoteSense_103"};
-		String[] files = new String[] {"RemoteSense_83"};
+		String[] files = new String[] {"RemoteSense_13"};
 		for (String file : files) {
 			runworkflow(file);			
 		}
@@ -18,7 +18,7 @@ public class Runner {
 	}
 	
 	private static void runworkflow(String filename) {
-		WorkflowDataset dataset = new WorkflowDataset(100, filename);
+		WorkflowDataset dataset = new WorkflowDataset(20, filename);
 		TestResult.reset();
 		GeneticAllocator allocator = new GeneticAllocator();
 //		allocator.setPolicyType();//全局网络		

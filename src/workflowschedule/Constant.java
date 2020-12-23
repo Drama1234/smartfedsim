@@ -16,7 +16,8 @@ public class Constant {
 	public static final String BUDGET = "budget";
 	public static final String VM_INSTANCES= "vm_instances";
 	public static final String COST_INTER_BW = "cost_per_interbw";
-	
+	//makespan
+	public static final String TASK_TIME = "task_time";
 	public static final String COST_CPU = "cost_per_cpu";
 	public static final String COST_MEM = "cost_per_mem";
 	public static final String COST_STORAGE = "cost_per_storage";

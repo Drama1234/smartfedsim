@@ -68,8 +68,10 @@ public class IntercloudBwConstraint extends Policy{
 		if (numofdifference == 0) {
 			distance = MAXSATISFACTION_DISTANCE;
 		}else{
+			//个数越多，差异越大，值越小
 			distance = sumofdifference / numofdifference;
 		}
+		System.out.println("跨云带宽约束："+distance);
 		return distance * getWeight();
 	}
 }

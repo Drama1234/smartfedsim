@@ -39,6 +39,7 @@ public class MSFitnessFunction extends FitnessFunction{
 		IMSProvider provider = MSProviderAdapter.findProviderById(_state.getProviders(), providerID);
 		for (int i = 0; i < policy.size(); i++) {
 			weightedDistance[i] = policy.get(i).evaluateGlobalPolicy(gene_index, chromos, _state.getApplication(), provider, _state.getInternet());
+			//System.out.println("权重距离:"+weightedDistance[i]+"权重名称："+policy.get(i).getName());
 		}
 		for (int i = 0; i < weightedDistance.length; i++) {
 			if(weightedDistance[i] > 0) {

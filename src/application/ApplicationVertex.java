@@ -63,7 +63,8 @@ public class ApplicationVertex
 	private String name;
 	private int id;
 	private static int counter = 0;
-	private double budget = 1.0;
+	private double budget = 0;
+	private double task_time = 0;
 	private vmType vm_type;
 	private Vm desiredVm = null;
 	//得到用户期望的虚拟机
@@ -166,6 +167,13 @@ public class ApplicationVertex
 		}
 	}
 	
+	public double getTask_time() {
+		return task_time;
+	}
+
+	public void setTask_time(double task_time) {
+		this.task_time = task_time;
+	}
 
 	public double getBudget() {
 		return budget;

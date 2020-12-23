@@ -31,11 +31,20 @@ public class providerIDConstraint extends Policy{
 //		System.out.println("云服务供应商Id:"+nodeProviderId);
 		if(nodeProviderId.equals("-1")) {
 			distance = 0;
-		} else {
-			distance = calculateDistance(nodeProviderId, provProviderId);
+		}else if(nodeProviderId == provProviderId) {
+			distance = -1;
+		}else {
+			distance = 1;
 		}
+//		if(nodeProviderId.equals("-1")) {
+//			distance = 0;
+//		} else if(nodeProviderId == provProviderId) {
+//			distance = calculateDistance(nodeProviderId, provProviderId);
+//		}
+		
 		if (DEBUG)
 			System.out.println("\tEvaluation on providerId: " + nodeProviderId + " vs " + provProviderId + "=" + distance);
+		
 		return distance * getWeight();	
 	}
 	

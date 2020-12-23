@@ -56,7 +56,7 @@ public class MSApplicationUtility {
 		return ret;
 	}
 	
-	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, double budget,FederationDatacenter datacenter, long cloudletLength) {
+	private static MSApplicationNode vmToMSApplicationNode(Vm vm, Set<ApplicationEdge> edges, double budget, double time, FederationDatacenter datacenter, long cloudletLength) {
 		
 		MSApplicationNode appNode = new MSApplicationNode();
 		int providerID = -1;
@@ -91,6 +91,7 @@ public class MSApplicationUtility {
 		
 		HashMap<String, Object> nodeCharacteristic = new HashMap<String, Object>();
 		nodeCharacteristic.put(Constant.BUDGET, budget);
+		nodeCharacteristic.put(Constant.TASK_TIME,time);
 		nodeCharacteristic.put(Constant.providerID, providerID);
 		nodeCharacteristic.put(Constant.vertextLength, cloudletLength);
 		
@@ -125,9 +126,9 @@ public class MSApplicationUtility {
 			long cloudletLength = vertex.getCloudlets().get(0).getCloudletLength();
 			MSApplicationNode node;
 			if(vertex.getfeFederationDatacenters()!=null) {
-				node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getfeFederationDatacenters().get(0),cloudletLength);
+				node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getTask_time(),vertex.getfeFederationDatacenters().get(0),cloudletLength);
 			}else {
-				node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),null,cloudletLength);
+				node = vmToMSApplicationNode(vmList.get(i), app.edgesOf(vertex), vertex.getBudget(),vertex.getTask_time(),null,cloudletLength);
 			}			
 //			if (vertex.getDesiredVm() != null){
 //				Vm desVm = vertex.getDesiredVm();
