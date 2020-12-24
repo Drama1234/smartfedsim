@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import Constraints.PolicyContainer;
+import WorkflowParameterConstraints.costConstraint;
 import federation.resources.FederationDatacenter;
 import workflownetworking.InternetEstimator;
 
@@ -24,8 +25,8 @@ public class PolicyFactory {
 		constraint.add(constraint.providerBwConstraints(weights[3]));
 		constraint.add(constraint.latencyConstraints(weights[4]));
 		constraint.add(constraint.IntercloudBwConstraints(weights[5]));
-		constraint.add(constraint.providerIDConstraints(weights[6]));
-		constraint.add(constraint.costConstraints(weights[7]));
+//		constraint.add(constraint.providerIDConstraints(weights[6]));
+		constraint.add(constraint.costConstraints(weights[6]));
 		return constraint;
 	}
 	
@@ -34,6 +35,7 @@ public class PolicyFactory {
 		PolicyContainer constraint = new PolicyContainer(weights);
 		constraint.add(constraint.costssPolicy(weights[0]));
 		constraint.add(constraint.makespanPolicy(weights[1]));
+//		constraint.add(constraint.providerIdsPloPolicy(weights[2]));
 		return constraint;
 	}
 	

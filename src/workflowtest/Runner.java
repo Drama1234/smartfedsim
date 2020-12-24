@@ -22,11 +22,11 @@ public class Runner {
 		TestResult.reset();
 		GeneticAllocator allocator = new GeneticAllocator();
 //		allocator.setPolicyType();//全局网络		
-//		for(int i= 0;i<10;i++) {
+		for(int i= 0;i<10;i++) {
 			allocator.setRandomSeed(77);
-			Experiment experiment = new Experiment(allocator, dataset, 77);		
+			Experiment experiment = new Experiment(allocator, dataset, 77);
 			experiment.run();
-//		}
+		}
 		
 		double makespan = TestResult.getCompletion().getMean();
 		double cost = TestResult.getCost().getMean();

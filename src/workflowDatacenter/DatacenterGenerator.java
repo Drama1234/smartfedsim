@@ -50,10 +50,10 @@ public class DatacenterGenerator extends AbstractGenerator{
 		costPerCpu = new Range(0.10, 0.80); 
 		//host
 		ramAmount = new Range(1024*8, 1024*32);//8-32
-		bwAmount = new Range(100*1024*1024, 500*1024*1024);//100Mb-500Mb/s
+		bwAmount = new Range(50*1024*1024, 100*1024*1024);//50Mb-100Mb/s
 		stoAmount = new Range(500*1024, 3*1024*1024); // 500GB - 3TB
-		coreAmount = new Range(6, 8);
-		mipsAmount = new Range(6, 10);		
+		coreAmount = new Range(4, 8);
+		mipsAmount = new Range(4, 8);		
 	}
 	
 	/**

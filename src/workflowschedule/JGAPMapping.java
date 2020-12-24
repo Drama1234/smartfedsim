@@ -18,6 +18,7 @@ import org.jgap.util.ICloneable;
 
 import Constraints.Makespan;
 import Constraints.costConstraint;
+import WorkflowParameterConstraints.makespanConstraint;
 import it.cnr.isti.smartfed.metascheduler.MyCrossoverOperator;
 import it.cnr.isti.smartfed.metascheduler.MyMutationOperator;
 import it.cnr.isti.smartfed.metascheduler.resources.MSApplicationNode;
@@ -29,10 +30,10 @@ import workflowschedule.iface.MSProviderAdapter;
 
 
 public class JGAPMapping {
-	public static int POP_SIZE = 1;
-	public static int EVOLUTION_STEP = 1;
+	public static int POP_SIZE = 50;
+	public static int EVOLUTION_STEP = 150;
 	
-	public static final int INTERNAL_SOLUTION_NUMBER = 1;
+//	public static final int INTERNAL_SOLUTION_NUMBER = 1;
 	public static final int SOLUTION_NUMBER = 1;
 	public static int MUTATION = 0;
 	public static double CROSSOVER = 0;
@@ -51,14 +52,18 @@ public class JGAPMapping {
 			List<MSApplicationNode> nodes = state.getApplication().getNodes();
 			
 			Gene[] genes = new Gene[nodes.size()];
+			genes[0] = new CIntegerGene(conf,3,3);
+			genes[nodes.size()-1] = new CIntegerGene(conf, 3, 3);
 //			System.out.println("基因的长度"+nodes.size());
 //			genes[0] = new CIntegerGene(conf,0,0);
 //			genes[nodes.size() - 1] = new CIntegerGene(conf,0,0);
-			for (int i = 0; i < nodes.size(); i++) {
+			for (int i = 1; i < nodes.size()-1; i++) {
 				//precondition: providerList is ordered
 				//int firstInteger = providerList.get(0).getID();
 				//int lastInteger =  providerList.get(providerList.size()-1).getID();
+				
 				genes[i] = new CIntegerGene(conf, 3, providerNumber+2);
+				
 				//genes[i] = new CIntegerGene(conf, firstInteger, lastInteger);
 				//genes[i] = new CIntegerGene(conf, i, i);
 			}
@@ -132,7 +137,8 @@ public class JGAPMapping {
 		//tmp = WorkflowComputer.getFlowCompletionTime(application, providerList, internet);
 		for(int j=0; j < genes.length; j++) {
 			IMSProvider provider = MSProviderAdapter.findProviderById(providerList, (int) genes[j].getAllele());
-			tmp += Makespan.calculateMakespan_Network(j, c, application, provider, internet);
+	//		tmp += Makespan.calculateMakespan_Network(j, c, application, provider, internet);
+			tmp += makespanConstraint.calculateMakespan_Network(j, c, application, provider, internet);
 		}
 		return tmp;
 	}
@@ -146,6 +152,7 @@ public class JGAPMapping {
 			//tmp += ((CIntegerGene) genes[j]).getAllocationCost();
 			tmp += costConstraint.calculateCost_Network(j, c, application, provider, internet);
 //			tmp += BudgetConstraint.vmCost(nodes.get(j), provider, c);
+			tmp += WorkflowParameterConstraints.costConstraint.calculateCost_Network(j, c, application, provider, internet);
 		}
 		return tmp;
 	}
@@ -157,7 +164,7 @@ public class JGAPMapping {
 			Gene[] mygenes = solarray[i].getGenes();
 			boolean scarta = false;
 			for (int j=0; j<mygenes.length && !scarta; j++){
-				if (((CIntegerGene) mygenes[j]).getFitness() < 0.0){
+				if (((CIntegerGene) mygenes[j]).getFitness() < 0.0) {
 					scarta = true;
 				}
 			}

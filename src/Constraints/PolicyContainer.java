@@ -61,64 +61,70 @@ public class PolicyContainer {
 	}
 	
 	public Policy costssPolicy(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new WorkflowParameterConstraints.costConstraint(normWeight);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new WorkflowParameterConstraints.costConstraint(weight);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	public Policy makespanPolicy(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new WorkflowParameterConstraints.makespanConstraint(normWeight);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new WorkflowParameterConstraints.makespanConstraint(weight);
+		log.info("Norm weight into " + p.getName() + " " + weight);
+		return p;
+	}
+	public Policy providerIdsPloPolicy(double weight) {
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new WorkflowParameterConstraints.providerIdConstraint(weight);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy CoreNumberConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new CoreNumberConstraint(normWeight,highCoreNumberValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new CoreNumberConstraint(weight,highCoreNumberValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy RamConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new RamConstraint(normWeight,highRamValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new RamConstraint(weight,highRamValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy StorageConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new StorageConstraint(normWeight,highStorageValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new StorageConstraint(weight,highStorageValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy providerBwConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new providerBwConstraint(normWeight,highProviderBwValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new providerBwConstraint(weight,highProviderBwValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy IntercloudBwConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new IntercloudBwConstraint(normWeight,highNetworkBwValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new IntercloudBwConstraint(weight,highNetworkBwValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy latencyConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new LatencyConstraint(normWeight,highNetworkLatencyValue);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new LatencyConstraint(weight,highNetworkLatencyValue);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	
 	public Policy costConstraints(double weight) {
-		double normWeight = calculateNormWeight(weight);
-		Policy p = new costConstraint(normWeight);
-		log.info("Norm weight into " + p.getName() + " " + normWeight);
+//		double normWeight = calculateNormWeight(weight);
+		Policy p = new costConstraint(weight);
+		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
 	

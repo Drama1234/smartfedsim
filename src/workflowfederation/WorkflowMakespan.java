@@ -32,7 +32,7 @@ public class WorkflowMakespan {
 				// check for the entering edges to compute the time of
 				Set<ApplicationEdge> in_edges = workflow.incomingEdgesOf(av);
 				double offset_time = 0;
-				for (ApplicationEdge ae: in_edges) {
+				for (ApplicationEdge ae: in_edges){
 //					System.out.println("入边："+ae.toString());
 					double time = edgeTimeMap.get(ae);
 //					System.out.println("时间为："+time);
@@ -64,11 +64,11 @@ public class WorkflowMakespan {
 		}
 //		System.out.println("科学工作流深度："+depth);
 		//计算输出数据从计算中心传输到存储中心的时间
-		double output_time = getOutputDataTransfer(workflow,dcs,internet,depth--);
-//		System.out.println("输出时间："+output_time);
+		double output_time = getOutputDataTransfer(workflow,dcs,internet,--depth);
+		System.out.println("输出时间："+output_time);
 		//计算输入数据从存储中心传输到计算中心的时间
 		double input_time = getInputDataTransfer(workflow, dcs, internet);
-//		System.out.println("输入时间："+input_time);
+		System.out.println("输入时间："+input_time);
 		total_time = total_time + output_time + input_time;
 //		System.out.println("Makespan:"+total_time);
 		return total_time;
@@ -122,10 +122,10 @@ public class WorkflowMakespan {
 		}	
 		//计算输出数据从计算中心传输到存储中心的时间
 		double output_time = getOutputDataTransfer(workflow,dcs,internet,--depth);
-//		System.out.println("输出时间："+output_time);
+		System.out.println("输出时间："+output_time);
 		//计算输入数据从存储中心传输到计算中心的时间
 		double input_time = getInputDataTransfer(workflow, dcs, internet);
-//		System.out.println("输入时间："+input_time);
+		System.out.println("输入时间："+input_time);
 		total_time = total_time + output_time + input_time;
 //		System.out.println("Makespan:"+total_time);
 		return total_time;
@@ -181,8 +181,8 @@ public class WorkflowMakespan {
 //		System.out.println("id："+t.getCloudletId());
 //		System.out.println("数据中心大小："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw());
 		double bw = workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0).getDatacenterBw();
-//		System.out.println("数据中心带宽："+Double.valueOf(String.format("%.2f", bw/1024/1024))+"MB/s");
-//		System.out.println("任务ID："+t.getCloudletId()+"数据中心ID："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0));
+		System.out.println("数据中心带宽："+Double.valueOf(String.format("%.2f", bw/1024/1024))+"MB/s");
+		System.out.println("任务ID："+t.getCloudletId()+" 数据中心ID："+workflow.getVertexForCloudlet(t).getfeFederationDatacenters().get(0));
 		double input_time = inputSize / bw;
 		
 		return input_time;

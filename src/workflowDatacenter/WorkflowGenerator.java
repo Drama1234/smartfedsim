@@ -111,7 +111,7 @@ public class WorkflowGenerator extends Application{
 				6502, 
 				1, 
 				4*1024,//ram GB
-				100 * 1024 * 1024,//100MB/s
+				55 * 1024 * 1024,//55MB/s
 				200 * 1024//200GB
 				);
 	}
@@ -122,7 +122,7 @@ public class WorkflowGenerator extends Application{
 				6502*2, 
 				2, 
 				8*1024,//ram
-				250 * 1024 * 1024,//250MB/s
+				75 * 1024 * 1024,//75MB/s
 				500 * 1024//500GB
 				);
 	}
@@ -131,8 +131,8 @@ public class WorkflowGenerator extends Application{
 				userId, 
 				6502*4, 
 				4, 
-				16*1024,//ram
-				300 * 1024 * 1024,//300MB/s
+				16 * 1024,//ram
+				90 * 1024 * 1024,//90MB/s
 				1024 * 1024//1TB
 				);
 	}
