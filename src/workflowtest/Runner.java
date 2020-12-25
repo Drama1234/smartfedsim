@@ -10,7 +10,7 @@ public class Runner {
 		sb.append("\t\texecution time").append("\t\t").append("budget\t").append("\n");
 //		String[] files = new String[]{"RemoteSense_13","RemoteSense_23","RemoteSense_53","RemoteSense_83","RemoteSense_103","RemoteSense_143"};
 //		String[] files = new String[] {"RemoteSense_103"};
-		String[] files = new String[] {"RemoteSense_13"};
+		String[] files = new String[] {"RemoteSense_103"};
 		for (String file : files) {
 			runworkflow(file);			
 		}
@@ -23,8 +23,8 @@ public class Runner {
 		GeneticAllocator allocator = new GeneticAllocator();
 //		allocator.setPolicyType();//全局网络		
 		for(int i= 0;i<10;i++) {
-			allocator.setRandomSeed(77);
-			Experiment experiment = new Experiment(allocator, dataset, 77);
+			allocator.setRandomSeed(i*7);
+			Experiment experiment = new Experiment(allocator, dataset, i*7);
 			experiment.run();
 		}
 		

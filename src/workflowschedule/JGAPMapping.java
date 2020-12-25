@@ -150,7 +150,7 @@ public class JGAPMapping {
 		for (int j=0; j<genes.length; j++){
 			IMSProvider provider = MSProviderAdapter.findProviderById(providerList, (int) genes[j].getAllele());
 			//tmp += ((CIntegerGene) genes[j]).getAllocationCost();
-			tmp += costConstraint.calculateCost_Network(j, c, application, provider, internet);
+//			tmp += costConstraint.calculateCost_Network(j, c, application, provider, internet);
 //			tmp += BudgetConstraint.vmCost(nodes.get(j), provider, c);
 			tmp += WorkflowParameterConstraints.costConstraint.calculateCost_Network(j, c, application, provider, internet);
 		}
