@@ -7,11 +7,13 @@ import java.util.List;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
 import org.cloudbus.cloudsim.Host;
 
+import it.cnr.isti.smartfed.federation.resources.Country;
+
 
 
 public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 	private long DatacenterBw = 0;
-	
+	private double[] costVmTypes = null;
 	public DatacenterCharacteristicsMS(String architecture, String os, 
 			String vmm, List<? extends Host> hostList,double timeZone, 
 			double costPerCpu, double costPerMem, double costPerStorage, double costPerBw) {
@@ -21,9 +23,18 @@ public class DatacenterCharacteristicsMS extends DatacenterCharacteristics{
 //			this.costVmTypes = costPerVm;
 	}
 	
-//	public double getCostVmCustom() {
-//		return costVmCustom;
-//	}
+	public DatacenterCharacteristicsMS(String architecture, String os,
+			String vmm, List<? extends Host> hostList, double timeZone,
+			double costPerSec, double costPerMem, double costPerStorage,
+			double costPerBw, double[] costPerVm) {
+		super(architecture, os, vmm, hostList, timeZone, costPerSec, costPerMem,
+				costPerStorage, costPerBw);
+		this.costVmTypes = costPerVm;
+	}
+	
+	public double[] getCostVmTypes() {
+		return costVmTypes;
+	}
 
 	public double getCostPerCpu() {
 		return super.getCostPerSecond();	

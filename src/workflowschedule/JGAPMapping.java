@@ -203,8 +203,8 @@ class InternalDefaultConfiguration extends Configuration implements ICloneable {
 			setKeepPopulationSizeConstant(true);
 			
 			this.setEventManager(new EventManager());
-//			addGeneticOperator(new MyCrossoverOperator());
-//			addGeneticOperator(new MyMutationOperator());
+			addGeneticOperator(new MyCrossoverOperator());
+			addGeneticOperator(new MyMutationOperator());
 			addGeneticOperator(new CrossoverOperator(this, JGAPMapping.CROSSOVER));
 			addGeneticOperator(new MutationOperator(this, JGAPMapping.MUTATION)); // 0 disable the mutation
 			this.setFitnessEvaluator(new DefaultFitnessEvaluator());

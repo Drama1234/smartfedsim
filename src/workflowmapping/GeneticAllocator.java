@@ -12,7 +12,6 @@ import application.Application;
 import application.ApplicationVertex;
 import federation.resources.FederationDatacenter;
 import workflowfederation.Federation;
-import workflowfederation.FederationLog;
 import workflowfederation.MonitoringHub;
 import workflownetworking.InternetEstimator;
 import workflowschedule.PolicyFactory;
