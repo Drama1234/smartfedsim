@@ -70,10 +70,13 @@ public class makespanConstraint extends Policy{
 				InternetLink link = null;
 				try {link = internet.getInternetLink(prov.getID(), tProvId);} 
 				catch (Exception e1) {e1.printStackTrace();}
+				
 				if(link !=null) {
+//					System.out.println("边为："+prov.getID()+"--------->"+tProvId);
 					latency = link.getLatency();
 					transfer_time = e.getMessageLength()/link.getBandwidth() + latency;
 				}else {
+//					System.out.println("云服务供应商ID为："+prov.getID());
 					transfer_time = e.getMessageLength()/(Long)prov.getNetwork().getCharacteristic().get(Constant.BW);
 				}
 				time += transfer_time;

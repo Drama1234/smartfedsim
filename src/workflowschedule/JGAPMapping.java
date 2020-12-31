@@ -106,8 +106,8 @@ public class JGAPMapping {
 					Gene[] mygenes = array[i].getGenes();
 					sol[k] = new Solution(array[i], nodes);
 					sol[k].chromosome.setGenes(mygenes);
-					sol[k].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
-					sol[k].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
+//					sol[k].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
+//					sol[k].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
 					k++;
 				}
 			}
@@ -120,8 +120,8 @@ public class JGAPMapping {
 					Gene[] mygenes = array[i].getGenes();
 					sol[i] = new Solution(array[i], nodes);
 					sol[i].chromosome.setGenes(mygenes);
-					sol[i].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
-					sol[i].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
+	//				sol[i].setCostAmount(calculateCostSolution(application,providerList,array[i],internet));
+	//				sol[i].setMakespan(calculateMakespanSolution(application,providerList,array[i],internet));
 				}
 			}
 			Configuration.reset();
@@ -203,8 +203,8 @@ class InternalDefaultConfiguration extends Configuration implements ICloneable {
 			setKeepPopulationSizeConstant(true);
 			
 			this.setEventManager(new EventManager());
-			addGeneticOperator(new MyCrossoverOperator());
-			addGeneticOperator(new MyMutationOperator());
+//			addGeneticOperator(new MyCrossoverOperator());
+//			addGeneticOperator(new MyMutationOperator());
 			addGeneticOperator(new CrossoverOperator(this, JGAPMapping.CROSSOVER));
 			addGeneticOperator(new MutationOperator(this, JGAPMapping.MUTATION)); // 0 disable the mutation
 			this.setFitnessEvaluator(new DefaultFitnessEvaluator());

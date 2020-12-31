@@ -94,7 +94,7 @@ public class Experiment {
 		// print the cloudlet
 		List<Cloudlet> newList = federation.getReceivedCloudlet();
 		System.out.println("任务大小："+newList.size());
-//		UtilityPrint.printCloudletList(newList); 		
+		UtilityPrint.printCloudletList(newList); 		
 		
 		int i = 0;
 		for (Allocation allocation: federation.getAllocations()) {
@@ -107,15 +107,20 @@ public class Experiment {
 				for (ApplicationVertex av : allocation.getApplication().vertexSet())
 					budget += av.getBudget();
 				
+				long realduration = allocation.getRealDuration();
+				
 //				double makespan = WorkflowMakespan.getWorkflowMakespan((WorkflowGenerator)applications.get(0), datacenters, internetEstimator);
 				double makespan = WorkflowMakespan.getWorkflowTime(datacenters,internetEstimator,allocation);
 				double cost = WorkflowCost.getWorkflowCost(datacenters, allocation, internetEstimator);
 				TestResult.getCompletion().addValue(makespan);
 				TestResult.getCost().addValue(cost);
+				TestResult.getRealDuration().addValue(realduration);
+				
 				
 				System.out.println("budget：-------------------> " + Double.valueOf(String.format("%.2f", budget)));
 				System.out.println("cost：-------------------> " + Double.valueOf(String.format("%.2f", cost)));
 				System.out.println("makespan：----------------> " + Double.valueOf(String.format("%.2f", makespan)));
+				System.out.println("realduration:----------------> " + realduration);
 			}else
 				System.out.println("Not completed");
 		}	

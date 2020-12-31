@@ -66,18 +66,20 @@ public class PolicyContainer {
 		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
+	
 	public Policy makespanPolicy(double weight) {
 //		double normWeight = calculateNormWeight(weight);
 		Policy p = new WorkflowParameterConstraints.makespanConstraint(weight);
 		log.info("Norm weight into " + p.getName() + " " + weight);
 		return p;
 	}
-	public Policy providerIdsPloPolicy(double weight) {
-//		double normWeight = calculateNormWeight(weight);
-		Policy p = new WorkflowParameterConstraints.providerIdConstraint(weight);
-		log.info("Norm weight into " + p.getName() + " " + weight);
-		return p;
-	}
+	
+//	public Policy providerIdsPloPolicy(double weight) {
+////		double normWeight = calculateNormWeight(weight);
+//		Policy p = new WorkflowParameterConstraints.providerIdConstraint(weight);
+//		log.info("Norm weight into " + p.getName() + " " + weight);
+//		return p;
+//	}
 	
 	public Policy CoreNumberConstraints(double weight) {
 //		double normWeight = calculateNormWeight(weight);

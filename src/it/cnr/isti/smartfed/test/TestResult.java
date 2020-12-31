@@ -36,6 +36,7 @@ public class TestResult
 	private static SummaryStatistics timeDifference;
 	private static SummaryStatistics completion;
 	private static SummaryStatistics completionDifference;
+	private static SummaryStatistics realduration;
 	
 	static
 	{
@@ -58,6 +59,11 @@ public class TestResult
 		// workflow completion
 		completion = new SummaryStatistics();
 		completionDifference = new SummaryStatistics();
+		realduration = new SummaryStatistics();
+	}
+	
+	public static SummaryStatistics getRealDuration() {
+		return realduration;
 	}
 		
 	public static SummaryStatistics getNetCost() {

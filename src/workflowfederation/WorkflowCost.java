@@ -29,11 +29,11 @@ public class WorkflowCost {
 			Set<ApplicationEdge> edges = workflow.edgesOf(av);
 			
 			//计算任务在虚拟机上的执行时间
-			double task_time = WorkflowMakespan.taskTime(task, workflow);
+			double task_time = WorkflowMakespan.taskTime(task, allocation);
 			//计算任务前序和后继节点之间网络传输的时间
 			for (ApplicationEdge ae: edges) {
 				//入边传输时间
-				time = WorkflowMakespan.edgeTime(ae, workflow, task, dcs, internet);
+				time = WorkflowMakespan.edgeTime(ae, allocation, task, dcs, internet);
 				edge_time += time;
 			}
 			vm_time = task_time + edge_time;
